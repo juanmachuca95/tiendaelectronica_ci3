@@ -9,9 +9,9 @@ class Home extends CI_Controller {
 		$this->load->library(array('session'));	
 	}
 
-	public function index()
-	{
+	public function index(){
 		$data = $this->getTemplate();
+		$data['categorias'] = $this->getCategorias();
 		$this->load->view('home', $data);
 	}
 	
@@ -30,24 +30,32 @@ class Home extends CI_Controller {
 	public function galeria(){
 		$datos = $this->Producto->getProductos();
 		$data = $this->getTemplate();
+		
 		$data['lista'] = $datos;
 		$this->load->view('galeria', $data);
 	}
 
 	public function galeriaCategoria(){
 		$categoria = $this->input->post('categoria', true);
+
 		if($categoria == "Todos"){
 			$data = $this->getTemplate();
+			
 			$data['lista'] = $this->Producto->getProductos();
 			$this->load->view('galeria',$data);
 		}else{
-			$this->galeriaPorCategoria($categoria);
+			$datos = $this->Producto->getProductosCategoria($categoria);
+			$data = $this->getTemplate();
+			
+			$data['lista'] = $datos;
+			$this->load->view('galeria', $data);
 		}
 	}
 
-	public function galeriaPorCategoria($categoria){
+	public function elegirCategoria($categoria = 0){
 		$datos = $this->Producto->getProductosCategoria($categoria);
 		$data = $this->getTemplate();
+		
 		$data['lista'] = $datos;
 		$this->load->view('galeria', $data);
 	}

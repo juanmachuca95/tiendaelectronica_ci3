@@ -105,14 +105,31 @@
             $this->db->select('stock');
             $this->db->where("id = $codigo");
             $query = $this->db->get('productos');
-            if($query->row('stock') >= $cantidad){
+            $stock = $query->row('stock');
+            if(intval($stock) >= $cantidad){
                 return true;
             }else{
                 return false;
             }
+        }
 
+        function actualizarProductosVendidos($data){
+            foreach ($data as $key => $value) {
+                $codigo = $key;
+                $cantidad = $value;
+                $this->db->select('stock');
+                $this->db->where('id', $codigo);
+                $dato = $this->db->get('productos');
 
+                $actualizar = $dato->row('stock') - $cantidad;
 
+                $this->db->set('stock', $actualizar);
+                $this->db->where('id', $codigo);
+                $this->db->update('productos');
+            }
+                
+
+            return true;
         }
     }   
 

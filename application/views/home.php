@@ -41,7 +41,7 @@
                                     <div class="card-body">     
                                         <h4 class="card-title font-weight-bold text-center"><?=$row->categoria?></h4>  
                                         <p class="lead text-dark text-center"><?=$row->descripcion?></p>
-                                        <a class="btn btn-info" href="<?=base_url('home/galeriaPorCategoria/'.$row->categoria)?>">Galeria de Productos</a>
+                                        <a class="btn btn-info" href="<?=base_url('home/elegirCategoria/'.$row->categoria)?>">Galeria de Productos</a>
                                     </div>
                                 </div>
                             </div>

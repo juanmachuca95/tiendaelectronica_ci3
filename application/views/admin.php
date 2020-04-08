@@ -2,7 +2,7 @@
 <head>
     <?= $head ?>
 </head>
-    <body>
+    <body id="fondo_admin">
         <?php if(isset($mensaje)){ ?>
             <p class=" bg-info text-center text-white"><?=$mensaje?></p>
         <?php } ?>

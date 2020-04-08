@@ -1,7 +1,7 @@
 <?php if(isset($html)){ echo $html;} ?>
     <?php if(isset($head)){ echo $head;} ?>
 
-    <body>
+    <body id="fondo_admin">
     <?php if(isset($nav_admin)){ echo $nav_admin;} ?>
     <div class="container p-0 m-0">
         <div class="row m-0 p-0">

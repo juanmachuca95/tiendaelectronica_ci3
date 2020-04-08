@@ -26,7 +26,7 @@ class Login extends CI_Controller {
 		return $data;	
 	}
 
-    public function login(){
+    public function iniciarSession(){
         $email = $this->input->post('correo',true);
         $contrasenia = $this->input->post('password',true); 
         

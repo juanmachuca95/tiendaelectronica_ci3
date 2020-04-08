@@ -4,7 +4,7 @@
 
     <body>
     <?= $nav_cliente;?>
-    <div class="container pb-4">
+    <div class="container pb-4 pt-0 px-0">
 
     <?php if(isset($error)){ ?>
         <p><?=$error?></p>
@@ -54,8 +54,16 @@
                 <h3 class="font-weight-bold">¡Confirma tu Pedido!</h3>
                     <p class="font-weight-light">
                         Se reservara y la administracion se pondra en contacto contigo dentro de las 24 hs. para definir puntos de entrega o tipos envios
-                        <form action="<?=base_url('cliente/cargarPedido/')?>" method="post"></form><input class="form-control" type="tel" pattern="/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/" name="telefono" placeholder="(Código de área) Número">
-                        <a class="btn btn-success btn-xs" href="<?=base_url('cliente/cargarPedido/')?>" type="submit" >Confirmar </a>
+                        
+                    <form action="<?=base_url('cliente/cargarPedido/')?>" method="post">
+
+                    <input class="form-control mb-2" type="tel" id="celular" name="celular" 
+                    placeholder="Ejemplo: 03794-69-0474 (11 digitos con guiones)" 
+                    pattern="[0-9]*{4}-[0-9]*{2}-[0-9]*{4}" required>
+                    <small><?php if(isset($fallo) ) { echo $fallo; }?></small>
+                        <button class="btn btn-warning " type="submit" role="button">Confirmar </button> 
+                    </form>
+                        
                     </p>
                 </div>
             <?php

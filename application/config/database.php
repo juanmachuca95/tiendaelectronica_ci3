@@ -80,7 +80,7 @@ $query_builder = TRUE;
 	'database' => 'souvenirs_misiones',
 	'dbdriver' => 'mysqli',
 
-	//Trabajado en la red
+	//Admin_machuca12
 */
 $db['default'] = array(
 	'dsn'	=> '',

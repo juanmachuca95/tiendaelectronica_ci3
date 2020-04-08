@@ -2,7 +2,7 @@
 <head>
     <?= $head ?>
 </head>
-    <body id="fondo">
+    <body id="fondo_admin">
     <?php if(isset($data['mensaje'])){
         echo $data['mensaje'];
     }?>

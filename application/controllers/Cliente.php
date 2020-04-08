@@ -8,6 +8,7 @@ class Cliente extends CI_Controller{
         $this->load->library('session');
         $this->load->model('Producto');
         $this->load->model('Pedido');
+        $this->load->model('Usuario');
     } 
 
     public function index(){
@@ -47,6 +48,7 @@ class Cliente extends CI_Controller{
                 $this->session->set_userdata('items', $items);//Recargo el la variable de session
                 $mensaje ="Items cargados al carrito &#x1f6d2;";
                 $data = $this->getTemplate();
+                $data['categorias'] = $this->getCategorias();
                 $data['mensaje'] = $mensaje;
                 $data['lista'] = $this->Producto->getProductos();
                 $this->load->view('galeria', $data);
@@ -54,6 +56,7 @@ class Cliente extends CI_Controller{
             }else{
                 $error = "No es posible cargarlo, debido al faltante de stock";
                 $data = $this->getTemplate();
+                $data['categorias'] = $this->getCategorias();
                 $data['mensaje'] = $error;
                 $data['lista'] = $this->Producto->getProductos();
                 $this->load->view('galeria', $data);
@@ -104,35 +107,44 @@ class Cliente extends CI_Controller{
     public function cargarPedido(){
         
         $id_cliente = $this->session->userdata('id_cliente');
-        /*
-        resultado de var_dump($items); 
-        array(4) { [0]=> string(2) "39" [1]=> string(2) "39" [2]=> string(2) "36" [3]=> string(2) "35" }
-        var_dump($datos);
-        array(3) { [39]=> int(2) [36]=> int(1) [35]=> int(1) }*/
+        $celular = $this->input->post('celular',true);
+        $celular = preg_replace("/[^0-9]/","",$celular);
 
-        if($this->session->userdata('items') !== null){
-            $items = $this->session->userdata('items');      
-            $datos = array_count_values($items);
-        }
-        //Es la unica forma que encontre de guardar un arrat en la base de datos. 
-        /*print_r( $guardo_los_items = serialize($datos));
-        echo"<br>";
-        print_r( unserialize($guardo_los_items) );
-        */
-        
-        if(!empty($datos)  && $id_cliente){
-            //serializo los datos del array
-            $lista_de_items = serialize($datos);
+        if ((strlen($celular) == 11) || (strlen($celular) == 10)){
+            //echo "es correcto $celular";
+            $this->Usuario->guardarCelular($id_cliente, $celular);
+            /*
+            resultado de var_dump($items); 
+            array(4) { [0]=> string(2) "39" [1]=> string(2) "39" [2]=> string(2) "36" [3]=> string(2) "35" }
+            var_dump($datos);
+            array(3) { [39]=> int(2) [36]=> int(1) [35]=> int(1) }*/
 
-            if($this->Pedido->cargarPedido($lista_de_items , $id_cliente) ){
-                $this->session->set_userdata('items', null);
-                $this->pedidosConfirmados();
+            if($this->session->userdata('items') !== null){
+                $items = $this->session->userdata('items');      
+                $datos = array_count_values($items);
+            }
+            //Es la unica forma que encontre de guardar un arrat en la base de datos. 
+            /*print_r( $guardo_los_items = serialize($datos));
+            echo"<br>";
+            print_r( unserialize($guardo_los_items) );
+            */
+            
+            if(!empty($datos)  && $id_cliente){
+                //serializo los datos del array
+                $lista_de_items = serialize($datos);
+
+                if($this->Pedido->cargarPedido($lista_de_items , $id_cliente) ){
+                    $this->session->set_userdata('items', null);
+                    $this->pedidosConfirmados();
+                }else{
+                    $data = $this->getTemplate();
+                    $data['error'] = "No se ha podido confirmar el pedido";
+                }
             }else{
-                $data = $this->getTemplate();
-                $data['error'] = "No se ha podido confirmar el pedido";
+                return false;
             }
         }else{
-            return false;
+            echo "es incorrecto $celular"; 
         }
     }
 
@@ -184,5 +196,13 @@ class Cliente extends CI_Controller{
         }
         
     }
+
+    public function getCategorias(){
+		if($lista = $this->Producto->getCategorias()){
+			return $lista;
+		}else{
+			return false;
+		}
+	}
 }
 ?>

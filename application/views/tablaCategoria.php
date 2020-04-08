@@ -1,6 +1,6 @@
 <?= $html ?>
     <?= $head ?>
-<body>
+<body id="fondo_admin">
 <?php if(isset($error)){
     echo '<p class="font-weight-bold text-white text-center bg-warning">'.$error .'</p>';}
 ?>

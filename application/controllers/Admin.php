@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 		$this->load->model('Producto');
 		$this->load->model('Autorizacion');
 		$this->load->model('Pedido');
+		$this->load->model('Usuario');
 		$this->load->library(array('session'));
 		//$this->load->helper('MY_templates');
 	}
@@ -25,6 +26,8 @@ class Admin extends CI_Controller {
 	public function getTemplate(){
 		
 		$data = array(
+			'entregados' => $this->Pedido->getPedidosEnviados(),
+			'clientes' => $this->Usuario->getClientes(),
 			'html' => $this->load->view('layout/html','', TRUE),
 			'head' => $this->load->view('layout/head','',TRUE),
 			'nav_admin' =>$this->load->view('layout/nav_admin','',TRUE),
@@ -150,6 +153,7 @@ class Admin extends CI_Controller {
 		$id 			= $this->input->post('id', true);
 		$categoria 		= $this->input->post('categoria', true);
 		$descripcion 	= $this->input->post('descripcion',true);
+		$cantidad		= $this->input->post('stock',true);
 		$precio			= $this->input->post('precio',true);
 		$boton_compra  = $this->input->post('info_boton',true);
 		
@@ -161,6 +165,7 @@ class Admin extends CI_Controller {
 			$data = array(
 				'categoria' => $categoria,
 				'descripcion' => $descripcion,
+				'stock' => $cantidad,
 				'precio' => $precio,
 				'boton_compra' => $boton_compra,
 			);
@@ -197,6 +202,7 @@ class Admin extends CI_Controller {
 				$data = array(
 					'categoria' => $categoria,
 					'descripcion' => $descripcion,
+					'stock' => $cantidad,
 					'precio' => $precio,
 					'imagen' => $url,
 					'boton_compra' => $boton_compra,
@@ -349,12 +355,62 @@ class Admin extends CI_Controller {
 	}
 	
 	public function confirmarPedido($id){
+
 		if($admin = $this->session->userdata('is_logged')){
-			if($this->Pedido->confirmarEnvio($id)){
-				$data = $this->getTemplate();
-				$data['mensaje'] = "¡El pedido se autorizo a Envio correctamente!.";
-				$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
-				$this->load->view('pedidos', $data);
+			if($items = $this->Pedido->getDescripcionPedido($id)){
+
+				//print_r($items);
+				//echo "<br>";
+				$datos = unserialize($items->items);
+				//echo "<br>";
+				//print_r($datos);
+				
+				//echo "<br>";
+				//echo "<br>";
+				//echo "Cantidad de Items: ".count($datos);
+				//echo "<br>";echo "<br>";
+				$faltante = array();
+				$sin_respaldo = false;
+				for($i = 0; $i < count($datos); $i++){
+				$cantidad = $datos[key($datos)];
+				//	echo  key($datos)." ".$cantidad;
+					if($cant = $this->Producto->stockProducto(key($datos), $cantidad)){
+				//		echo "Hay Stock ".var_dump($cant)." <br><br>";
+					}else{
+						$sin_respaldo = true;
+						$faltante[] = key($datos);
+				//		echo "No hay stock: ".var_dump($cant)."<br><br>";
+					}
+					next($datos);
+				}
+				if($sin_respaldo){
+					$data = $this->getTemplate();
+					$data['mensaje'] = "El Pedido codigo $id : No tiene stock suficiente para cubrir esta demanda.  &#x1f515;";
+					$data['faltante'] = $faltante;
+					$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+					
+					$this->load->view('pedidos', $data);
+					//echo $faltante[0]." ".count($faltante);
+				}else{
+					//todo ok, confirmar el envio. 
+					if($this->Producto->actualizarProductosVendidos($datos)){
+						$this->Pedido->confirmarEnvio($id);
+						$data = $this->getTemplate();
+						$data['mensaje'] = "El Pedido codigo $id : ¡El pedido se autorizo a Envio correctamente &#x1f389;!.";
+						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+						
+						$this->load->view('pedidos', $data);
+					}else{
+						$data = $this->getTemplate();
+						$data['mensaje'] = "¡Error en el metodo final de confirmacion de envio!.";
+						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+						
+						$this->load->view('pedidos', $data);
+					}
+					
+				}
+
+
 			}
 		}else{
 			show_404();

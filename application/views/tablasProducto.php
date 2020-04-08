@@ -1,7 +1,7 @@
 <?php if(isset($html)){ echo $html;} ?>
     <?php if(isset($head)){ echo $head;} ?>
 
-    <body>
+    <body id="fondo_admin">
     <?php if(isset($nav_admin)){ echo $nav_admin;} ?>
     <h2 class="font-weight-bold" style="font-size:2rem;">Lista de Mercaderias</h2>
 

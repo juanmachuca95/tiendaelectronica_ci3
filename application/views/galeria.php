@@ -14,16 +14,15 @@
             <div class="row py-3">
                 <div class="col-sm-12 justify-content-center row pt-4 mx-0">
                 <form action="<?=base_url('home/galeriaCategoria')?>" method="post" class="form-inline p-3">
-                <?php if(isset($categorias)) {  
-                    if(isset($todos)) { $categorias = $todos; echo var_dump($categorias);} ?>
+                <?php if (isset($categorias) ) { ?>
                     <select class="custom-select col-8" name="categoria" id="categoria">
-                        <option value="Todos">Todos</option>
+                        <option>Todos</option>
                         <?php foreach ($categorias as $row) { ?>
                         <option value="<?=$row->categoria?>"><?=$row->categoria?></option>
                         <?php } ?>
                     </select>
                     <button class="btn btn-info text-white col-4" type="submit">Filtrar</button>
-                <?php } else{ echo "<p class='bg-info text-white'>"."no llego"."</p>";} ?>
+                <?php } else{ echo "<p class='bg-light text-dark'>"."no llego"."</p>";} ?>
                 </form>
             </div>
                     <?php if(isset($lista)){

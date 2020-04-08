@@ -18,7 +18,7 @@
                     <p class="lead bg-dark text-warning" ><?=$msj?>&#x1f389;.</p>
                 <?php } ?>
 
-                <form action="<?=base_url('login/login')?>" method="post">
+                <form action="<?=base_url('login/iniciarSession')?>" method="post">
                     <div class="form-group">
                         <label for="correo">Email</label>
                         <input class="form-control" type="email" id="correo" name="correo" placeholder="Correo. Ej.: nombre@gmail.com" required>

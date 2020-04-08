@@ -32,7 +32,7 @@
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('home')?>">
+                            <a class="nav-link text-white" href="<?=base_url('login')?>">
                                 
                             ¿ Activar Carrito &#x1f6d2; ?
                             

@@ -3,6 +3,7 @@
 class Pedido extends CI_Model{
     function __construct(){
         $this->load->database();
+        $this->load->model('Producto');
     } 
 
     function cargarPedido($items, $id_cliente){
@@ -87,6 +88,19 @@ class Pedido extends CI_Model{
         $query = $this->db->get('pedidos');
         if($query == true){
             return $query->row();
+        }else{
+            return false;
+        }
+    }
+
+    function getPedidosEnviados(){
+        $this->db->select( '*');
+        $this->db->from('clientes');
+        $this->db->where("entregado = 1");
+        $this->db->join('pedidos','clientes.id_cliente = pedidos.id_cliente', 'inner');
+
+        if($query = $this->db->get()){
+            return $query->result();
         }else{
             return false;
         }
