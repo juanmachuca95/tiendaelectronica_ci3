@@ -1,6 +1,7 @@
     <!--Script de bootstrap y jquery-->
     <script src="<?php echo base_url()?>/assets/js/jquery/jquery-3.4.1.min.js"></script>
     <script src="<?=base_url()?>/assets/js/myJQuery.js"></script>
+    <script src="<?=base_url()?>/assets/js/validation.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap.bundle.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap.js"></script>
     

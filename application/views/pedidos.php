@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-9">
                         <p class="lead px-4">
-                            Total de pedidos : <?php if ( isset($todos_los_pedidos) ) { echo count($todos_los_pedidos);  }?> 
+                            Total de pedidos : <?php if ( isset($cantidad_pedidos) ) { echo $cantidad_pedidos;  }?> 
                             / Total de Pedidos Entregados: <?php if ( isset($entregados) ) { echo count($entregados);  }?>
                         </p>
                         <?php if (isset($productos) && isset($info_items)){ $subtotal = 0; ?>
@@ -87,7 +87,7 @@
         <th>Acciones</th>
         
         </thead>
-        <?php foreach ($todos_los_pedidos as $row) {
+        <?php foreach ($todos_los_pedidos as $row):
 
             //if($row->entregado == false){ //solo pedidos que no se  halla entregado
             $data = array(
@@ -111,10 +111,36 @@
             </tr>
 
             
-        <?php } //} ?>
+        <?php endforeach;  //} ?>
+        
         </table>
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <?php
+        $next = $current_page + 1;
+        $prev = $current_page - 1;
+
+        if($prev < 0){
+            $prev = 0;
+        }
+        if($next > $last_page){
+            $next = $last_page;
+        }
+          ?>
+            <li class="page-item"><a class="page-link" href="<?=base_url('admin/pedidos/'.$prev)?>">Previous</a></li>
+            
+            <?php for($i = 1; $i <= $last_page; $i++) { ?>
+            
+            <li class="page-item"><a class="page-link" href="<?=base_url('admin/pedidos/'.$i)?>"><?=$i?></a></li>
+            
+            <?php } ?>
+            <li class="page-item"><a class="page-link" href="<?=base_url('admin/pedidos/'.$next)?>">Next</a></li>
+        </ul>
+        </nav>
+       
     </div>
     <?php }  ?>
+    
     
     </div> <!--Cierre de div container-->
     <script src="<?php echo base_url();?>/assets/js/jquery-3.4.1.min.js"></script>

@@ -9,11 +9,12 @@ class Admin extends CI_Controller {
 		$this->load->model('Autorizacion');
 		$this->load->model('Pedido');
 		$this->load->model('Usuario');
-		$this->load->library(array('session'));
+		$this->load->library(array('session', 'pagination'));
 		//$this->load->helper('MY_templates');
 	}
 
 	public function index(){
+		
 		$dato = $this->session->userdata('is_logged');
 		if($dato){
 			$data = $this->getTemplate();
@@ -309,10 +310,23 @@ class Admin extends CI_Controller {
 	}
 
 	
-	public function pedidos(){
+	public function pedidos($page = 1){
+		
 		if($admin = $this->session->userdata('is_logged')){
+
+			$page--;
+			if($page < 0){
+				$page = 0;
+			}
+			$page_size = 2;
+			$offset = $page * $page_size;
+
+
 			$data = $this->getTemplate();
-			$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+			$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin($page_size, $offset);
+			$data['current_page'] = $page;
+			$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / $page_size );
+			$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 			$this->load->view('pedidos', $data);
 		}else{
 			show_404();
@@ -341,12 +355,19 @@ class Admin extends CI_Controller {
 			if($this->Pedido->eliminarUnPedido($id)){
 				$data = $this->getTemplate();
 				$data['mensaje'] = "¡Se elimino el pedido correctamente!.";
-				$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+				$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin(2, 0);
+				$data['current_page'] = 1;
+				$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
+				$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 				$this->load->view('pedidos', $data);
 			}else{
 				$data = $this->getTemplate();
 				$data['mensaje'] = "¡No se elimino el pedido correctamente!.";
-				$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
+				
+				$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin(2, 0);
+				$data['current_page'] = 1;
+				$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
+				$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 				$this->load->view('pedidos', $data);
 			}
 		}else{
@@ -384,11 +405,14 @@ class Admin extends CI_Controller {
 					next($datos);
 				}
 				if($sin_respaldo){
+					
 					$data = $this->getTemplate();
 					$data['mensaje'] = "El Pedido codigo $id : No tiene stock suficiente para cubrir esta demanda.  &#x1f515;";
 					$data['faltante'] = $faltante;
-					$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
-					
+					$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin(2, 0);
+					$data['current_page'] = 1;
+					$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
+					$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 					$this->load->view('pedidos', $data);
 					//echo $faltante[0]." ".count($faltante);
 				}else{
@@ -397,14 +421,18 @@ class Admin extends CI_Controller {
 						$this->Pedido->confirmarEnvio($id);
 						$data = $this->getTemplate();
 						$data['mensaje'] = "El Pedido codigo $id : ¡El pedido se autorizo a Envio correctamente &#x1f389;!.";
-						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
-						
+						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin(2, 0);
+						$data['current_page'] = 1;
+						$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
+						$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 						$this->load->view('pedidos', $data);
 					}else{
 						$data = $this->getTemplate();
 						$data['mensaje'] = "¡Error en el metodo final de confirmacion de envio!.";
-						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin();
-						
+						$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin(2, 0);
+						$data['current_page'] = 1;
+						$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
+						$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 						$this->load->view('pedidos', $data);
 					}
 					
@@ -414,6 +442,32 @@ class Admin extends CI_Controller {
 			}
 		}else{
 			show_404();
+		}
+	}
+
+	public function usuarios(){
+		if( $this->session->userdata('is_logged')){
+			$data = $this->getTemplate();
+			$data['todos_los_usuarios'] = $this->Usuario->getClientes();
+			$this->load->view('usuarios',$data);
+		}else{
+			show_404();
+		}
+		
+	}
+
+	public function eliminarUsuario($id = 0){
+		//echo "$id";
+		if($this->Usuario->eliminarUsuario($id)){
+			$data = $this->getTemplate();
+			$data['mensaje'] = "<p class='text-success font-weight-normal px-4'>Se elimino correctamente el usuario $id </p>";
+			$data['todos_los_usuarios'] = $this->Usuario->getClientes(); 
+			$this->load->view('usuarios',$data);
+		}else{
+			$data = $this->getTemplate();
+			$data['mensaje'] = "<p class='text-danger font-weight-normal px-4'>El usuario id : '$id' tiene pedidos pendientes, no se puede eliminar por el momento.</p>";
+			$data['todos_los_usuarios'] = $this->Usuario->getClientes(); 
+			$this->load->view('usuarios',$data);
 		}
 	}
 }

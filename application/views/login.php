@@ -8,58 +8,53 @@
         <?php } ?>
         <div class="row pt-4" >
 
-            <div class="col-sm-12 col-md-5 pt-4 pb-4 mt-4 mb-4 bg-dark text-white card border border-light" width="400px;" >
+            <div class="col-sm-12 col-md-6 pt-4 pb-4 mt-4 mb-4 bg-light  rounded " width="400px;" >
                 
                 <?php if ( null === $this->session->userdata('admin') && null === $this->session->userdata('usuario') ) { ?>
                 
-                <h1 class="display-4 text-warning">Login</h1>
+                <h3 class="font-weight-bold display-4 text-warning p-3">Login</h3>
 
                 <?php if(isset($msj)) { ?>
                     <p class="lead bg-dark text-warning" ><?=$msj?>&#x1f389;.</p>
                 <?php } ?>
 
-                <form action="<?=base_url('login/iniciarSession')?>" method="post">
+                <form  class="px-3"action="<?=base_url('login/iniciarSession')?>" method="post">
                     <div class="form-group">
-                        <label for="correo">Email</label>
-                        <input class="form-control" type="email" id="correo" name="correo" placeholder="Correo. Ej.: nombre@gmail.com" required>
+                        <label for="inputEmail">Email</label>
+                        <input class="form-control" id="inputEmail" type="email" name="correo" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com " required>
+                        <small class="text-primary" id="outputEmail"></small>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input class="form-control" type="password" id="password" minlength="8" maxlength="12" name="password" placeholder="No mayor de 12 digitos" required>
+                    <label for="inputPassword">Contraseña
+                        <i id="show_pss" class="cerrados">
+                            &#x1f573;
+                        </i>
+                    </label>
+                    <input class="form-control" id="inputPassword" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password" name="password" placeholder="No mayor de 12 digitos" required>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-info">Ingresar</button>
                     </div>
-                    <p><a class="lead text-decoration-none text-white" href="<?=base_url('login/registro')?>">¿No tienes cuenta? Regitrarse como <b class="text-warning">Cliente.</b></a></p>
+                    <p class="font-weight-light text-decoration-none text-dark">¿No tienes cuenta? Regitrarse como <a class="text-primary" href="<?=base_url('login/registro')?>">Cliente</a></p>
                     <?php if( isset($error) ) { 
                         echo $error." &#x1f515;";
                     } 
                     ?>
                 </form>
                 <?php } else { ?>
-                    <h1 class="display-4 text-warning">Session Iniciada</h1>
+                    <h1 class="font-weight-bold display-4 p-5">Session Iniciada</h1>
                     <hr class="bg-light">
                     <?php if (null === $this->session->userdata('usuario')) { ?>
-                    <p class="lead"><b class="text-warning"> Administrador/a en curso: </b> <?= $this->session->userdata('admin') ?> </p>
-                    <p class="lead">Trabajando en los recursos de la App &#x1f468;&#x200d;&#x1f527;</p>
-                    <p><a class="lead text-decoration-none" href="<?=base_url('login/logout')?>">cerrar session</a></p>
+                    <p class="font-weight-bold px-3"><b class="text-info"> Administrador/a en curso: </b> <?= $this->session->userdata('admin') ?> </p>
+                    <p class="font-weight-light px-3">Trabajando en los recursos de la App &#x1f468;&#x200d;&#x1f527;</p>
+                    <small class="font-weight-light px-3"><a href="<?=base_url('login/logout')?>">Cerrar Session</a></small>
                     <?php }else{ ?>
-                    <p class="lead"><b class="text-warning"> Usuario en curso: </b> <?=$this->session->userdata('usuario')?></p>
-                    <p class="lead">Disfrutando de los recursos de la App &#x1f601;</p>
-                    <p><a class="lead text-decoration-none" href="<?=base_url('login/logout')?>">cerrar session</a></p>
+                    <p class="font-weight-bold px-3"><b class="text-info"> Usuario en curso: </b> <?=$this->session->userdata('usuario')?></p>
+                    <p class="font-weight-light px-3">Disfrutando de los recursos de la App &#x1f601;</p>
+                    <small class="font-weight-light px-3"><a href="<?=base_url('login/logout')?>">Cerrar Session</a></small>
                     <?php } ?>
                 <?php } ?>
-            </div>
-            <div class="col-md-6 m-0 p-0 home-categoria">
-            
-                <div class="text-justify-center p-5">
-                    <p class="display-4">Ventajas de Usuario</p>
-                    <p class="lead">1. Facilidad en las elecciones de pago, <strong class="text-warning">Mercado Pago, Pedidos, etc.</strong></p>
-                    <p class="lead">2. Posibilidad de hacer pedidos en cantidad, acceso a su control de negocio y al trato directo.</p>
-                    <p class="lead">3. O contactanos a traves de este misma pagina. Solapa <strong>Contacto</strong>. V&iacutea email <strong>souvenirszn@gmail.com</strong></p>
-                </div>         
-            
-            </div>     
+            </div> px-3
         </div>
     </div>
 

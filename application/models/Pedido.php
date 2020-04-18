@@ -50,14 +50,28 @@ class Pedido extends CI_Model{
         }
     }
 
-    function getPedidosInfoAdmin(){
+    function getPedidosInfoAdmin($page_size, $offset){
+        $this->db->select( '*');
+        $this->db->from('clientes');
+        $this->db->limit($page_size, $offset);
+        $this->db->where("entregado = 0");
+        $this->db->join('pedidos','clientes.id_cliente = pedidos.id_cliente', 'inner');
+
+        if($query = $this->db->get()){
+            return $query->result();
+        }else{
+            return false;
+        }
+    }
+
+    function getCantidadPedidos(){
         $this->db->select( '*');
         $this->db->from('clientes');
         $this->db->where("entregado = 0");
         $this->db->join('pedidos','clientes.id_cliente = pedidos.id_cliente', 'inner');
 
         if($query = $this->db->get()){
-            return $query->result();
+            return $query->num_rows();
         }else{
             return false;
         }
@@ -104,6 +118,11 @@ class Pedido extends CI_Model{
         }else{
             return false;
         }
+    }
+
+    function getPaginate($limit, $offset){
+        $sql = $this->db->get('pedidos', $limit, $offset);
+        return $sql->result();
     }
 }
 
