@@ -65,9 +65,6 @@ class Admin extends CI_Controller {
 		if(isset($_FILES['img'])){
 			if ($this->upload->do_upload('img'))
 			{
-				// Mueve archivo a la carpeta indicada en la variable $data
-				$data = $this->upload->data();
-
 				// Path donde guarda el archivo..
 				$url ="assets/img/productos/".$_FILES['img']['name'];
 
