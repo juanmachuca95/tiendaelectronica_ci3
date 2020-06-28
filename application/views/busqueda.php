@@ -11,7 +11,7 @@
             <div class="jumbotron bg-light">
             <div class="row">
                 <div class="col-md-3 mr-5">
-                    <img class="p-3 bg-warning rounded-circle" src="<?=base_url($row->imagen)?>" style="max-width: 280px;" alt="">
+                    <img class="p-3 bg-warning rounded" src="<?=base_url($row->imagen)?>" style="max-width: 280px;" alt="">
                 </div>
                 <div class="col-md-8 ">
                     <h1 class="display-4">Categoria: <?=$row->categoria?></h1>
@@ -19,7 +19,7 @@
                     <P class="lead">Precio por unidad: <?=$row->precio?></P>
                     <hr class="my-4">
                     <p>Hace tu pedido registrandote como cliente, accediendo al panel de control o a traves del boton de Mercado Pago</p>
-                    <a class="btn btn-primary" href="<?=base_url('cliente/items/'.$row->id)?>" role="button">&#x1f4cb; Hacer Pedido</a>
+                    <a class="btn btn-primary" href="<?=base_url('galeria/detalleProducto/'.$row->id)?>" role="button">&#x1f4cb; DETALLES </a>
                     <a class="btn btn-warning text-decoration-none" href="<?=$row->boton_compra;?>">&#x1f6d2; Compra </a>
                 </div>
             </div>

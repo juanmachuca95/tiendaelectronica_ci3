@@ -10,13 +10,11 @@ class Admin extends CI_Controller {
 		$this->load->model('Pedido');
 		$this->load->model('Usuario');
 		$this->load->library(array('session', 'pagination'));
-		//$this->load->helper('MY_templates');
 	}
 
 	public function index(){
 		
-		$dato = $this->session->userdata('is_logged');
-		if($dato){
+		if($this->session->userdata('is_logged')){
 			$data = $this->getTemplate();
 			$this->load->view('admin',$data);
 		}else{
@@ -25,313 +23,179 @@ class Admin extends CI_Controller {
 	}
 
 	public function getTemplate(){
-		
 		$data = array(
-			'entregados' => $this->Pedido->getPedidosEnviados(),
-			'clientes' => $this->Usuario->getClientes(),
 			'html' => $this->load->view('layout/html','', TRUE),
-			'head' => $this->load->view('layout/head','',TRUE),
-			'nav_admin' =>$this->load->view('layout/nav_admin','',TRUE),
-			//'lista' => $this->Producto->getProductos(),
-			//'listaAmigurrumis' => $this->Producto->getProductosAmigurrumis(),
+			'head' => $this->load->view('layout/head','',TRUE),			
 		);	
 		return $data;	
 	}
 
-	public function form_carga(){
-		if($dato = $this->session->userdata('is_logged')){
-			$data = $this->getTemplate();
-			$data['form_carga'] =  $this->load->view('forms/form_carga','',TRUE);
-			$this->load->view('admin',$data);
-		}else{
-			show_404();
-		}
-	}
-
-	public function cargar(){
-		$this->load->library('upload');
-		//Configuracion para el archivo img
-		$config['upload_path'] = 'assets/img/productos/';
-		$config['allowed_types'] = 'gif|jpg|JPEG|png';
-		$config['max_size'] = '10024';
-		$config['max_width']  = '6000';
-		$config['max_height']  = '6000';
-
-		// Inicializa la configuración para el archivo 
-		$this->upload->initialize($config);
-		//$boton = $this->input->post('info_boton',true);
-		//echo $boton;
-		
-		if(isset($_FILES['img'])){
-			if ($this->upload->do_upload('img'))
-			{
-				// Mueve archivo a la carpeta indicada en la variable $data
-				$data = $this->upload->data();
-
-				// Path donde guarda el archivo..
-				$url ="assets/img/productos/".$_FILES['img']['name'];
-
-				// Array de datos para insertar en productos
-				$data = array(
-					'categoria' 	=> $this->input->post('categoria',true),
-					'descripcion'	=> $this->input->post('descripcion',true),
-					'precio'		=> $this->input->post('precio',true),
-					'imagen'		=> $url,
-					'boton_compra'  => $this->input->post('info_boton',true),
-				);
-				if($this->Producto->cargar($data)){//Estoy llamando al mi model.
-					echo '<p class=" font-weight-bold bg-primary text-center text-white">Carga exitosa</p>';
-					$this->load->view('admin', $this->getTemplate());
-				}else{
-					echo '<p class="font-weight-bold bg-danger text-center text-white ">Error al cargar</p>';
-					$this->load->view('admin', $this->getTemplate());
-				}
-			}else{
-				echo '<p class="font-weight-bold bg-warning text-center text-white ">Error al cargar imagen, extensión incorrecto o excede el tamaño permitido que es de: 2MB</p>';
-					$this->load->view('admin', $this->getTemplate());
-			}
-		}else{
-			redirect('admin','refresh');
-		}
-	}
-
-
-	public function tablasProducto(){
-		if($dato = $this->session->userdata('is_logged')){
-			$data = $this->getTemplate();
-			$data['tablasProducto'] = $this->load->view('tablasProducto','',TRUE);
-			$this->load->view('admin',$data);
-		}else{
-			show_404();
-		}
-	}
-
-	public function ver_Categoria(){
-		if($admin = $this->session->userdata('is_logged')){
-			$categoria = $this->input->post('eleccion',TRUE);
-			//echo $categoria;
-			if($categoria == '0'){
-				$error = "No elegiste ninguna lista";
-				$data = $this->getTemplate();
-				$data['error'] = $error;
-				$this->load->view('tablasProducto',$data);
-			}else if($categoria == 'Todos'){
-				//echo $categoria;
-				$datos = $this->Producto->getProductos();
-				$data = $this->getTemplate();
-				$data['listaGeneral'] = $datos;
-				//tengo que la vista TablaProducto
-				$data['elegir'] = $this->load->view('tablasProducto','',true);
-				$this->load->view('tablaCategoria',$data);
-			}else{
-				if($datos = $this->Producto->getProductosCategoria($categoria)){
-					$data = $this->getTemplate();
-					$data['listaGeneral'] = $datos;
-					//tengo que la vista TablaProducto
-					$data['elegir'] = $this->load->view('tablasProducto','',true);
-					$this->load->view('tablaCategoria',$data);
-				}else{
-					$error = "La categoria elegida no tiene registros en base de datos.";
-					$data = $this->getTemplate();
-					$data['error'] = $error;
-					$this->load->view('tablasProducto',$data);
-				}
-			}
-		}else{
-			show_404();
-		}
-	}
-
-
-	public function editar($id = 0){
-		$registro = $this->Producto->getProducto($id);	
+	//Cargador de la vista crear productos
+	function cargar_producto(){
+		//echo "metodo cargar producto";
 		$data = $this->getTemplate();
-		$data['registro'] = $registro;
-		$this->load->view('forms/form_actualizacion',$data);
+		$data['form'] = $this->load->view('forms/form_carga','',true);
+		$this->load->view('admin/crearProducto',$data);	
 	}
 
-	public function update(){
-		$id 			= $this->input->post('id', true);
-		$categoria 		= $this->input->post('categoria', true);
-		$descripcion 	= $this->input->post('descripcion',true);
-		$cantidad		= $this->input->post('stock',true);
-		$precio			= $this->input->post('precio',true);
-		$boton_compra  = $this->input->post('info_boton',true);
-		
-		//echo $id." ".$categoria." ".$descripcion." ".$precio." ".$_FILES['img']['name'];
-		//var_dump($_FILES['img']['name']);
-		//si no se recibio imagen
-		if( $_FILES['img']['name'] == '' ){
-			//echo "<br>"."No llego imagen";
-			$data = array(
-				'categoria' => $categoria,
-				'descripcion' => $descripcion,
-				'stock' => $cantidad,
-				'precio' => $precio,
-				'boton_compra' => $boton_compra,
-			);
-			if($this->Producto->actualizar($data, $id)){
-				$data = $this->getTemplate();
-				$data['mensaje']= "actualizacion exitosa en producto id = $id";
-				$this->load->view('admin', $data);
-			}else{
-				$data = $this->getTemplate();
-				$data['error']= "Actualiacion SIN exito en producto id = $id";
-				$this->load->view('admin', $data);
-			}
-		}else{
-			//echo "<br>"."Llego imagen : ".$_FILES['img']['name'];
-			//Hay que modificar la imagen
-			$this->load->library('upload');
-			//Configuracion para el archivo img
-			$config['upload_path'] = 'assets/img/productos/';
-			$config['allowed_types'] = 'gif|jpg|jpeg|png';
-			$config['max_size'] = '10024';
-			$config['max_width']  = '6000;';
-			$config['max_height']  = '6000';
+	//vista para editar productos
+	function editar_producto($offset = 0){
+		$productos = $this->Producto->getProductos();
 
-			// Inicializa la configuración para el archivo 
-			$this->upload->initialize($config);
+		$config['base_url'] = base_url('admin/editar_producto/');
+		$config['total_rows'] = count($productos);
+		$config['per_page'] = 6;
 
-			if ($this->upload->do_upload('img')){
-				//echo "<br>"."cargada la imagen en carpeta";
-				// Mueve archivo a la carpeta indicada en la variable $data
-				$data = $this->upload->data();
-				// Path donde guarda el archivo..
-				$url ="assets/img/productos/".$_FILES['img']['name'];
-				// Array de datos para insertar en productos
-				$data = array(
-					'categoria' => $categoria,
-					'descripcion' => $descripcion,
-					'stock' => $cantidad,
-					'precio' => $precio,
-					'imagen' => $url,
-					'boton_compra' => $boton_compra,
-				);
-				//mando al model actualizar con los datos e imagen
-				if($this->Producto->actualizar($data, $id)){
-					$data = $this->getTemplate();
-					$data['mensaje']= "Actualizacion Exitosa en producto id = $id";
-					$this->load->view('admin', $data);
-				}else{
-					$data = $this->getTemplate();
-					$data['error']= "Actualiacion SIN exito en producto id = $id";
-					$this->load->view('admin', $data);
-				}
-			}else{
-				//echo "<br>"."No se cargo en la carpeta";
-				$data = $this->getTemplate();
-				$data['error'] = $this->upload->display_errors();
-				$this->load->view('admin', $data);
-			}
-		}
-	}
-	
-	public function eliminar($id = 0){
-		//echo $id;
-		if($this->Producto->eliminar($id)){
-			$data = $this->getTemplate();
-			$data['mensaje'] = "Se dio de baja producto id = $id";
-			$this->load->view('admin',$data);
-		}else{
-			$data = $this->getTemplate();
-			$data['error'] = "No es posible dar de baja producto id = $id";
-			$this->load->view('admin',$data);
-		}
+		//Estilos
+		$config['full_tag_open'] 	= '<div class="pagging text-center"><nav><ul class="pagination m-0 px-1 pb-4">';
+		$config['full_tag_close'] 	= '</ul></nav></div>';
+		$config['num_tag_open'] 	= '<li class="page-item"><span class="page-link">';
+		$config['num_tag_close']	= '</span></li>';
+		$config['cur_tag_open']		= '<li class="page-item active"><span class="page-link">';
+		$config['cur_tag_close']	= '<span class="sr-only">(current)</span></span></li>';
+		$config['next_tag_open']	= '<li class="page-item"><span class="page-link">';
+		$config['next_tagl_close']	= '<span aria-hidden="true">&raquo;</span></span></li>';
+		$config['prev_tag_open']	= '<li class="page-item"><span class="page-link">';
+		$config['prev_tagl_close']  = '</span></li>'; 
+		$config['first_tag_open']	= '<li class="page-item"><span class="page-link">';
+		$config['first_tagl_close']	= '</span></li>';
+		$config['last_tag_open']	= '<li class="page-item"><span class="page-link">';
+		$config['last_tagl_close'] = '</span></li>';
+		$this->pagination->initialize($config);
+
+		$lista = $this->Producto->getPaginacion($config['per_page'], $offset);
+		$data = $this->getTemplate();
+		$data['listaGeneral'] = $lista;
+		$this->load->view('admin/editarProducto',$data);
 	}
 
-	public function categoria(){
+	//cargador de la vista Pedidos.
+	function pedidos($page = 1){
 		if($admin = $this->session->userdata('is_logged')){
-			$datos = $this->Producto->getCategorias();
-			$data = $this->getTemplate();
-			$data['categorias'] = $datos;
-			$this->load->view('categoria',$data);
-			
-		}else{
-			show_404();
-		}
-	}
-
-	public function crearCategoria(){
-
-		$data = array(
-			'categoria' => $this->input->post('categoria',true),
-			'descripcion' => $this->input->post('descripcion', true),
-		);
-
-		if($this->Producto->crearCategoria($data)){
-			redirect($_SERVER['HTTP_REFERER'], 'refresh');
-		}else{
-			$datos = $this->Producto->getCategorias();
-			$data = $this->getTemplate();
-			$data['categorias'] = $datos;
-			$data['error'] = "Error al insertar, verifique su bd";
-			$this->load->view('categoria',$data);
-		}
-
-	}
-
-	public function info(){
-		if($admin = $this->session->userdata('is_logged')){
-			$data = $this->getTemplate();
-			$data['datos'] = $this->datosAdmin();
-			$this->load->view('info_admin',$data);
-		}else{
-			show_404();
-		}
-	}
-
-	public function datosAdmin(){
-		if($data = $this->Autorizacion->getDatosAdmin()){
-			return $data;
-		}else{
-			return false;
-		}
-	}
-
-	public function actualizarDatosAdmin(){
-		$data = array(
-			'id' => $this->input->post('id', true),
-
-			'nombre_admin' => $this->input->post('nombre', true),
-			'celular' => $this->input->post('celular', true),
-			'email' => $this->input->post('email', true),
-			'contraseña' => $this->input->post('password', true),
-			
-		);
-
-		if($this->Autorizacion->actualizarInfoAdmin($data, $data['id'])){
-			//echo "Se realizaron los cambios correctamente";
-			redirect($_SERVER['HTTP_REFERER'], 'refresh');
-		}else{
-			//echo "Fallo al hacer los cambios correctamente";
-			redirect($_SERVER['HTTP_REFERER'], 'refresh');
-		}
-	}
-
-	
-	public function pedidos($page = 1){
-		
-		if($admin = $this->session->userdata('is_logged')){
-
 			$page--;
 			if($page < 0){
 				$page = 0;
 			}
 			$page_size = 2;
 			$offset = $page * $page_size;
-
-
 			$data = $this->getTemplate();
 			$data['todos_los_pedidos'] = $this->Pedido->getPedidosInfoAdmin($page_size, $offset);
-			$data['current_page'] = $page;
-			$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / $page_size );
-			$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
+			$data['current_page'] 		= $page;
+			$data['last_page'] 			= ceil($this->Pedido->getCantidadPedidos() / $page_size );
+			$data['cantidad_pedidos'] 	= $this->Pedido->getCantidadPedidos();
+			$data['entregados']			= $this->Pedido->getCantidadPedidosEntregados();
 			$this->load->view('pedidos', $data);
 		}else{
 			show_404();
 		}
 	}
+
+	//cargador de la vista Usuarios.
+	function usuarios(){
+		if( $this->session->userdata('is_logged')){
+			$data = $this->getTemplate();
+			$data['todos_los_usuarios'] = $this->Usuario->getClientes();
+			$data['cant_usuarios']		= count($data['todos_los_usuarios']);
+			$this->load->view('usuarios',$data);
+		}else{
+			show_404();
+		}	
+	}
+
+	//Funcion de carga del producto. 
+	public function cargar(){
+		$this->load->library('upload');
+		$config['upload_path'] = 'assets/img/productos/';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_size'] = '10024';
+		$config['max_width']  = '6000';
+		$config['max_height']  = '6000';
+		// Inicializa la configuración para el archivo 
+		$this->upload->initialize($config);
+		
+		if(isset($_FILES['img'])){
+			if ($this->upload->do_upload('img')){
+				// Mueve archivo a la carpeta indicada en la variable $data
+				$data = $this->upload->data();
+				// Path donde guarda el archivo..
+				$url ="assets/img/productos/".$_FILES['img']['name'];
+				// Array de datos para insertar en productos
+				$data = array(
+					'categoria' 	=> $this->input->post('categoria',true),
+					'stock' 		=> $this->input->post('stock', true),
+					'descripcion'	=> $this->input->post('descripcion',true),
+					'precio'		=> $this->input->post('precio',true),
+					'imagen'		=> $url,
+					'boton_compra'  => $this->input->post('info_boton',true),
+				);
+				if($this->Producto->cargar($data)){//Estoy llamando al mi model.
+					$msj = "El producto se creo Correctamente";
+					$this->session->set_flashdata('msj',$msj);
+					$this->cargar_producto();
+				}else{
+					$msj = "No fue posible cargar el producto";
+					$this->session->set_flashdata('msj',$msj);
+					$this->cargar_producto();
+				}
+			}
+		}
+	}
+
+	//Nuevo forma de actualizar registro desde la tabla.. 
+	function editRegistro(){
+		if(isset($_POST['codigo'])){
+			$codigo 		= $_POST['codigo'];
+			$categoria		= $_POST['categoria'];
+			$descripcion	= $_POST['descripcion'];
+			$cantidad		= $_POST['stock'];
+			$precio			= $_POST['precio'];
+
+			$data = array(
+				'categoria' 	=> $categoria,
+				'descripcion' 	=> $descripcion,
+				'stock' 		=> $cantidad,
+				'precio' 		=> $precio,
+			);
+			if(isset($_FILES['file'])){
+				$this->load->library('upload');
+				$config['upload_path'] = 'assets/img/productos/';
+				$config['allowed_types'] = 'gif|jpg|jpeg|png';
+				$config['max_size'] = '10024';
+				$config['max_width']  = '6000;';
+				$config['max_height']  = '6000';
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('file')){
+					$url ="assets/img/productos/".$_FILES['file']['name'];
+					$data['imagen'] = $url;
+					if($this->Producto->actualizar($data, $codigo)){
+						echo true;
+					}else{
+						echo false;
+					}
+				}
+			}else{
+				if($this->Producto->actualizar($data, $codigo)){
+					echo true;
+				}else{
+					echo false;
+				}
+			}
+		}
+	}
+
+	/*Eliminacion de un producto por codigo Id*/
+	function eliminar($id = 0){
+		if($this->Producto->eliminar($id)){
+			$msj = "Se dio de baja producto id = $id";
+			$this->session->set_flashdata('msj', $msj);
+			$this->editar_producto();
+		}else{
+			$msj = "No fue posible dar de baja producto id = $id. Intentalo nuevamente mas tarde.";
+			$this->session->set_flashdata('msj', $msj);
+			$this->editar_producto();
+		}
+	}
+
 
 	public function detalle($id){
 		if($admin = $this->session->userdata('is_logged')){
@@ -378,16 +242,13 @@ class Admin extends CI_Controller {
 	public function confirmarPedido($id){
 
 		if($admin = $this->session->userdata('is_logged')){
-			if($items = $this->Pedido->getDescripcionPedido($id)){
-
+			$pedidoYaConfirmado = $this->Pedido->getConfirmado();
+			if($items = $this->Pedido->getDescripcionPedido($id) && $pedidoYaConfirmado == false){
 				//print_r($items);
 				//echo "<br>";
 				$datos = unserialize($items->items);
 				//echo "<br>";
 				//print_r($datos);
-				
-				//echo "<br>";
-				//echo "<br>";
 				//echo "Cantidad de Items: ".count($datos);
 				//echo "<br>";echo "<br>";
 				$faltante = array();
@@ -405,7 +266,6 @@ class Admin extends CI_Controller {
 					next($datos);
 				}
 				if($sin_respaldo){
-					
 					$data = $this->getTemplate();
 					$data['mensaje'] = "El Pedido codigo $id : No tiene stock suficiente para cubrir esta demanda.  &#x1f515;";
 					$data['faltante'] = $faltante;
@@ -434,40 +294,28 @@ class Admin extends CI_Controller {
 						$data['last_page'] = ceil($this->Pedido->getCantidadPedidos() / 2);
 						$data['cantidad_pedidos'] = $this->Pedido->getCantidadPedidos();
 						$this->load->view('pedidos', $data);
-					}
-					
+					}	
 				}
-
-
+			}else{
+				$msj = "El pedido ya ha sido confirmado";
+				$this->session->set_flashdata('msj',$msj);
+				$this->pedidos();
 			}
 		}else{
 			show_404();
 		}
 	}
 
-	public function usuarios(){
-		if( $this->session->userdata('is_logged')){
-			$data = $this->getTemplate();
-			$data['todos_los_usuarios'] = $this->Usuario->getClientes();
-			$this->load->view('usuarios',$data);
-		}else{
-			show_404();
-		}
-		
-	}
 
 	public function eliminarUsuario($id = 0){
-		//echo "$id";
 		if($this->Usuario->eliminarUsuario($id)){
-			$data = $this->getTemplate();
-			$data['mensaje'] = "<p class='text-success font-weight-normal px-4'>Se elimino correctamente el usuario $id </p>";
-			$data['todos_los_usuarios'] = $this->Usuario->getClientes(); 
-			$this->load->view('usuarios',$data);
+			$mensaje = "<p class='bg-success text-white font-weight-normal p-4'>Se elimino correctamente el usuario $id </p>";
+			$this->session->set_flashdata('msj', $mensaje); 
+			$this->usuarios();
 		}else{
-			$data = $this->getTemplate();
-			$data['mensaje'] = "<p class='text-danger font-weight-normal px-4'>El usuario id : '$id' tiene pedidos pendientes, no se puede eliminar por el momento.</p>";
-			$data['todos_los_usuarios'] = $this->Usuario->getClientes(); 
-			$this->load->view('usuarios',$data);
+			$mensaje = "<p class='bg-danger text-white font-weight-normal p-4'>El usuario id : '$id' tiene pedidos pendientes, no se puede eliminar por el momento.</p>";
+			$this->session->set_flashdata('msj', $mensaje); 
+			$this->usuarios();
 		}
 	}
 }

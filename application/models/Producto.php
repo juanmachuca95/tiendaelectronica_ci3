@@ -9,27 +9,24 @@
         function cargar($datos){
             if($this->db->insert('productos',$datos)){
                 return true;
-            }else{
-                return false;
             }
+            return false;
         }
 
         //toda la tabla de productos
         function getProductos(){
             if($sql = $this->db->get('productos')){
                 return $sql->result();
-            }else{
-                return false;
             }
+            return false;
         }
 
         //tabla por categoria
         function getProductosCategoria($categoria){
             if($sql = $this->db->get_where('productos', array('categoria' => $categoria))) {
                 return $sql->result();
-            }else{
-                return false;
-            }           
+            }
+            return false;         
         }
 
         //read datos
@@ -44,13 +41,10 @@
 
         //update
         function actualizar($data, $id){
-
-            if($this->db->update('productos',$data,array('id'=>$id)) ){
+            if($this->db->update('productos',$data, array('id'=>$id)) ){
                 return true;
-            }else{
-                return false;
             }
-
+            return false;
         }
 
         function eliminar($id){
@@ -127,9 +121,21 @@
                 $this->db->where('id', $codigo);
                 $this->db->update('productos');
             }
-                
-
             return true;
+        }
+
+        function datosProducto($codigo){
+            $this->db->where('id',$codigo);
+            $sql = $this->db->get('productos');
+            if($sql->num_rows() == 1){
+                return $sql->row();
+            }
+            return false;
+        }
+
+        function getPaginacion($limit, $offset){
+            $sql = $this->db->get('productos', $limit, $offset);
+            return $sql->result();
         }
     }   
 

@@ -1,7 +1,7 @@
 <div class="container p-0 ">
     <div class="row my-4">
         <div class="col- col-ms-12 col-md-8 py-4 px-4 bg-light rounded">
-        <form id="form_usuario"  action="<?=base_url('login/registrarCliente')?>" method="post">
+        <form id="form_usuario" action="<?=base_url('login/registrar')?>" method="post">
             <h3 class="font-weight-bold py-3">Crea tu cuenta de Usuario</h3>
             <div class="form-row">
                 <div class="form-group col-xs-12 col-ms-12 col-md-6">
@@ -43,7 +43,7 @@
                     </label>
 
                     <input class="form-control" id="inputPasswordRepet" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password"
-                    name="password" placeholder="No mayor de 12 digitos" required>
+                    name="password2" placeholder="No mayor de 12 digitos" required>
                 
                 </div>
                 <small class="text-primary m-0 pl-1 pb-3" id="outputPassword"></small>

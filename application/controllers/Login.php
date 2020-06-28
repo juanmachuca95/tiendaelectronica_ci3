@@ -5,8 +5,9 @@ class Login extends CI_Controller {
 
 	public function __construct(){
         parent::__construct();
-        $this->load->model('Autorizacion');
         $this->load->library(array('session'));	
+        $this->load->model('Autorizacion');
+       
 	}
 
 	public function index()
@@ -26,7 +27,7 @@ class Login extends CI_Controller {
 		return $data;	
 	}
 
-    public function iniciarSession(){
+    public function iniciar(){
         $email = $this->input->post('correo',true);
         $contrasenia = $this->input->post('password',true); 
         
@@ -38,7 +39,8 @@ class Login extends CI_Controller {
                 'is_logged' => true,
             );
             $this->session->set_userdata($data);
-            redirect('admin','refresh');
+            $data = $this->getTemplate();
+            $this->load->view('login',$data);
 
         }else if($resultado = $this->Autorizacion->login_usuario($email, $contrasenia))  {
             
@@ -75,7 +77,7 @@ class Login extends CI_Controller {
         $this->load->view('registro', $data); 
     }
 
-    public function registrarCliente(){
+    public function registrar(){
         $data = array(
             'nombre'    => $this->input->post('nombre', true),
             'apellido'  => $this->input->post('apellido', true),

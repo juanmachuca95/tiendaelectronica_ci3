@@ -11,53 +11,19 @@ class Home extends CI_Controller {
 
 	public function index(){
 		$data = $this->getTemplate();
-		$data['categorias'] = $this->getCategorias();
+		$data['categorias'] = $this->Producto->getCategorias();
 		$this->load->view('home', $data);
 	}
 	
 	public function getTemplate(){
 		
-		$data = array(
-			'categorias' => $this->getCategorias(),
+		$data = array(		
 			'html' => $this->load->view('layout/html','', TRUE),
 			'head' => $this->load->view('layout/head','',TRUE),
 			'nav' => $this->load->view('layout/nav','', TRUE),	
 			'footer' => $this->load->view('layout/footer','', TRUE),		
 		);
 		return $data;	
-	}
-
-	public function galeria(){
-		$datos = $this->Producto->getProductos();
-		$data = $this->getTemplate();
-		
-		$data['lista'] = $datos;
-		$this->load->view('galeria', $data);
-	}
-
-	public function galeriaCategoria(){
-		$categoria = $this->input->post('categoria', true);
-
-		if($categoria == "Todos"){
-			$data = $this->getTemplate();
-			
-			$data['lista'] = $this->Producto->getProductos();
-			$this->load->view('galeria',$data);
-		}else{
-			$datos = $this->Producto->getProductosCategoria($categoria);
-			$data = $this->getTemplate();
-			
-			$data['lista'] = $datos;
-			$this->load->view('galeria', $data);
-		}
-	}
-
-	public function elegirCategoria($categoria = 0){
-		$datos = $this->Producto->getProductosCategoria($categoria);
-		$data = $this->getTemplate();
-		
-		$data['lista'] = $datos;
-		$this->load->view('galeria', $data);
 	}
 
 	public function getCategorias(){

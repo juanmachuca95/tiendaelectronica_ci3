@@ -1,11 +1,7 @@
-    <!--Script de bootstrap y jquery-->
-    <script src="<?php echo base_url()?>/assets/js/jquery/jquery-3.4.1.min.js"></script>
-    <script src="<?=base_url()?>/assets/js/myJQuery.js"></script>
-    <script src="<?=base_url()?>/assets/js/validation.js"></script>
-    <script src="<?php echo base_url()?>assets/js/bootstrap.bundle.js"></script>
-    <script src="<?php echo base_url()?>assets/js/bootstrap.js"></script>
-    
-    
+<script src="<?php echo base_url()?>assets/js/bootstrap.js"></script>
+<script src="<?php echo base_url()?>assets/js/bootstrap.bundle.js"></script>
+<script src="<?=base_url()?>/assets/js/myJQuery.js"></script>
+<script src="<?=base_url()?>/assets/js/validation.js"></script>
 </body>
         <!-- Footer -->
         
@@ -55,7 +51,7 @@
             </li>
             <li>
             <p>
-                <a class="lead text-white"  href="#!">DESARROLLADOR</a>
+                <a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a>
             </p>
             </li>
         </ul>
@@ -74,15 +70,26 @@
         <ul class="list-unstyled text-center">
             <li>
             <p>
-                <a class="text-decoration-none text-white lead" href="https://goo.gl/maps/PrjQue8BMvo7mbcSA"><img src="<?=base_url('assets/img/icons/d.png')?>" width="25px;" alt=""> Calle La Pampa Puerto Esperanza Misiones</a></p>
+                <a class="text-decoration-none text-white lead" href="https://goo.gl/maps/PrjQue8BMvo7mbcSA">
+                <i class="fas fa-map-marker-alt"></i> 
+                 Calle La Pampa Puerto Esperanza Misiones
+                </a>
+            </p>
             </li>
             <li>
-            <p >
-                <a class="text-decoration-none text-white lead" href="#">&#x1f4e7; souvenirzn@gmail.com</a>
+                <p>
+                    <a class="text-decoration-none text-white lead" href="#">
+                    <i class="fas fa-envelope"></i>
+                     souvenirzn@gmail.com
+                    </a>
+                </p>
             </li>
             <li>
             <p>
-                <a class="text-decoration-none text-white lead" href="https://wa.me/5493757570174"><img src="<?=base_url('assets/img/icons/w.png')?>" width="28px;" alt=""> 03757 57-0174</a></p>
+                <a class="text-decoration-none text-white lead" href="https://wa.me/5493757570174">
+                    <i class="fab fa-whatsapp"></i> 03757 57-0174
+                </a>
+            </p>
             </li>
             <li>
         </ul>

@@ -64,17 +64,40 @@ class Pedido extends CI_Model{
         }
     }
 
+    /*Cantidad de pedidos pendientes*/
     function getCantidadPedidos(){
         $this->db->select( '*');
         $this->db->from('clientes');
-        $this->db->where("entregado = 0");
+        $this->db->where('entregado', 0);
         $this->db->join('pedidos','clientes.id_cliente = pedidos.id_cliente', 'inner');
 
         if($query = $this->db->get()){
             return $query->num_rows();
-        }else{
-            return false;
         }
+        return false;
+    }
+
+    /*Total de pedidos entregados*/
+    function getCantidadPedidosEntregados(){
+        $this->db->select( '*');
+        $this->db->from('clientes');
+        $this->db->where('entregado', 1);
+        $this->db->join('pedidos','clientes.id_cliente = pedidos.id_cliente', 'inner');
+
+        if($query = $this->db->get()){
+            return $query->num_rows();
+        }
+        return false;
+    }
+
+    function getPedidoYaEntregado($id){
+        $this->db->where('id_pedido', $id);
+        $this->db->where('entregado', 1);
+        $sql = $this->db->get('pedidos');
+        if($sql->num_rows() == 1){
+            return true;
+        }
+        return false;
     }
 
     function eliminarUnPedido($id){

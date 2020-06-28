@@ -32,51 +32,23 @@ class Cliente extends CI_Controller{
 
 
     //Agrego los id de productos al carrito de compra
-    public function items($id = 0){
+    public function items(){
         //prever que el admin no pueda, ni el que no esta registrado puedan hacer Pedidos
-
-        if(true == $this->session->userdata('is_logged_user')){
-
-            //var_dump($id) devuelve el string con el codigo;
+        if( isset($_POST['id_producto']) ){
+            $id = $_POST['id_producto'];
             $items = $this->session->userdata('items');
             $items[] = $id;
             //var_dump($items);
             $datos = array_count_values($items);
             //echo $datos[$id];
-
             if($this->Producto->stockProducto($id, $datos[$id] ) ){
                 $this->session->set_userdata('items', $items);//Recargo el la variable de session
-                $mensaje ="Items cargados al carrito &#x1f6d2;";
-                $data = $this->getTemplate();
-                $data['categorias'] = $this->getCategorias();
-                $data['mensaje'] = $mensaje;
-                $data['lista'] = $this->Producto->getProductos();
-                $this->load->view('galeria', $data);
-                
+                $result = true;
+                echo $result;
             }else{
-                $error = "No es posible cargarlo, debido al faltante de stock";
-                $data = $this->getTemplate();
-                $data['categorias'] = $this->getCategorias();
-                $data['mensaje'] = $error;
-                $data['lista'] = $this->Producto->getProductos();
-                $this->load->view('galeria', $data);
-                
+                $error = false;
+                echo $error;
             }
-            
-             
-        }else if(true == $this->session->userdata('is_logged')){
-            //es el admin
-            $mensaje ="El administrador no puede realizar Pedidos.";
-
-            $data = $this->getTemplate();
-            $data['mensaje'] = $mensaje;
-            $this->load->view('galeria',$data);
-        }else{
-            $error = "Debes iniciar sesion para hacer Pedidos.";
-            $data = $this->getTemplate();
-            $data['mensaje'] = $error;
-            $data['lista'] = $this->Producto->getProductos();
-            $this->load->view('login', $data);
         }
         
     }

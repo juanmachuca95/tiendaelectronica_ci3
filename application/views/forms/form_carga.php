@@ -1,8 +1,9 @@
-<div class="container ">
-<div class="row pb-3">
-    <div class=" col-sm-12 col-md-6 card  border border-warning">
+<div class="container p-0">
+<div class="row m-0">
+    <div class=" col-sm-12 col-md-6 p-0">
+        <div class="p-4">
         <h4 class="mt-3 mb-3"><strong>Cargar Producto</strong></h5>
-        <form action="<?=base_url()?>admin/cargar" method="post" enctype="multipart/form-data">
+        <form action="<?=base_url('admin/cargar')?>" id="crear_producto"  method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="categoria">Categoria (Se puede agregar Categorias) </label>
 
@@ -34,9 +35,10 @@
                 <input class="form-control" type="text" id="info_boton" name="info_boton" placeholder="Pega aqu&iacute el Link de Mercado Pago" required>
             </div>
             <div class="form-group">
-                <button class="btn btn-info" type="submit">Confimar</button>
+                <button class="btn btn-info" id="cargar" type="submit">Confimar</button>
             </div>
         </form>
+        </div>
     </div>
     <div class="col-sm-12 col-md-6 p-0">
         <div class="bg-dark text-white p-4 m-4">

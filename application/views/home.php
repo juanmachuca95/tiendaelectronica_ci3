@@ -41,7 +41,6 @@
                                     <div class="card-body">     
                                         <h4 class="card-title font-weight-bold text-center"><?=$row->categoria?></h4>  
                                         <p class="lead text-dark text-center"><?=$row->descripcion?></p>
-                                        <a class="btn btn-info" href="<?=base_url('home/elegirCategoria/'.$row->categoria)?>">Galeria de Productos</a>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +54,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p class="text-center lead">Preciona ver todos para conocer mas a fondo los productos de Souvenirs ZN</p>
-                <p class=" text-center"><a  class="btn btn-warning" href="<?=base_url('home/galeria')?>">Ver Todos Los Productos</a></p>
+                <p class=" text-center"><a class="btn btn-warning" href="<?=base_url('galeria')?>">Ver Todos Los Productos</a></p>
             </div>
         </div>
         

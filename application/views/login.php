@@ -15,10 +15,10 @@
                 <h3 class="font-weight-bold display-4 text-warning p-3">Login</h3>
 
                 <?php if(isset($msj)) { ?>
-                    <p class="lead bg-dark text-warning" ><?=$msj?>&#x1f389;.</p>
+                    <p class=" px-3 lead text-success" ><?=$msj?>&#x1f389;.</p>
                 <?php } ?>
 
-                <form  class="px-3"action="<?=base_url('login/iniciarSession')?>" method="post">
+                <form  class="px-3"action="<?=base_url('login/iniciar')?>" method="post">
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
                         <input class="form-control" id="inputEmail" type="email" name="correo" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com " required>
@@ -47,6 +47,7 @@
                     <?php if (null === $this->session->userdata('usuario')) { ?>
                     <p class="font-weight-bold px-3"><b class="text-info"> Administrador/a en curso: </b> <?= $this->session->userdata('admin') ?> </p>
                     <p class="font-weight-light px-3">Trabajando en los recursos de la App &#x1f468;&#x200d;&#x1f527;</p>
+                    <p class="px-3"><a class="btn btn-warning" href="<?=base_url('admin')?>">Tu Panel</a></p>
                     <small class="font-weight-light px-3"><a href="<?=base_url('login/logout')?>">Cerrar Session</a></small>
                     <?php }else{ ?>
                     <p class="font-weight-bold px-3"><b class="text-info"> Usuario en curso: </b> <?=$this->session->userdata('usuario')?></p>
@@ -54,7 +55,7 @@
                     <small class="font-weight-light px-3"><a href="<?=base_url('login/logout')?>">Cerrar Session</a></small>
                     <?php } ?>
                 <?php } ?>
-            </div> px-3
+            </div>
         </div>
     </div>
 
