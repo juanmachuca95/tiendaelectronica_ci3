@@ -86,8 +86,8 @@
             </li>
             <li>
             <p>
-                <a class="text-decoration-none text-white lead" href="https://wa.me/5493757570174">
-                    <i class="fab fa-whatsapp"></i> 03757 57-0174
+                <a class="text-decoration-none text-white lead">
+                    <i class="fab fa-whatsapp"></i> 03794690474
                 </a>
             </p>
             </li>

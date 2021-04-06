@@ -41,10 +41,13 @@
                             <a class="nav-link text-white" href="<?=base_url('cliente')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="<?=base_url('galeria')?>">Productos</a>
+                            <a class="nav-link  text-white" href="<?=base_url('galeria')?>">Catálogo de Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('contacto')?>">Contacto</a>
+                            <a class="nav-link text-white" href="<?=base_url('contacto')?>">Consultas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=base_url('quienessomos')?>">¿Quienes Somos?</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('login')?>">Login</a>

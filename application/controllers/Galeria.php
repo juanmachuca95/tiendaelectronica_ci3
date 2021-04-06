@@ -40,6 +40,7 @@ class Galeria extends CI_Controller{
 		$lista = $this->Producto->getPaginacion($config['per_page'], $offset);
 		$data = $this->getTemplate();
 		$data['lista'] = $lista;
+		//print_r($lista);
 
 		$this->load->view('galeria', $data);
     }

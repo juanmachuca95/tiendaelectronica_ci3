@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //https://testingwebaplication.000webhost.com
 //'http://localhost/WebResponsive/'
-$config['base_url'] = 'http://localhost/WebResponsive/';
+$config['base_url'] = 'http://SouvenirsZN.test';
 
 /*
 |--------------------------------------------------------------------------

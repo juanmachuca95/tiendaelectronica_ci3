@@ -45,7 +45,6 @@
 						<?php else : ?>
 						<a href="<?=base_url('login')?>" class="btn btn-warning">REGISTRATE Y USA EL  <i class="fas fa-cart-plus"></i></a>
 						<?php endif; ?>
-						<a href="<?=$producto->boton_compra?>" class="btn btn-outline-info"> COMPRAR </a>
 
 					</p>
 				</div>

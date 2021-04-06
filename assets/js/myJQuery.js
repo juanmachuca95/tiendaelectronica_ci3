@@ -1,3 +1,5 @@
+const url = 'http://souvenirszn.test';
+
 $(document).ready(function(){
 	var alto 		= $('html').height();
 	var altoCont	= $('.fondo_admin').height();
@@ -15,7 +17,7 @@ $('.addItem').on('click',function(e){
 	var codigo = $('#codigo').html();
 	$.ajax({
 		type: 'POST',
-		url	: 'http://localhost/WebResponsive/cliente/items/',
+		url	: url+'/cliente/items/',
 		data: {id_producto : codigo},
 		success:function(data){
 			console.log(data);
