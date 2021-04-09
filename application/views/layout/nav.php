@@ -29,12 +29,12 @@
                     
                         </li>
                         <?php }else{ ?>
-                            <li class="nav-item">
+                           <!--  <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('login')?>">
                                 
                             ¿ Activar Carrito &#x1f6d2; ?
                             
-                            </a>
+                            </a> -->
                         </li>
                         <?php } ?>
                         <li class="nav-item active ">
@@ -44,12 +44,12 @@
                             <a class="nav-link  text-white" href="<?=base_url('galeria')?>">Catálogo de Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('contacto')?>">Consultas</a>
+                            <a class="nav-link text-white" href="<?=base_url('contacto')?>">Información de Contacto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('quienessomos')?>">¿Quienes Somos?</a>
                         </li>
-                        <li class="nav-item">
+                     <!--    <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('login')?>">Login</a>
                         </li>
                         <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
@@ -58,7 +58,7 @@
                             <button class="btn btn-warning" type="submit">Buscar</button>
                                   
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                     </ul>
                 </div>

@@ -17,9 +17,9 @@
         <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
 
         <!-- Content -->
-        <h3 class="font-weight-light fuente mb-4 text-center  text-warning">Souvenirs ZN Misiones.</h3>
-        <p class="text-center lead text-white">· Diseñador gráfico  </p>
-        <p class="text-center lead text-white">· Servicio de impresión </p>
+        <h3 class="font-weight-light fuente mb-4 text-center  text-warning">Souvenirs ZN.</h3>
+        <p class="text-center lead text-white">· Diseños a medida</p>
+        <p class="text-center lead text-white">· Servicio de a instituciones </p>
         <p class="text-center lead text-white">· Tienda de regalos</p>
         <p class="text-center lead text-white">· Innovaci&oacuten y personalizaci&oacuten</p>
         </div>
@@ -36,22 +36,17 @@
         <ul class="list-unstyled text-justify-center">
             <li>
             <p>
-                <a  class="lead text-white" href="#!">PROYECTOS</a>
+                <a  class="lead text-white" href="#!">CONSULTAS</a>
             </p>
             </li>
             <li>
             <p>
-                <a class="lead text-white"  href="#!">NOSOTROS</a>
+                <a class="lead text-white"  href="#!">CONTACTO</a>
             </p>
             </li>
             <li>
             <p>
-                <a class="lead text-white"  href="#!">BLOG</a>
-            </p>
-            </li>
-            <li>
-            <p>
-                <a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a>
+                <a class="lead text-white"  href="<?= base_url('terminoscondiciones')?>">TERMINOS DE USO Y CONDICIONES</a>
             </p>
             </li>
         </ul>
@@ -70,9 +65,9 @@
         <ul class="list-unstyled text-center">
             <li>
             <p>
-                <a class="text-decoration-none text-white lead" href="https://goo.gl/maps/PrjQue8BMvo7mbcSA">
+                <a class="text-decoration-none text-white lead">
                 <i class="fas fa-map-marker-alt"></i> 
-                 Calle La Pampa Puerto Esperanza Misiones
+                 Castelli 1198
                 </a>
             </p>
             </li>
@@ -111,12 +106,12 @@
             <!-- Creacion casera del icono de facebook
                 <a class="bg-primary py-2 px-3 rounded-circle text-white font-weight-bold text-decoration-none" href="<?=base_url()?>">f</a>
             -->
-            <a href="https://www.facebook.com/souvenireszn/"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/f.png" alt="facebook"></a>
+            <a href=""><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/f.png" alt="facebook"></a>
             </p>
             </li>
             <li>
             <p>
-            <a href="https://instagram.com/souvenirszn?igshid=pududncn5j0f"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/i.png" alt="instagram"></a>
+            <a href=""><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/i.png" alt="instagram"></a>
             </p>
             </li>
             <li>
@@ -139,7 +134,7 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-warning text-center"><strong> © 2020 Copyright:
+    <div class="footer-copyright text-warning text-center"><strong> © 2021 Copyright:
     <a href="<?=base_url()?>">SouvenirZN.com</a></strong> 
     </div>
     <!-- Copyright -->
