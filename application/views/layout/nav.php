@@ -13,7 +13,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto text-center">
                         
-                        <?php if(null !== $this->session->userdata('usuario')) {?>
+                       <!--  <?php if(null !== $this->session->userdata('usuario')) {?>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('cliente/carrito')?>">
                             Mis Pedidos (<?= $this->session->userdata('usuario')?><span class="badge badge-warning p-1">
@@ -29,16 +29,16 @@
                     
                         </li>
                         <?php }else{ ?>
-                           <!--  <li class="nav-item">
+                            <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('login')?>">
                                 
                             ¿ Activar Carrito &#x1f6d2; ?
                             
-                            </a> -->
+                            </a>
                         </li>
-                        <?php } ?>
+                        <?php } ?> -->
                         <li class="nav-item active ">
-                            <a class="nav-link text-white" href="<?=base_url('cliente')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="<?=base_url('comercializacion')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  text-white" href="<?=base_url('galeria')?>">Catálogo de Productos</a>
