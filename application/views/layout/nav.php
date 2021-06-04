@@ -47,7 +47,7 @@
                             <a class="nav-link text-white" href="<?=base_url('contacto')?>">Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('login')?>">Login</a>
+                            <a class="nav-link text-white" href="<?=base_url('login/index')?>">Login</a>
                         </li>
                         <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
                             <input class="form-control mr-sm-2 col-xs-8" type="search" name="buscar" placeholder="Encuentra lo que quieres" aria-label="Search" required>

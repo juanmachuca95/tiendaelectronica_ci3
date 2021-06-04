@@ -5,13 +5,12 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Producto');
+		//$this->load->model('Producto');
 		$this->load->library(array('session'));	
 	}
 
 	public function index(){
 		$data = $this->getTemplate();
-		$data['categorias'] = $this->Producto->getCategorias();
 		$this->load->view('home', $data);
 	}
 	

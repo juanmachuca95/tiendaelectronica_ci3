@@ -14,12 +14,30 @@
             }
         }
 
+        public function login($email, $password){
+            $sql = "SELECT * FROM users WHERE email = ?";
+            if($result = $this->db->query($sql, array($email))){
+                $row = $result->row();
+                if (password_verify($password, $row->password)) {
+                    return $row;
+                }
+            }
+            return false;
+        }
+
         function registrar($data){
             if($this->db->insert('clientes', $data)){
                 return true;
             }else{
                 return false;
             }
+        }
+
+        function store($data){
+            if($this->db->insert('users', $data)){
+                return true;
+            }
+            return false;
         }
 
         function login_usuario($admin, $contrasenia){
@@ -30,6 +48,7 @@
                 return false;
             }
         }
+
 
         function actualizarInfoAdmin($data, $id ){
             if($this->db->update('contacto', $data, "id = $id" ) ) {

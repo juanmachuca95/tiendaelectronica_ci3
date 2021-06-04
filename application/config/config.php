@@ -23,9 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//https://testingwebaplication.000webhost.com
-//'http://localhost/WebResponsive/'
-$config['base_url'] = 'http://localhost/WebResponsive/';
+$config['base_url'] = 'http://machucajuan.test/';
 
 /*
 |--------------------------------------------------------------------------

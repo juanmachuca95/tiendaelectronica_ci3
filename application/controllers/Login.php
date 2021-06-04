@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
+    private $view = 'login';
+    private $route = 'login';
+
 	public function __construct(){
         parent::__construct();
         $this->load->library(array('session'));	
@@ -13,8 +16,49 @@ class Login extends CI_Controller {
 	public function index()
 	{
 		$data = $this->getTemplate();
-		$this->load->view('login', $data);
-		
+		return $this->load->view($this->view.'/index', $data);
+    }
+
+    public function login(){
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('correo', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() == FALSE){
+            return $this->load->view($this->view.'/index', $this->getTemplate());
+        }
+        $correo = $this->input->post('correo');
+        $password = $this->input->post('password');
+        if($resultado = $this->Autorizacion->login($correo, $password)){
+            echo "roles: ".$resultado->roles_id;
+            $role_admin = ($resultado->roles_id == 1) ? true : false;
+            if(!$role_admin){
+                $data = $this->getTemplate();
+                $data = array(
+                    'id_cliente' => $resultado->id,
+                    'usuario' => $resultado->nombre,
+                    'correo' => $resultado->correo,
+                    'items' => array(),
+                    'is_logged_user' => true,
+                );
+                $this->session->set_userdata($data);
+                return redirect('home');
+            }else{
+                $data = array(
+                    'admin' => $resultado->nombre,
+                    'correo' => $resultado->email,
+                    'is_logged' => true,
+                );
+                $this->session->set_userdata($data);
+                $data = $this->getTemplate();
+                $this->load->view('login',$data);
+            }
+
+        }
+        $data = $this->getTemplate();
+        $data['error'] = "Los datos ingresados no tienen permisos de acceso.";
+        $this->load->view('login',$data);
     }
     
 	public function getTemplate(){
@@ -46,7 +90,7 @@ class Login extends CI_Controller {
             
             $data = $this->getTemplate();
             $data = array(
-                'id_cliente' => $resultado->id_cliente,
+                'id_cliente' => $resultado->id,
                 'usuario' => $resultado->nombre,
                 'correo' => $resultado->correo,
                 //Agregar info de Pedidos de Usuario
@@ -71,6 +115,8 @@ class Login extends CI_Controller {
         redirect('login','refresh');
     }
 
+
+
     public function registro(){
         $data = $this->getTemplate();
         $data['form_registro'] = $this->load->view('forms/form_registro','',true);
@@ -83,6 +129,7 @@ class Login extends CI_Controller {
             'apellido'  => $this->input->post('apellido', true),
             'correo'     => $this->input->post('correo',true),
             'password'  => $this->input->post('password', true),
+            'roles_id' => 2, // Cliente
         );
 
         if($this->Autorizacion->registrar($data)){

@@ -12,16 +12,17 @@
                 
                 <?php if ( null === $this->session->userdata('admin') && null === $this->session->userdata('usuario') ) { ?>
                 
-                <h3 class="font-weight-bold display-4 text-warning p-3">Login</h3>
+                <h3 class="font-weight-bold display-4 text-warning p-3">Login update</h3>
 
                 <?php if(isset($msj)) { ?>
                     <p class=" px-3 lead text-success" ><?=$msj?>&#x1f389;.</p>
                 <?php } ?>
 
-                <form  class="px-3"action="<?=base_url('login')?>" method="post">
+                <?php echo validation_errors(); ?>
+                <?php echo form_open('login'); ?>
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
-                        <input class="form-control" id="inputEmail" type="email" name="correo" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com " required>
+                        <input class="form-control" id="inputEmail" type="email" name="correo" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com ">
                         <small class="text-primary" id="outputEmail"></small>
                     </div>
                     <div class="form-group">
@@ -30,7 +31,7 @@
                             &#x1f573;
                         </i>
                     </label>
-                    <input class="form-control" id="inputPassword" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password" name="password" placeholder="No mayor de 12 digitos" required>
+                    <input class="form-control" id="inputPassword" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password" name="password" placeholder="No mayor de 12 digitos">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-info">Ingresar</button>
