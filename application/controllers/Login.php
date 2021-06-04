@@ -8,15 +8,13 @@ class Login extends CI_Controller {
 
 	public function __construct(){
         parent::__construct();
+        $this->load->library('template');
         $this->load->library(array('session'));	
         $this->load->model('Autorizacion');
-       
 	}
 
-	public function index()
-	{
-		$data = $this->getTemplate();
-		return $this->load->view($this->view.'/index', $data);
+	public function index(){
+        return $this->template->load('app', $this->view.'/index');
     }
 
     public function login(){
@@ -71,41 +69,6 @@ class Login extends CI_Controller {
 		return $data;	
 	}
 
-    public function iniciar(){
-        $email = $this->input->post('correo',true);
-        $contrasenia = $this->input->post('password',true); 
-        
-        if($resultado = $this->Autorizacion->login_admin($email, $contrasenia)){
-            //echo "datos correctos";
-            $data = array(
-                'admin' => $resultado->nombre_admin,
-                'correo' => $resultado->email,
-                'is_logged' => true,
-            );
-            $this->session->set_userdata($data);
-            $data = $this->getTemplate();
-            $this->load->view('login',$data);
-
-        }else if($resultado = $this->Autorizacion->login_usuario($email, $contrasenia))  {
-            
-            $data = $this->getTemplate();
-            $data = array(
-                'id_cliente' => $resultado->id,
-                'usuario' => $resultado->nombre,
-                'correo' => $resultado->correo,
-                //Agregar info de Pedidos de Usuario
-                'items' => array(),
-                'is_logged_user' => true,
-            );
-            $this->session->set_userdata($data);
-            redirect('home','refresh');
-
-        }else{
-            $data = $this->getTemplate();
-            $data['error'] = "Los datos ingresados no tienen permisos de acceso.";
-            $this->load->view('login',$data);
-        }
-    }
 
     public function logout(){
         $data = array('admin','correo','is_logged');

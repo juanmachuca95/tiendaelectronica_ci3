@@ -5,15 +5,6 @@
             $this->load->database();
         }
         
-        function login_admin($admin,$contrasenia){
-            $data = $this->db->get_where('contacto', array('email' => $admin, 'contraseña' => $contrasenia ));
-            if($data->result()){
-                return $data->row();
-            }else{
-                return false;
-            }
-        }
-
         public function login($email, $password){
             $sql = "SELECT * FROM users WHERE email = ?";
             if($result = $this->db->query($sql, array($email))){
@@ -25,29 +16,30 @@
             return false;
         }
 
-        function registrar($data){
-            if($this->db->insert('clientes', $data)){
+        function create($data){
+            $sql = "INSERT INTO users (nombre, apellido, email, password, roles_id) 
+                VALUES (?, ?, ?, ?, ?)";
+            if($result = $this->db->query($sql, array(
+                $data['nombre'], 
+                $data['apellido'],
+                $data['email'],
+                $data['password'],
+                $data['roles_id']))
+            ){
                 return true;
-            }else{
-                return false;
             }
+            return false;
+            
         }
 
-        function store($data){
+        /* FORMA CORTA
+        function create($data){
             if($this->db->insert('users', $data)){
                 return true;
             }
             return false;
-        }
+        } */
 
-        function login_usuario($admin, $contrasenia){
-            $data = $this->db->get_where('clientes', array('correo' => $admin, 'password' => $contrasenia ));
-            if($data->result()){
-                return $data->row();
-            }else{
-                return false;
-            }
-        }
 
 
         function actualizarInfoAdmin($data, $id ){
