@@ -57,7 +57,14 @@ $route['inicio'] = 'login';
 $route['users/store']['POST'] = 'users/store';
 $route['users/crear'] = 'users/create';
 
-$route['catalogo'] = 'productos';
+// Productos
+$route['productos'] = 'productos';
+$route['productos/(:num)'] = 'productos/$1';
+$route['catalogo'] = 'productos/catalogo';
+$route['catalogo/(:num)'] = 'productos/catalogo/$1';
+
+// Admin
+$route['admin'] = 'admin';
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';

@@ -56,7 +56,7 @@
                             <a class="nav-link text-white" href="<?=base_url('cliente')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="<?=base_url('galeria')?>">Productos</a>
+                            <a class="nav-link  text-white" href="<?=base_url('catalogo')?>">Catálogo de Productos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('contacto')?>">Contacto</a>

@@ -14,7 +14,7 @@ class Galeria extends CI_Controller{
     	$productos = $this->Producto->getProductos();
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url('galeria/index');
+		$config['base_url'] = base_url('catalogo');
 		$config['total_rows'] = count($productos);
 		$config['per_page'] = 6;
 
@@ -33,8 +33,6 @@ class Galeria extends CI_Controller{
 		$config['first_tagl_close']	= '</span></li>';
 		$config['last_tag_open']	= '<li class="page-item"><span class="page-link">';
 		$config['last_tagl_close'] = '</span></li>';
-
-
 		$this->pagination->initialize($config);
 
 		$lista = $this->Producto->getPaginacion($config['per_page'], $offset);

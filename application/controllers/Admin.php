@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
+	private $view = 'admin';
 
 	public function __construct(){
 		parent::__construct();
@@ -9,10 +10,14 @@ class Admin extends CI_Controller {
 		$this->load->model('Autorizacion');
 		$this->load->model('Pedido');
 		$this->load->model('Usuario');
-		$this->load->library(array('session', 'pagination'));
+		$this->load->library(array('session', 'pagination', 'template'));
 	}
 
 	public function index(){
+		return $this->template->load('dashboard', $this->view.'/index');
+	}
+
+	/* public function index(){
 		
 		if($this->session->userdata('is_logged')){
 			$data = $this->getTemplate();
@@ -20,7 +25,7 @@ class Admin extends CI_Controller {
 		}else{
 			return show_404();
 		}
-	}
+	} */
 
 	public function getTemplate(){
 		$data = array(

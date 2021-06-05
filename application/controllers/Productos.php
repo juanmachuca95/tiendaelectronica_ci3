@@ -7,14 +7,28 @@ class Productos extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->library('template');
-        $this->load->library('session');
+        $this->load->library(array(
+            'template','session','pagination','configpagination'
+        ));
         $this->load->model('Autorizacion');
+        $this->load->model('Producto');
+        $this->perPage = 6;
     }
 
-    public function index(){
-        return $this->template->load('app', $this->view.'/index', [
-            ''
+    public function index( $offset = 0 ){
+
+    }
+
+    public function catalogo( $offset = 0 ){
+        /** Pagination */
+        $config = $this->configpagination->config(
+            base_url('catalogo'), 
+            count($this->Producto->getProductos()), 
+            $this->perPage
+        );
+		$this->pagination->initialize($config);
+        return $this->template->load('app', $this->view.'/catalogo', [
+            'productos' => $this->Producto->getPaginacion($config['per_page'], $offset)
         ]);
     }
 }

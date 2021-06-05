@@ -24,7 +24,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE){
-            return $this->load->view($this->view.'/index', $this->getTemplate());
+            return $this->template->load('app', $this->view.'/index');
         }
         $correo = $this->input->post('correo');
         $password = $this->input->post('password');
@@ -32,7 +32,6 @@ class Login extends CI_Controller {
             echo "roles: ".$resultado->roles_id;
             $role_admin = ($resultado->roles_id == 1) ? true : false;
             if(!$role_admin){
-                $data = $this->getTemplate();
                 $data = array(
                     'id_cliente' => $resultado->id,
                     'usuario' => $resultado->nombre,
@@ -50,7 +49,7 @@ class Login extends CI_Controller {
                 );
                 $this->session->set_userdata($data);
                 $data = $this->getTemplate();
-                $this->load->view('login',$data);
+                return redirect('admin');
             }
 
         }
