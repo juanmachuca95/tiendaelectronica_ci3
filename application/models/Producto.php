@@ -137,6 +137,13 @@
             $sql = $this->db->get('productos', $limit, $offset);
             return $sql->result();
         }
+
+        function get_pagination($limit, $offset){
+            $this->db->order_by('id', 'desc');
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get('productos');
+            return $query->result();
+        }
     }   
 
 ?>

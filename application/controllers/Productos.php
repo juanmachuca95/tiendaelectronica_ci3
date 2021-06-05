@@ -16,7 +16,18 @@ class Productos extends CI_Controller {
     }
 
     public function index( $offset = 0 ){
+        /** Pagination */
+        $config = $this->configpagination->config(
+            base_url('productos/index'), 
+            count($this->Producto->getProductos()), 
+            $this->perPage
+        );
 
+		$this->pagination->initialize($config);
+        return $this->template->load('dashboard', $this->view.'/index', [
+            'title' => 'Productos',
+            'productos' => $this->Producto->get_pagination($config['per_page'], $offset)
+        ]);
     }
 
     public function catalogo( $offset = 0 ){

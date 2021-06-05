@@ -60,6 +60,7 @@ $route['users/crear'] = 'users/create';
 // Productos
 $route['productos'] = 'productos';
 $route['productos/(:num)'] = 'productos/$1';
+
 $route['catalogo'] = 'productos/catalogo';
 $route['catalogo/(:num)'] = 'productos/catalogo/$1';
 
