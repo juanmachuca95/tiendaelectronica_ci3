@@ -354,6 +354,17 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    <?php if($this->session->success) :?>
+    <p class="p-3 alert alert-success">
+      <?=$this->session->success;?>
+    </p>
+    <?php endif; ?>
+
+    <?php if($this->session->error) :?>
+    <p class="p-3 alert alert-danger">
+      <?=$this->session->error;?>
+    </p>
+    <?php endif; ?>
 
     <!-- Main content -->
     <?=$body?>

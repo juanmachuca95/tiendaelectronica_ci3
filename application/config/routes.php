@@ -62,9 +62,13 @@ $route['productos'] = 'productos';
 $route['productos/(:num)'] = 'productos/$1';
 $route['productos/crear'] = 'productos/create';
 $route['productos/store']['POST'] = 'productos/store';
-
+$route['productos/edit/(:num)'] = 'productos/edit/$1';
+$route['productos/update/(:num)']['PUT'] = 'productos/update/$1';
+$route['productos/destroy/(:num)'] = 'productos/destroy/$1';
+ 
 $route['catalogo'] = 'productos/catalogo';
 $route['catalogo/(:num)'] = 'productos/catalogo/$1';
+$route['detalle/(:num)'] = 'productos/detalle/$1';
 
 // Admin
 $route['admin'] = 'admin';

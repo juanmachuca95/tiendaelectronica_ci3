@@ -57,7 +57,7 @@
                         </svg> <?=$producto->precio;?> USD
                     </p>
                     <a href="#" class="btn text-white text-uppercase" style="background-color: #6200ee;"> Comprar </a>
-                    <a href="#" class="btn btn-outline-light text-uppercase" style="color: #6200ee;"> Detalles </a>
+                    <a href="<?=base_url('productos/detalle/').$producto->id?>" class="btn btn-outline-light text-uppercase" style="color: #6200ee;"> Detalles </a>
                 </div>
             </div>
         </div>

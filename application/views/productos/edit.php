@@ -4,7 +4,7 @@
         <div class="col-md-6">
             <div class="card card-secondary">
             <div class="card-header">
-                <h3 class="card-title">Formulario</h3>
+                <h3 class="card-title">Formulario de edición</h3>
 
                 <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -14,43 +14,47 @@
             </div>
             <div class="card-body">
 
-                <?=form_open_multipart('productos/store');?>
+                <?=form_open_multipart('productos/update/'.$producto->id);?>
                 <div class="form-group">
                 <label for="producto" >Nombre del producto </label>
                 <input type="text" id="producto" name="producto" class="form-control" 
-                    value="<?php echo set_value("producto"); ?>" required>
+                    value="<?=$producto->producto;?>" required>
                 <small class="text-danger"><?php echo form_error('producto'); ?></small>
                 </div>
 
                 <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" maxLength="255" class="form-control" rows="4" required><?=set_value("descripcion");?></textarea>
+                <textarea id="descripcion" name="descripcion" maxLength="255" class="form-control" rows="4" required><?=$producto->descripcion;?></textarea>
                 <small class="text-danger"><?php echo form_error('descripcion'); ?></small>
                 </div>
 
                 <div class="form-group">
                 <label for="precio">Precio</label>
                 <input type="number" step="0.01" id="precio" name="precio" class="form-control"
-                value="<?php echo set_value("precio"); ?>" >
+                value="<?=$producto->precio?>" >
                 <small class="text-danger"><?php echo form_error('precio'); ?></small>
                 </div>
 
                 <div class="form-group">
-                <label for="imagen">Imagen</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" required>
+                    <label class="form-control" for="imagen">Imagen actual</label>
+                    <img class="img-thumbail" src="<?=$producto->imagen?>" alt="<?=$producto->producto?>">
+                </div>
+
+                <div class="form-group">
+                <label for="imagen">Cambiar imagen</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control">
                 <small class="text-danger"><?php echo form_error('imagen'); ?><?=($error_image) ?? '' ?></small>
                 </div>
                 
                 <div class="form-group">
                     <div class="d-flex">
                         <label for="activo">Activo</label>
-                        <input type="checkbox" name="activo" id="activo" class="form-control" value="1" <?php echo set_checkbox('activo', '1'); ?>>
+                        <input type="checkbox" name="activo" id="activo" class="form-control" value="1" <?=$producto->activo ? 'checked' : 'unchecked'; ?> <?php echo set_checkbox('activo', $producto->activo); ?>>
                     </div>
-                    <small class="text-danger"><?php echo form_error('activo'); ?></small>
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-success" type="submit">Agregar</button>
+                    <button class="btn btn-success" type="submit">Actualizar</button>
                 </div>
                 </form>
             </div>

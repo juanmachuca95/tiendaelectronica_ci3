@@ -40,7 +40,7 @@
         </thead>
         <tbody>
 
-            <?php foreach ($productos as $producto): ?>
+            <?php if(!empty($productos)): foreach ($productos as $producto): ?>
             <tr>
                 <td>
                     <?=$producto->id;?>
@@ -62,24 +62,24 @@
                     <?php endif;?>
                 </td>
                 <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="#">
+                    <a class="btn btn-primary btn-sm" href="<?=base_url('productos/show/').$producto->id?>">
                         <i class="fas fa-folder">
                         </i>
                         View
                     </a>
-                    <a class="btn btn-info btn-sm" href="#">
+                    <a class="btn btn-info btn-sm" href="<?=base_url('productos/edit/').$producto->id?>">
                         <i class="fas fa-pencil-alt">
                         </i>
                         Edit
                     </a>
-                    <a class="btn btn-danger btn-sm" href="#">
+                    <a class="btn btn-danger btn-sm" href="<?=base_url('productos/destroy/').$producto->id?>">
                         <i class="fas fa-trash">
                         </i>
                         Delete
                     </a>
                 </td>
             </tr>
-            <?php endforeach;?>
+            <?php endforeach; endif;?>
         </tbody>
 
     </table>

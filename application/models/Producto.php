@@ -13,6 +13,32 @@
             return false;
         }
 
+        public function find($id){
+            $query = $this->db->get_where('productos', array('id' => $id));
+            return $query->row();
+        }
+
+        public function create($data){
+            if($this->db->insert('productos', $data)){
+                return true;
+            }
+            return false;
+        }
+
+        public function update($id, $data){
+            if($this->db->update('productos',$data, array('id'=>$id))){
+                return true;
+            }
+            return false;
+        }
+
+        public function delete($id){
+            if($this->db->delete('productos', array('id' => $id))){
+                return true;
+            }
+            return false;
+        }
+
         //toda la tabla de productos
         function getProductos(){
             if($sql = $this->db->get('productos')){
