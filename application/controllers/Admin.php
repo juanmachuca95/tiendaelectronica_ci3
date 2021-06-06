@@ -14,6 +14,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function index(){
+		$status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+		
 		return $this->template->load('dashboard', $this->view.'/index');
 	}
 

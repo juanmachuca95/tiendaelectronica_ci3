@@ -52,10 +52,10 @@ class Login extends CI_Controller {
                 return redirect('admin');
             }
 
-        }
-        $data = $this->getTemplate();
-        $data['error'] = "Los datos ingresados no tienen permisos de acceso.";
-        $this->load->view('login',$data);
+        };
+        return $this->template->load('app', $this->view.'/index', [
+            'error' => "Los datos ingresados no tienen permisos de acceso."
+        ]);
     }
     
 	public function getTemplate(){

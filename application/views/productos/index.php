@@ -4,7 +4,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Productos registrados: <?=count($productos)?></h3>
+    <h3 class="card-title"><a class="btn btn-primary" href="<?=base_url('productos/crear')?>">Registrar producto</a></h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
