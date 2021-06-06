@@ -39,6 +39,12 @@
             return false;
         }
 
+        public function active($id, $active){
+            $this->db->set('activo', $active);
+            $this->db->where('id', $id);
+            $this->db->update('productos');
+        }
+
         //toda la tabla de productos
         function getProductos(){
             if($sql = $this->db->get('productos')){

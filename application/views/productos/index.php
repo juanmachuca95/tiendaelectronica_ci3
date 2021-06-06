@@ -19,22 +19,22 @@
     <table class="table table-striped projects">
         <thead>
             <tr>
-                <th style="width: 1%">
+                <th>
                     #
                 </th>
-                <th style="width: 20%">
+                <th>
                     Nombre producto
                 </th>
-                <th style="width: 30%">
+                <th>
                     Imagen
                 </th>
                 <th>
                     Precio
                 </th>
-                <th style="width: 8%" class="text-center">
+                <th class="text-center">
                     Activo
                 </th>
-                <th style="width: 20%">
+                <th>
                 </th>
             </tr>
         </thead>
@@ -49,16 +49,20 @@
                     <?=$producto->producto?>
                 </td>
                 <td>
-                   <?=$producto->imagen?>
+                   <a class="text-decoration-none" target="new" href="<?=$producto->imagen?>">Link</a> 
                 </td>
                 <td>
                    <?=$producto->precio?>
                 </td>
                 <td class="project-state">
                     <?php if ($producto->activo): ?>
+                    <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
                     <span class="badge badge-success">activo</span>
+                    </a>
                     <?php else: ?>
+                    <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
                     <span class="badge badge-danger">inactivo</span>
+                    </a>
                     <?php endif;?>
                 </td>
                 <td class="project-actions text-right">

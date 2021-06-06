@@ -195,6 +195,15 @@ class Productos extends CI_Controller {
         return $this->template->load('dashboard', $this->view.'/show', ['title' => 'Productos', 'producto' => $this->Producto->find($id)]);
     }
 
+    public function active($id, $active){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+        
+        $active = ($active == 0) ? true : false;
+        $this->Producto->active($id, $active);
+        redirect('productos');
+    }
+
     public function catalogo( $offset = 0 ){
         /** Pagination */
         $config = $this->configpagination->config(
