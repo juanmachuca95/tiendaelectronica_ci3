@@ -228,6 +228,15 @@
           </li> -->
           <li class="nav-header">RECURSOS</li>
           <li class="nav-item">
+            <a href="<?=base_url('consultas')?>" class="nav-link">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+                Consultas
+                <span class="right badge badge-warning">New <?=0;?></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?=base_url('productos')?>" class="nav-link">
               <i class="nav-icon fas fa-dumpster-fire"></i>
               <p>

@@ -59,6 +59,8 @@ $route['comercializacion'] = 'comercializacion';
 
 //Consultas 
 $route['consultas'] = 'consultas';
+$route['consultas/(:num)'] = 'consultas/$1';
+$route['consultas/crear'] = 'consultas/create';
 
 //Contacto
 $route['contactos'] = 'contactos';

@@ -5,7 +5,7 @@ class Terminos extends CI_Controller {
     private $view = 'terminos';
 
     public function __construct(){
-        parent::__construct();
+        parent::__construct();  
         $this->load->library(array('session', 'template'));	
     }
 

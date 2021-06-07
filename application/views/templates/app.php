@@ -7,10 +7,10 @@
     <link rel="shortcut icon" href="<?=base_url('assets/img/icons/favicon.png')?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/miestilo.css">
-    
+    <link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
+
     <link href="https://fonts.googleapis.com/css?family=Bellota|Lobster&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/3b9095d4bc.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- mi barra de navegacion -->
@@ -62,10 +62,12 @@
                             <a class="nav-link text-white" href="<?=base_url('contactos')?>">Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('consultas')?>">Consultas</a>
+                            <a class="nav-link text-white" href="<?=base_url('consultas/crear')?>">Consultas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('inicio')?>">Login</a>
+                            <a class="nav-link text-white" href="<?=base_url('inicio')?>">
+                            Login <i class="fas fa-sign-in-alt fa-lg"></i>
+                           </a>
                         </li>
                         <!-- <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
                             <input class="form-control mr-sm-2 col-xs-8" type="search" name="buscar" placeholder="Encuentra lo que quieres" aria-label="Search" required>
