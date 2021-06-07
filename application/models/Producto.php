@@ -166,7 +166,7 @@
         }
 
         function getPaginacion($limit, $offset){
-            $sql = $this->db->get('productos', $limit, $offset);
+            $sql = $this->db->get_where('productos', array('activo' => 1), $limit, $offset);
             return $sql->result();
         }
 
