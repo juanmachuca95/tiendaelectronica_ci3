@@ -53,25 +53,26 @@
                         </li>
                         <?php } ?>
                         <li class="nav-item active ">
-                            <a class="nav-link text-white" href="<?=base_url('cliente')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="<?=base_url('comercializacion')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  text-white" href="<?=base_url('catalogo')?>">Catálogo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('contacto')?>">Contacto</a>
+                            <a class="nav-link text-white" href="<?=base_url('contactos')?>">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=base_url('consultas')?>">Consultas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('inicio')?>">Login</a>
                         </li>
-                        <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
+                        <!-- <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
                             <input class="form-control mr-sm-2 col-xs-8" type="search" name="buscar" placeholder="Encuentra lo que quieres" aria-label="Search" required>
                             <div class="my-2 my-sm-0 col-12 col-sm-1 p-0 m-0">       
-                            <button class="btn btn-warning" type="submit">Buscar</button>
-                                    
+                                <button class="btn btn-warning" type="submit">Buscar</button>
                             </div>
-                        </div>
-                    </form>
+                        </form> -->
                     </ul>
                 </div>
             </nav>
@@ -104,11 +105,11 @@
         <h3 class="font-weight-bold fuente  mb-4 text-justify-center text-warning">Acerca de</h3>
 
         <ul class="list-unstyled text-justify-center">
-            <li><p><a  class="lead text-white" href="#!">PROYECTOS</a></p></li>
-            <li><p><a class="lead text-white"  href="#!">NOSOTROS</a></p></li>
-            <li><p><a class="lead text-white"  href="#!">BLOG</a></p></li>
+            <li><p><a  class="lead text-white" href="<?=base_url('nosotros')?>">NOSOTROS</a></p></li>
+            <li><p><a class="lead text-white"  href="<?=base_url('terminos')?>">TERMINOS Y CONDICIONES</a></p></li>
+          <!--   <li><p><a class="lead text-white"  href="#!">BLOG</a></p></li>
             <li><p><a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a></p></li>
-        </ul>
+  -->       </ul>
 
         </div>
         <hr class="clearfix w-100 d-md-none">

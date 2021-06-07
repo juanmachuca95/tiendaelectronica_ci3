@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contacto extends CI_Controller {
-    private $view = 'contacto';
+class Comercializacion extends CI_Controller {
+    private $view = 'comercializacion';
 
     public function __construct(){
         parent::__construct();
