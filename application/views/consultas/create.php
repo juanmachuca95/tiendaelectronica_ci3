@@ -6,15 +6,15 @@
                 <p class="font-weight-lighter">
                     Mandan&oacutes tus inquietudes, sobre sobre desarrollos ideas o emprendimientos que quieras llevar a cabo. </p>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Tu nombre" value="<?=set_value('nombre')?>" >
+                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Tu nombre" value="<?=set_value('nombre')?>" maxLength="255">
                     <small class="text-danger"><?=form_error('nombre'); ?></small>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Ingresa tu correo electronico" value="<?=set_value('email')?>" >
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Ingresa tu correo electronico" value="<?=set_value('email')?>" maxLength="255">
                     <small class="text-danger"><?=form_error('email'); ?></small>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Escribe la descripción de tu consulta . . ."><?=set_value('descripcion')?></textarea>
+                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Escribe la descripción de tu consulta . . ." maxLength="1000"><?=set_value('descripcion')?></textarea>
                     <small class="text-danger"><?=form_error('descripcion'); ?></small>
                 </div>
                 <div class="form-group">

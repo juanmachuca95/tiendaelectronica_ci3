@@ -37,7 +37,7 @@ class Consultas extends CI_Controller {
     public function store(){
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|max_length[255]');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('descripcion', 'Descripción', 'required|max_length[255]');
+        $this->form_validation->set_rules('descripcion', 'Descripción', 'required|max_length[1000]');
 
         if (!$this->form_validation->run()){
             return $this->template->load('app', $this->view.'/create');

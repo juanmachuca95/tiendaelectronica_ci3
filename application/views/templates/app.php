@@ -80,6 +80,26 @@
             </nav>
         </div>
     </header>
+    <?php if($this->session->success) :?>
+    <div class="container-fluid alert alert-success m-0">
+        <div class="container m-0">
+            <p class="p-3 m-0">
+                <?=$this->session->success;?>
+            </p>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if($this->session->error) :?>
+    <div class="container-fluid alert alert-danger m-0">
+        <div class="container m-0">
+            <p class="p-3 m-0">
+                <?=$this->session->error;?>
+            </p>
+        </div>
+    </div>
+    <?php endif; ?>
+    </div>
 
     <?=$body;?>
 
