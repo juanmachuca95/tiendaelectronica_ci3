@@ -218,9 +218,6 @@ class Productos extends CI_Controller {
     }
 
     public function detalle($id){
-        $status = ($this->session->is_logged) ? true : false;
-		if(!$status){ return show_404(); }
-
         return $this->template->load('app', $this->view.'/detalle', ['producto' => $this->Producto->find($id)]);
     }
 }
