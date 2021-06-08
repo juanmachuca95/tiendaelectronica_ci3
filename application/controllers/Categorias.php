@@ -45,7 +45,7 @@ class Categorias extends CI_Controller{
 		if(!$status){ return show_404(); }
 
         $this->form_validation->set_rules('categoria', 'Categoria', 
-            'required|max_length[255]|is_unique[categorias.categoria]'
+            'required|max_length[255]|exist[categorias.id]'
         );
        
         if (!$this->form_validation->run()){

@@ -33,15 +33,22 @@
 <div class="container-fluid bg-light px-0">
     <div class="row justify-content-center align-items-center p-5 m-0">
         <div class="col-12 col-md-7">
-            <form action="<?=base_url('productos/search')?>">
-                <div class="input-group">
-                    <input type="text" id="producto" name="producto" placeholder="¿Que producto estas buscando? . . . " class="form-control">
-                    <small class="text-danger"><?php echo form_error('producto'); ?></small>
-                    <select class="custom-select" name="categoria" id="categoria">
-                        <option value="" selected>Elige una categoria . . .</option>
-                    </select>
-                    
-                    <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+            <form action="<?=base_url('productos/finder')?>" method="POST">
+                <h4 class="text-center"><?=($resultados) ?? 'Buscar en Catálogo'; ?></h4>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <input type="text" class="form-control" name="producto" id="producto" placeholder="¿Que producto estas buscando? . . .">
+                        <small class="text-danger" for="producto"><?php echo form_error('producto'); ?></small>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <select class="custom-select" name="categorias_id" id="categorias_id">
+                            <option value="" selected>Elige una categoria . . .</option>
+                        </select>
+                        <small class="text-danger" for="categorias_id"><?php echo form_error('categorias_id'); ?></small>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -90,7 +97,7 @@
 
 
 <script>
-    const categoria = document.querySelector('#categoria');
+    const categoria = document.querySelector('#categorias_id');
 
     window.addEventListener('DOMContentLoaded', () => {
         if (window.XMLHttpRequest) {
@@ -113,7 +120,7 @@
                 }
             }
         }
-        http_request.open('GET', 'categorias/search?get=ok', true);
+        http_request.open('GET', '../categorias/search?get=ok', true);
 	    http_request.send();
         
     });

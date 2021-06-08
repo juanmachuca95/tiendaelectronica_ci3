@@ -221,17 +221,25 @@ class Productos extends CI_Controller {
         return $this->template->load('app', $this->view.'/detalle', ['producto' => $this->Producto->find($id)]);
     }
 
-    public function search(){
+    public function finder(){
         $this->form_validation->set_rules('producto', 'Producto', 
             'required|max_length[255]'
         );
         $this->form_validation->set_rules('categorias_id', 'Categoria',
-        'required|numeric|exist[categorias.id]');
+        'required');
 
-        if (!$this->form_validation->run()){
-            return $this->template->load('app', $this->view.'/catalogo');
+        if($this->form_validation->run() == FALSE)
+        {
+            return $this->catalogo();
         }
 
-
+        $categorias_id = $this->input->post('categorias_id');
+        $producto = $this->input->post('producto');
+        $productos = $this->Producto->finder($categorias_id, $producto);
+        
+        return $this->template->load('app', $this->view.'/catalogo', [
+            'productos' =>  $productos = $this->Producto->finder($categorias_id, $producto),
+            'resultados' => 'Hay '.count($productos).' resultados para '.$producto 
+        ]);
     }
 }

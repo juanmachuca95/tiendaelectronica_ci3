@@ -13,18 +13,42 @@
             return false;
         }
 
-        public function find($id){
-            $query = $this->db->get_where('productos', array('id' => $id));
-            return $query->row();
-        }
-
+        
         public function create($data){
             if($this->db->insert('productos', $data)){
                 return true;
             }
             return false;
         }
+        
+        public function delete($id){
+            if($this->db->delete('productos', array('id' => $id))){
+                return true;
+            }
+            return false;
+        }
+        
+        public function find($id){
+            $query = $this->db->get_where('productos', array('id' => $id));
+            return $query->row();
+        }
 
+        public function finder($categorias_id, $producto){
+            $query = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE p.producto LIKE ? AND p.categorias_id = ?;";
+            if($result = $this->db->query($query, array('%'.$this->db->escape_like_str($producto).'%', $categorias_id) )){
+                return $result->result();
+            }
+            return [];
+        }
+
+        public function get_productos(){
+            $query = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id";
+            if($result = $this->db->query($query)){
+                return $result->row();
+            }
+            return false;
+        }
+        
         public function update($id, $data){
             if($this->db->update('productos',$data, array('id'=>$id))){
                 return true;
@@ -32,12 +56,6 @@
             return false;
         }
 
-        public function delete($id){
-            if($this->db->delete('productos', array('id' => $id))){
-                return true;
-            }
-            return false;
-        }
 
         public function active($id, $active){
             $this->db->set('activo', $active);
@@ -53,23 +71,6 @@
             return false;
         }
 
-        //tabla por categoria
-        function getProductosCategoria($categoria){
-            if($sql = $this->db->get_where('productos', array('categoria' => $categoria))) {
-                return $sql->result();
-            }
-            return false;         
-        }
-
-        //read datos
-        function getProducto($id){
-            if($data = $this->db->get_where('productos', array('id' => $id))) {
-                return $data->result();
-            }else{
-                return false;
-            }
-
-        }
 
         //update
         function actualizar($data, $id){
@@ -165,7 +166,7 @@
             return false;
         }
 
-        function getPaginacion($limit, $offset){
+        public function getPaginacion($limit, $offset){
             $sql = $this->db->get_where('productos', array('activo' => 1), $limit, $offset);
             return $sql->result();
         }
