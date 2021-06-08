@@ -18,7 +18,7 @@
         <div class="nav_personalizado">
             <nav class="navbar navbar-expand-lg navbar-light font-weight-bold ">
                 <a class="navbar-brand mr-0" href="<?=base_url('home')?>">
-                    <img src="<?=base_url()?>assets/img/logo.png" width="110" height="110" class="d-inline-block align-top rounded-circle" alt="logo">
+                    <img src="<?=base_url()?>assets/img/logo.png" width="90" height="90" class="d-inline-block align-top rounded-circle" alt="logo">
                 </a>
 
                 <button class="navbar-toggler bg-warning border border-light"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

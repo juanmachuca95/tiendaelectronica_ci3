@@ -220,4 +220,8 @@ class Productos extends CI_Controller {
     public function detalle($id){
         return $this->template->load('app', $this->view.'/detalle', ['producto' => $this->Producto->find($id)]);
     }
+
+    public function search(){
+        
+    }
 }

@@ -3,13 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Consultas extends CI_Controller {
     private $view = 'consultas';
-    private $perPage = 2;
+    private $perPage = 10;
 
     public function __construct(){
         parent::__construct();
         $this->load->library(array(
-            'session', 'template', 'configpagination',
-            'pagination', 'form_validation'
+            'template','session','pagination','configpagination',
+            'form_validation',
         ));	
         $this->load->model('Consulta');
     }
@@ -24,6 +24,7 @@ class Consultas extends CI_Controller {
             $this->perPage
         );
 
+		$this->pagination->initialize($config);
         return $this->template->load('dashboard', $this->view.'/index', [
             'title' => 'Consultas',
             'consultas' => $this->Consulta->get_pagination($config['per_page'], $offset)
