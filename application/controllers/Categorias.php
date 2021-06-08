@@ -112,4 +112,12 @@ class Categorias extends CI_Controller{
         $this->session->set_flashdata('success', 'Se ha eliminado un producto.');
         return redirect('categorias');
     }
+
+
+    public function search(){
+        if($_GET['get'] == 'ok'){
+            $categorias = $this->Categoria->get_categorias();
+            echo json_encode($categorias);
+        }
+    }
 }

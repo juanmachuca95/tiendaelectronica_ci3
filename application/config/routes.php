@@ -61,6 +61,7 @@ $route['categorias/crear'] = 'categorias/create';
 $route['categorias/edit/(:num)'] = 'categorias/edit/$1';
 $route['categorias/update/(:num)']['PUT'] = 'categorias/update/$1';
 $route['categorias/destroy/(:num)'] = 'categorias/destroy/$1';
+$route['categorias/search/(:any)']['GET'] = 'categorias/seach';
 
 //Comercializacion
 $route['comercializacion'] = 'comercializacion';

@@ -38,10 +38,7 @@
                     <input type="text" id="producto" name="producto" placeholder="¿Que producto estas buscando? . . . " class="form-control">
                     <small class="text-danger"><?php echo form_error('producto'); ?></small>
                     <select class="custom-select" name="categoria" id="categoria">
-                        <option value="">Elige una categoria . . .</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="" selected>Elige una categoria . . .</option>
                     </select>
                     
                     <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
@@ -90,3 +87,35 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const categoria = document.querySelector('#categoria');
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.XMLHttpRequest) {
+            http_request = new XMLHttpRequest();
+        } else {
+            http_request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        http_request.onreadystatechange = function () {
+            if (http_request.readyState == 4 && http_request.status == 200) {
+                console.log("La solicitud se ejecuto correctamente");
+                data = JSON.parse(http_request.responseText);
+                if(Object.entries(data).length !== 0){
+                    data.forEach(element => {
+                        var option = document.createElement("option");
+                        option.value = element.id;
+                        option.innerHTML = element.categoria;
+                        categoria.appendChild(option);
+                    });
+                }
+            }
+        }
+        http_request.open('GET', 'categorias/search?get=ok', true);
+	    http_request.send();
+        
+    });
+
+</script>
