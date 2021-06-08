@@ -54,6 +54,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Admin
 $route['admin'] = 'admin';
 
+//Categorias
+$route['categorias'] = 'categorias';
+$route['categorias/(:num)'] = 'categorias/$1';
+$route['categorias/crear'] = 'categorias/create';
+$route['categorias/edit/(:num)'] = 'categorias/edit/$1';
+$route['categorias/update/(:num)']['PUT'] = 'categorias/update/$1';
+$route['categorias/destroy/(:num)'] = 'categorias/destroy/$1';
+
 //Comercializacion
 $route['comercializacion'] = 'comercializacion';
 
@@ -85,6 +93,7 @@ $route['productos/active/(:num)'] = 'productos/active/$1';
 $route['catalogo'] = 'productos/catalogo';
 $route['catalogo/(:num)'] = 'productos/catalogo/$1';
 $route['detalle/(:num)'] = 'productos/detalle/$1';
+$route['productos/search']['POST'] = 'productos/search';
 
 //Terminos
 $route['terminos'] = 'terminos';

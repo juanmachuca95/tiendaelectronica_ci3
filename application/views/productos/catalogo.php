@@ -31,17 +31,20 @@
 
 
 <div class="container-fluid bg-light px-0">
-    <div class="row justify-content-center align-items-center p-5">
-        <div class="col-12 col-md-6 d-flex">
+    <div class="row justify-content-center align-items-center p-5 m-0">
+        <div class="col-12 col-md-7">
             <form action="<?=base_url('productos/search')?>">
                 <div class="input-group">
-                    <input type="text" placeholder="¿Que producto estas buscando? . . . " class="form-control">
+                    <input type="text" id="producto" name="producto" placeholder="¿Que producto estas buscando? . . . " class="form-control">
+                    <small class="text-danger"><?php echo form_error('producto'); ?></small>
                     <select class="custom-select" name="categoria" id="categoria">
                         <option value="">Elige una categoria . . .</option>
                         <option value=""></option>
                         <option value=""></option>
                         <option value=""></option>
                     </select>
+                    
+                    <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
         </div>

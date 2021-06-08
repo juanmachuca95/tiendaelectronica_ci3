@@ -170,7 +170,7 @@
             return $sql->result();
         }
 
-        function get_pagination($limit, $offset){
+        public function get_pagination($limit, $offset){
             $this->db->order_by('id', 'desc');
             $this->db->limit($limit, $offset);
             $query = $this->db->get('productos');

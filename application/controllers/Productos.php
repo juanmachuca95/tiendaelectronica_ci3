@@ -10,7 +10,7 @@ class Productos extends CI_Controller {
         parent::__construct();
         $this->load->library(array(
             'template','session','pagination','configpagination',
-            'form_validation', 'upload'
+            'form_validation', 'upload', 'myformvalidation'
         ));
         $this->load->model('Autorizacion');
         $this->load->model('Producto');
@@ -222,6 +222,16 @@ class Productos extends CI_Controller {
     }
 
     public function search(){
-        
+        $this->form_validation->set_rules('producto', 'Producto', 
+            'required|max_length[255]'
+        );
+        $this->form_validation->set_rules('categorias_id', 'Categoria',
+        'required|numeric|exist[categorias.id]');
+
+        if (!$this->form_validation->run()){
+            return $this->template->load('app', $this->view.'/catalogo');
+        }
+
+
     }
 }

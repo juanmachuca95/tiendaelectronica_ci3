@@ -249,14 +249,29 @@
             <a href="<?=base_url('productos')?>" class="nav-link">
               <i class="nav-icon fas fa-dumpster-fire"></i>
               <p>
-                Productos
+                Catálogo
+                <i class="fas fa-angle-left right"></i>
                 <!-- <span class="right badge badge-danger">New</span> -->
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('categorias')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('productos')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-header">NUCLEO</li>
           <li class="nav-item">
-            <a href="<?=base_url('productos')?>" class="nav-link">
+            <a href="<?=base_url('configuraciones')?>" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Configuraciones
