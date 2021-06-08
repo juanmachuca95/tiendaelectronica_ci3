@@ -23,6 +23,13 @@
                 </div>
 
                 <div class="form-group">
+                    <select class="custom-select" name="categorias_id" id="categorias_id">
+                        <option value="" selected>Elige una categoria . . .</option>
+                    </select>
+                    <small class="text-danger" for="categorias_id"><?php echo form_error('categorias_id'); ?></small>
+                </div>
+
+                <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <textarea id="descripcion" name="descripcion" maxLength="255" class="form-control" rows="4" required><?=set_value("descripcion");?></textarea>
                 <small class="text-danger"><?php echo form_error('descripcion'); ?></small>
@@ -61,3 +68,36 @@
     </div>
 </section>
 <!-- /.content -->
+
+
+
+<script>
+    const categoria = document.querySelector('#categorias_id');
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.XMLHttpRequest) {
+            http_request = new XMLHttpRequest();
+        } else {
+            http_request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        http_request.onreadystatechange = function () {
+            if (http_request.readyState == 4 && http_request.status == 200) {
+                console.log("La solicitud se ejecuto correctamente");
+                data = JSON.parse(http_request.responseText);
+                if(Object.entries(data).length !== 0){
+                    data.forEach(element => {
+                        var option = document.createElement("option");
+                        option.value = element.id;
+                        option.innerHTML = element.categoria;
+                        categoria.appendChild(option);
+                    });
+                }
+            }
+        }
+        http_request.open('GET', '../categorias/search?get=ok', true);
+	    http_request.send();
+        
+    });
+
+</script>

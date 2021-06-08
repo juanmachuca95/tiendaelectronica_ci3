@@ -10,10 +10,11 @@ class Productos extends CI_Controller {
         parent::__construct();
         $this->load->library(array(
             'template','session','pagination','configpagination',
-            'form_validation', 'upload', 'myformvalidation'
+            'form_validation', 'upload'
         ));
         $this->load->model('Autorizacion');
         $this->load->model('Producto');
+        $this->load->model('Categoria');
         $this->perPage = 6;
     }
 
@@ -39,7 +40,10 @@ class Productos extends CI_Controller {
         $status = ($this->session->is_logged) ? true : false;
 		if(!$status){ return show_404(); }
 
-        return $this->template->load('dashboard', $this->view.'/create', ['title' => 'Productos']);
+        return $this->template->load('dashboard', $this->view.'/create', [
+            'title' => 'Productos',
+            'categorias' => $this->Categoria->get_categorias()
+        ]);
     }
 
     public function store(){
@@ -51,6 +55,9 @@ class Productos extends CI_Controller {
         );
         $this->form_validation->set_rules('descripcion', 'Descripción', 
             'required|max_length[255]'
+        );
+        $this->form_validation->set_rules('categorias_id', 'Categoria', 
+            'required'
         );
         $this->form_validation->set_rules('precio', 'Precio',
              'required|numeric');
@@ -86,6 +93,7 @@ class Productos extends CI_Controller {
         $activo = ($this->input->post('activo')) ? true : false;
         $data = [
             'producto' => $this->input->post('producto'),
+            'categorias_id' => $this->input->post('categorias_id'),
             'descripcion' => $this->input->post('descripcion'),
             'precio'    => $this->input->post('precio'),
             'imagen'    => $file_path,
@@ -106,7 +114,8 @@ class Productos extends CI_Controller {
 
         return $this->template->load('dashboard', $this->view.'/edit', [
             'title'     => 'Productos',
-            'producto'  => $this->Producto->find($id)
+            'producto'  => $this->Producto->find($id),
+            'categorias' => $this->Categoria->get_categorias()
         ]);
     }
 
@@ -124,9 +133,7 @@ class Productos extends CI_Controller {
             'required|numeric');
     
         if (!$this->form_validation->run()){
-            return $this->template->load('dashboard', $this->view.'/create', [
-                'title' => 'Productos'
-            ]);
+            return $this->edit($id);
         }
 
         $data = [];
@@ -134,6 +141,7 @@ class Productos extends CI_Controller {
         $activo = ($this->input->post('activo')) ? true : false;
         $data = [
             'producto' => $this->input->post('producto'),
+            'categorias_id' => $this->input->post('categorias_id'),
             'descripcion' => $this->input->post('descripcion'),
             'precio'    => $this->input->post('precio'),
             'activo'    => $activo,
@@ -213,7 +221,7 @@ class Productos extends CI_Controller {
         );
 		$this->pagination->initialize($config);
         return $this->template->load('app', $this->view.'/catalogo', [
-            'productos' => $this->Producto->getPaginacion($config['per_page'], $offset)
+            'productos' => $this->Producto->get_pagination($config['per_page'], $offset)
         ]);
     }
 

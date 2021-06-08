@@ -23,6 +23,17 @@
                 </div>
 
                 <div class="form-group">
+                    <select class="custom-select" name="categorias_id" id="categorias_id">
+                        <option value="<?=$producto->categorias_id?>" selected><?=$producto->categoria?></option>
+
+                        <?php foreach($categorias as $categoria) :?>
+                        <option value="<?=$categoria->id?>"><?=$categoria->categoria?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="text-danger" for="categorias_id"><?php echo form_error('categorias_id'); ?></small>
+                </div>
+
+                <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <textarea id="descripcion" name="descripcion" maxLength="255" class="form-control" rows="4" required><?=$producto->descripcion;?></textarea>
                 <small class="text-danger"><?php echo form_error('descripcion'); ?></small>
@@ -65,3 +76,5 @@
     </div>
 </section>
 <!-- /.content -->
+
+

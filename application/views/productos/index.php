@@ -31,6 +31,9 @@
                 <th>
                     Precio
                 </th>
+                <th>
+                    Categoria
+                </th>
                 <th class="text-center">
                     Activo
                 </th>
@@ -54,6 +57,7 @@
                 <td>
                    <?=$producto->precio?>
                 </td>
+                <td><?=$producto->categoria?></td>
                 <td class="project-state">
                     <?php if ($producto->activo): ?>
                     <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">

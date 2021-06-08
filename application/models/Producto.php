@@ -29,8 +29,11 @@
         }
         
         public function find($id){
-            $query = $this->db->get_where('productos', array('id' => $id));
-            return $query->row();
+            $query = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE p.id = ?";
+            if($result = $this->db->query($query, array('id' => $id))){
+                return $result->row();
+            }
+            return false;
         }
 
         public function finder($categorias_id, $producto){
@@ -172,10 +175,16 @@
         }
 
         public function get_pagination($limit, $offset){
-            $this->db->order_by('id', 'desc');
+            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id ORDER BY p.id DESC LIMIT ?, ?;";
+            if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
+                return $result->result();
+            }
+            return false;
+            
+            /* $this->db->order_by('id', 'desc');
             $this->db->limit($limit, $offset);
             $query = $this->db->get('productos');
-            return $query->result();
+            return $query->result() */;
         }
     }   
 

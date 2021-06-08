@@ -8,7 +8,7 @@ class Categorias extends CI_Controller{
         parent::__construct();
         $this->load->library(array(
             'template','session','pagination','configpagination',
-            'form_validation', 'upload', 'myformvalidation'
+            'form_validation', 'upload'
         ));
         $this->load->model('Autorizacion');
         $this->load->model('Categoria');
@@ -45,7 +45,7 @@ class Categorias extends CI_Controller{
 		if(!$status){ return show_404(); }
 
         $this->form_validation->set_rules('categoria', 'Categoria', 
-            'required|max_length[255]|exist[categorias.id]'
+            'required|max_length[255]|is_unique[categorias.categoria]'
         );
        
         if (!$this->form_validation->run()){
@@ -112,7 +112,6 @@ class Categorias extends CI_Controller{
         $this->session->set_flashdata('success', 'Se ha eliminado un producto.');
         return redirect('categorias');
     }
-
 
     public function search(){
         if($_GET['get'] == 'ok'){

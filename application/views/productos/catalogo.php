@@ -69,6 +69,7 @@
                             </svg>
                             <?=$producto->producto?>
                         </h5>
+                        <h4 class="card-subtitle text-muted"><?=$producto->categoria;?></h4>
                         <p class="card-text font-weight-lighter">
                             <?=$producto->descripcion?>
                         </p>
@@ -110,7 +111,7 @@
             if (http_request.readyState == 4 && http_request.status == 200) {
                 console.log("La solicitud se ejecuto correctamente");
                 data = JSON.parse(http_request.responseText);
-                if(Object.entries(data).length !== 0){
+                if(Object.entries(data).length > 0){
                     data.forEach(element => {
                         var option = document.createElement("option");
                         option.value = element.id;
