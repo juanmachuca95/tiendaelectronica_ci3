@@ -228,24 +228,6 @@
           </li> -->
           <li class="nav-header">RECURSOS</li>
           <li class="nav-item">
-            <a href="<?=base_url('consultas')?>" class="nav-link">
-              <i class="nav-icon fas fa-bell"></i>
-              <p>
-                Consultas
-                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url('consultas')?>" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Ordenes
-                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?=base_url('productos')?>" class="nav-link">
               <i class="nav-icon fas fa-dumpster-fire"></i>
               <p>
@@ -268,6 +250,33 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="<?=base_url('consultas')?>" class="nav-link">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+                Consultas
+                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?=base_url('consultas')?>" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Ordenes
+                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?=base_url('users')?>" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
+              </p>
+            </a>
           </li>
           <li class="nav-header">NUCLEO</li>
           <li class="nav-item">

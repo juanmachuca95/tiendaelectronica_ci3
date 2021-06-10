@@ -15,8 +15,10 @@ class Carritos extends CI_Controller{
         if(!$status) { return show_404(); }
 
         $data = $this->session->userdata('items');
+        if(empty($data)){ return redirect('catalogo'); }
+        $productos_ids = array_keys($data);
         return $this->template->load('app', $this->view.'/index', [
-            'listaPedidos' => $this->Producto->productosPedidos($data)
+            'productos' => $this->Producto->get_productos_carrito($productos_ids)
         ]);
     }
 
@@ -40,13 +42,13 @@ class Carritos extends CI_Controller{
                     //echo "Hay stock disponible para este producto - ACTUALIZADO: ".$items[$productos_id];
                     echo json_encode([
                         'cantidad' => $items[$productos_id],
-                        'cargado' => true
+                        'cargado' => true, 'carrito' => $this->get_carrito_count()
                     ]);
                 }else{
                     //echo "No hay stock disponible para este producto";
                     echo json_encode([
                         'cantidad' => $items[$productos_id],
-                        'cargado' => false
+                        'cargado' => false, 'carrito' => $this->get_carrito_count()
                     ]);
                 }
             }else{
@@ -57,16 +59,27 @@ class Carritos extends CI_Controller{
                 if($auth_saved){
                     $this->session->set_userdata('items', $items);//Recargo el la variable de session
                     //echo "Hay stock disponible para este producto ";
-                    $data = ['cantidad' => 1,'cargado' => true];
+                    $data = ['cantidad' => 1,'cargado' => true, 'carrito' => $this->get_carrito_count()];
                     echo json_encode($data);
                 }else{
                     //echo "No hay stock disponible para este producto ";
-                    $data = ['cantidad' => 0, 'cargado' => false];
+                    $data = ['cantidad' => 0, 'cargado' => false, 'carrito' => $this->get_carrito_count()];
                     echo json_encode($data);
                 }
             }
         }
+    }
 
-
+    public function get_carrito_count(){
+        $items = $this->session->items;
+        $count = 0;
+        if(!empty($items)){
+            foreach ($items as $key => $value) {
+                $count = $count + $value;
+            }
+            $this->session->set_userdata('carrito', $count);
+            return $count;
+        }
+        return $count;
     }
 }

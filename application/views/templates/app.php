@@ -32,15 +32,8 @@
                         <?php if(null !== $this->session->userdata('usuario')) {?>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('carritos')?>">
-                            Mi Carrito ( <?= $this->session->userdata('usuario')?><span class="badge badge-warning p-1">
-                            <i class="fas fa-shopping-cart fa-lg"></i>
-                            <?php if($this->session->userdata("items") !== null && count($this->session->userdata('items')) > 0 ) { 
-                                echo count($this->session->userdata('items')); 
-                            } 
-                            else { 
-                                echo  0;
-                            } ?></span> )
-                        
+                            Mi Carrito <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span id="carrito"><?=$this->session->carrito; ?></span> 
                         </a>
                     
                         </li>

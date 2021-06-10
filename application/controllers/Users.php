@@ -7,9 +7,31 @@ class Users extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->library('template');
-        $this->load->library('session');
-        $this->load->model('Autorizacion');
+        $this->load->library(array(
+            'template','session','pagination','configpagination',
+            'form_validation', 'upload'
+        ));
+        $this->load->model('User');
+        $this->load->model('Producto');
+        $this->perPage = 6;
+    }
+
+    public function index($offset = 0){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+
+        /** Pagination */
+        $config = $this->configpagination->config(
+            base_url('users/index'), 
+            count($this->User->get_users()), 
+            $this->perPage
+        );
+
+		$this->pagination->initialize($config);
+        return $this->template->load('dashboard', $this->view.'/index', [
+            'title' => 'Usuarios',
+            'users' => $this->User->get_pagination($config['per_page'], $offset)
+        ]);
     }
 
     public function create(){
@@ -35,4 +57,25 @@ class Users extends CI_Controller {
         return $this->template->load('app', 'login/index', $data);
     }
 
+    public function active($id, $active){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+        
+        $active = ($active == 0) ? true : false;
+        $this->User->active($id, $active);
+        redirect('users');
+    }
+
+    public function destroy($id){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+
+        $user = $this->User->find($id);
+        if(!$this->User->delete($id)){
+            $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado');
+            return $this->template->load('dashboard', $this->view.'/index', ['title' => 'Usuarios']); 
+        }
+        $this->session->set_flashdata('success', 'Se ha eliminado un usuario.');
+        return redirect('users');
+    }
 }

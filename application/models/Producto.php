@@ -51,6 +51,16 @@
             }
             return false;
         }
+
+        public function get_productos_carrito($productos_ids){
+            $this->db->where_in('id', $productos_ids);
+            $this->db->from('productos');
+            $query = $this->db->get();
+            if($query){
+                return $query->result();
+            }
+            return false;
+        }
         
         public function update($id, $data){
             if($this->db->update('productos',$data, array('id'=>$id))){

@@ -86,6 +86,10 @@ $route['salir'] = 'login/logout';
 // Nosotros
 $route['nosotros'] = 'nosotros';
 
+// Orden
+$route['ordenes'] = 'ordenes';
+$route['ordenes/crear/(:num)'] = 'orden/create/$1';
+
 // Productos
 $route['productos'] = 'productos';
 $route['productos/(:num)'] = 'productos/$1';
@@ -105,6 +109,8 @@ $route['detalle/(:num)'] = 'productos/detalle/$1';
 $route['terminos'] = 'terminos';
 
 // Users
+$route['users'] = 'users';
+$route['users/(:num)'] = 'users/$1';
 $route['users/store']['POST'] = 'users/store';
 $route['users/crear'] = 'users/create';
 
