@@ -95,7 +95,7 @@
 
     <?php else: ?>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron bg-transparent">
             <h1 class="display-4">¿Carrito vacio?, ¡Agrega un producto!</h1>
             <p class="lead">Agrega al carrito todo lo que necesitas y te lo mandamos a tu casa!.&#x1f69a;.</p>
             <hr class="my-4">

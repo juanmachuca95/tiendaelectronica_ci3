@@ -21,7 +21,8 @@ header::before{
     height: 100%;
     content: "";
     position: absolute;
-    background-color:#2c9c9c ;
+    /* background-color:#2c9c9c ; */
+    background-color:  #4d0099;
     opacity: 0.8;
     z-index: -1;
 }

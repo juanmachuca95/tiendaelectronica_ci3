@@ -1,3 +1,25 @@
+<!-- Modal carrito-->
+<div class="modal fade" id="carritoMensaje" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="carritoMensajeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carritoMensajeLabel"><i class="fas fa-shopping-cart"></i> Tu carrito </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center" id="mensaje"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+<!--         <button type="button" class="btn btn-primary">Understood</button>
+ -->      </div>
+    </div>
+  </div>
+</div>
+
+
 <section class="container-fluid bg-white py-5">
     <!-- Default box -->
     <div class="card card-solid">
@@ -87,23 +109,31 @@
 
                     <div class="mt-4">
 
-                    <?php if($this->session->is_logged_user) : ?>
-                    <div class="btn btn-primary btn-lg btn-flat">
-                        <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Agregar a carrito
-                    </div>
+                    <?php if($this->session->is_logged_user): ?>
+                    <a href="#agregar" class="btn btn-primary btn-lg btn-flat" id="agregar" data-id="<?=$producto->id?>" style="background-color: #6200ee;">
+                        <i data-id="<?=$producto->id?>" class="fas fa-shopping-cart"></i> 
+                        <b id="cantidad[<?=$producto->id?>]" data-id="<?=$producto->id?>">
+                            <?php 
+                                $items = $this->session->items ?? [];
+                                if(array_key_exists($producto->id, $items)){
+                                    echo $items[$producto->id];
+                                }else{
+                                    echo "0";
+                                }            
+                            ?>
+                        </b>
+                    </a>
                     <?php else:?>
-                    <div class="btn btn-primary btn-lg btn-flat">
+                    <div class="btn btn-lg btn-flat" style="background-color: #6200ee;">
                         <a class="text-decoration-none text-white" href="<?=base_url('inicio')?>">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                         Habilitar carrito
                         </a>
                     </div>
-                    
                     <?php endif; ?>
 
-                    <div class="btn btn-default btn-lg btn-flat">
-                        <i class="fas fa-heart fa-lg mr-2"></i>
+                    <div class="btn btn-outline-light text-uppercase btn-lg btn-flat" style="color: #6200ee;">
+                        <!-- <i class="fas fa-heart fa-lg mr-2"></i> -->
                         Comprar
                     </div>
                     <!-- <div class="btn btn-default btn-lg btn-flat">
@@ -148,3 +178,52 @@
     </div>
     <!-- /.card -->
 </section>
+
+
+<script>
+    const carrito = document.querySelector('#carrito');
+    const categoria = document.querySelector('#categorias_id');
+    const mensaje = document.querySelector('#mensaje');
+    const header = document.querySelector('#header');
+
+    window.addEventListener('DOMContentLoaded', () => {
+        
+        productos = document.querySelectorAll('#agregar');
+        productos.forEach(producto => {
+            producto.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log(e.target.dataset.id);
+                producto_id = e.target.dataset.id;
+                cantidad_producto_id = document.getElementById("cantidad["+producto_id+"]");
+
+                http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
+                http.onreadystatechange = function(){
+                    if (http.readyState == 4 && http.status == 200) {
+                        var data = http.responseText;
+                        data = JSON.parse(data);
+                        cantidad_producto_id.innerHTML = data.cantidad;
+                        carrito.innerHTML = data.carrito;
+                        showMensaje(data);
+
+                    }
+                }
+
+                http.open('POST', '../../carritos/store', true);
+                http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	            http.send('productos_id='+producto_id);
+            });
+        })
+        
+    });
+
+    function showMensaje(data){
+        if(data.cargado){
+            mensaje.innerHTML = 'Se agrego un producto a tu carrito exitosamente.';
+            $('#carritoMensaje').modal('show');
+        }else{
+            mensaje.innerHTML = 'Lo sentimos, no hay stock suficiente.';
+            $('#carritoMensaje').modal('show');
+        }
+    }
+
+</script>

@@ -31,8 +31,8 @@
                         <?php if($this->session->is_logged_user) {?>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('carritos')?>">
-                            Mi Carrito <i class="fas fa-shopping-cart fa-lg"></i>
-                            <span id="carrito"><?=$this->session->carrito; ?></span> 
+                            Carrito <i class="btn btn-warning btn-sm fas fa-shopping-cart"><span id="carrito"> <?=$this->session->carrito; ?></span></i>
+                            
                         </a>
                     
                         </li>
