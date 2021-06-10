@@ -35,6 +35,7 @@ class Login extends CI_Controller {
                     'id_cliente' => $resultado->id,
                     'usuario' => $resultado->nombre,
                     'correo' => $resultado->correo,
+                    'carrito' => 0,
                     'items' => array(),
                     'is_logged_user' => true,
                 );

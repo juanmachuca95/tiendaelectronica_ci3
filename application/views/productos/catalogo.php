@@ -20,6 +20,27 @@
     </div>
 </div>
 
+<!-- Modal carrito-->
+<div class="modal fade" id="carritoMensaje" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="carritoMensajeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carritoMensajeLabel"><i class="fas fa-shopping-cart"></i> Tu carrito </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center" id="mensaje"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+<!--         <button type="button" class="btn btn-primary">Understood</button>
+ -->      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Mensajes -->
 <?php if (isset($mensaje)): ?>
     <p class=" bg-info text-center text-white"><?=$mensaje?></p>
@@ -54,6 +75,7 @@
         </div>
     </div>
     <div class="container">
+    
         <div class="row m-0  d-flex justify-content-center">
             <?php foreach ($productos as $producto) : ?>
             <div class="col-12 col-sm-6 col-md-4 p-1">
@@ -80,6 +102,28 @@
                             </svg> <?=$producto->precio;?> USD
                         </p>
                         <a href="#" class="btn text-white text-uppercase" style="background-color: #6200ee;"> Comprar </a>
+
+                        <?php if($this->session->is_logged_user): ?>
+                        <a href="#" class="btn text-white text-uppercase" id="agregar" data-id="<?=$producto->id?>" style="background-color: #6200ee;">
+                            <i data-id="<?=$producto->id?>" class="fas fa-shopping-cart"></i> 
+                            <b id="cantidad[<?=$producto->id?>]" data-id="<?=$producto->id?>">
+
+                                <?php 
+                                    
+                                    $items = $this->session->items ?? [];
+                                    if(array_key_exists($producto->id, $items)){
+                                        echo $items[$producto->id];
+                                    }else{
+                                        echo "0";
+                                    }
+                                
+                                
+                                ?>
+                            
+                            </b>
+                        </a>
+                        <?php endif; ?>
+
                         <a href="<?=base_url('productos/detalle/').$producto->id?>" class="btn btn-outline-light text-uppercase" style="color: #6200ee;"> Detalles </a>
                     </div>
                 </div>
@@ -99,8 +143,38 @@
 
 <script>
     const categoria = document.querySelector('#categorias_id');
+    const mensaje = document.querySelector('#mensaje');
+    const header = document.querySelector('#header');
 
     window.addEventListener('DOMContentLoaded', () => {
+        
+        productos = document.querySelectorAll('#agregar');
+        productos.forEach(producto => {
+            producto.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log(e.target.dataset.id);
+                producto_id = e.target.dataset.id;
+                cantidad_producto_id = document.getElementById("cantidad["+producto_id+"]");
+
+                http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
+                http.onreadystatechange = function(){
+                    if (http.readyState == 4 && http.status == 200) {
+                        var data = http.responseText;
+                        data = JSON.parse(data);
+                        cantidad_producto_id.innerHTML = data.cantidad;
+                        showMensaje(data);
+
+                    }
+                }
+
+                http.open('POST', '../carritos/store', true);
+                http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	            http.send('productos_id='+producto_id);
+            });
+        })
+
+
+
         if (window.XMLHttpRequest) {
             http_request = new XMLHttpRequest();
         } else {
@@ -125,5 +199,15 @@
 	    http_request.send();
         
     });
+
+    function showMensaje(data){
+        if(data.cargado){
+            mensaje.innerHTML = 'Se agrego un producto a tu carrito exitosamente.';
+            $('#carritoMensaje').modal('show');
+        }else{
+            mensaje.innerHTML = 'Lo sentimos, no hay stock suficiente.';
+            $('#carritoMensaje').modal('show');
+        }
+    }
 
 </script>

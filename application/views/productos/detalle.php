@@ -86,15 +86,30 @@
                     </div>
 
                     <div class="mt-4">
+
+                    <?php if($this->session->is_logged_user) : ?>
                     <div class="btn btn-primary btn-lg btn-flat">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                         Agregar a carrito
                     </div>
+                    <?php else:?>
+                    <div class="btn btn-primary btn-lg btn-flat">
+                        <a class="text-decoration-none text-white" href="<?=base_url('inicio')?>">
+                        <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                        Habilitar carrito
+                        </a>
+                    </div>
+                    
+                    <?php endif; ?>
 
                     <div class="btn btn-default btn-lg btn-flat">
                         <i class="fas fa-heart fa-lg mr-2"></i>
-                        Lista de deseos
+                        Comprar
                     </div>
+                    <!-- <div class="btn btn-default btn-lg btn-flat">
+                        <i class="fas fa-heart fa-lg mr-2"></i>
+                        Lista de deseos
+                    </div> -->
                     </div>
 
                      <div class="mt-4 product-share">

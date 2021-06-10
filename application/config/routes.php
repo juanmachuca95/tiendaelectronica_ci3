@@ -54,6 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Admin
 $route['admin'] = 'admin';
 
+//Carrito
+$route['carritos'] = 'carritos';
+$route['carritos/store']['POST'] = 'carritos/store';
+
 //Categorias
 $route['categorias'] = 'categorias';
 $route['categorias/(:num)'] = 'categorias/$1';
@@ -77,6 +81,7 @@ $route['contactos'] = 'contactos';
 // Login
 $route['login']['POST'] = 'login/login';
 $route['inicio'] = 'login';
+$route['salir'] = 'login/logout';
 
 // Nosotros
 $route['nosotros'] = 'nosotros';

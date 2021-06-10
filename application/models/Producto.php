@@ -130,10 +130,29 @@
             }
         }
 
-        //consulta sobre si hay estock para un producto por el Id
-        function stockProducto($codigo, $cantidad){
+        function get_valid_stock($id, $cantidad){
             $this->db->select('stock');
-            $this->db->where("id = $codigo");
+            $this->db->where("id", $id);
+            $query = $this->db->get('productos');
+            $stock = $query->row('stock');
+            if(intval($stock) >= $cantidad && intVal($stock) > 0){
+                return true;
+            }
+            return false;
+        }
+
+        /* function update_stock($id){
+            $sql = "UPDATE productos SET stock=stock-1 WHERE id=?";
+            if($this->db->query($sql, array(intVal($id)) ){
+                return true;
+            }
+            return false;
+        } */
+
+        //consulta sobre si hay estock para un producto por el Id
+        function stockProducto($id, $cantidad){
+            $this->db->select('stock');
+            $this->db->where("id = $id");
             $query = $this->db->get('productos');
             $stock = $query->row('stock');
             if(intval($stock) >= $cantidad){
