@@ -20,62 +20,6 @@ class Admin extends CI_Controller {
 		return $this->template->load('dashboard', $this->view.'/index');
 	}
 
-	/* public function index(){
-		
-		if($this->session->userdata('is_logged')){
-			$data = $this->getTemplate();
-			$this->load->view('admin',$data);
-		}else{
-			return show_404();
-		}
-	} */
-
-	public function getTemplate(){
-		$data = array(
-			'html' => $this->load->view('layout/html','', TRUE),
-			'head' => $this->load->view('layout/head','',TRUE),			
-		);	
-		return $data;	
-	}
-
-	//Cargador de la vista crear productos
-	function cargar_producto(){
-		//echo "metodo cargar producto";
-		$data = $this->getTemplate();
-		$data['form'] = $this->load->view('forms/form_carga','',true);
-		$this->load->view('admin/crearProducto',$data);	
-	}
-
-	//vista para editar productos
-	function editar_producto($offset = 0){
-		$productos = $this->Producto->getProductos();
-
-		$config['base_url'] = base_url('admin/editar_producto/');
-		$config['total_rows'] = count($productos);
-		$config['per_page'] = 6;
-
-		//Estilos
-		$config['full_tag_open'] 	= '<div class="pagging text-center"><nav><ul class="pagination m-0 px-1 pb-4">';
-		$config['full_tag_close'] 	= '</ul></nav></div>';
-		$config['num_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-		$config['num_tag_close']	= '</span></li>';
-		$config['cur_tag_open']		= '<li class="page-item active"><span class="page-link">';
-		$config['cur_tag_close']	= '<span class="sr-only">(current)</span></span></li>';
-		$config['next_tag_open']	= '<li class="page-item"><span class="page-link">';
-		$config['next_tagl_close']	= '<span aria-hidden="true">&raquo;</span></span></li>';
-		$config['prev_tag_open']	= '<li class="page-item"><span class="page-link">';
-		$config['prev_tagl_close']  = '</span></li>'; 
-		$config['first_tag_open']	= '<li class="page-item"><span class="page-link">';
-		$config['first_tagl_close']	= '</span></li>';
-		$config['last_tag_open']	= '<li class="page-item"><span class="page-link">';
-		$config['last_tagl_close'] = '</span></li>';
-		$this->pagination->initialize($config);
-
-		$lista = $this->Producto->getPaginacion($config['per_page'], $offset);
-		$data = $this->getTemplate();
-		$data['listaGeneral'] = $lista;
-		$this->load->view('admin/editarProducto',$data);
-	}
 
 	//cargador de la vista Pedidos.
 	function pedidos($page = 1){
@@ -108,45 +52,6 @@ class Admin extends CI_Controller {
 		}else{
 			show_404();
 		}	
-	}
-
-	//Funcion de carga del producto. 
-	public function cargar(){
-		$this->load->library('upload');
-		$config['upload_path'] = 'assets/img/productos/';
-		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['max_size'] = '10024';
-		$config['max_width']  = '6000';
-		$config['max_height']  = '6000';
-		// Inicializa la configuración para el archivo 
-		$this->upload->initialize($config);
-		
-		if(isset($_FILES['img'])){
-			if ($this->upload->do_upload('img')){
-				// Mueve archivo a la carpeta indicada en la variable $data
-				$data = $this->upload->data();
-				// Path donde guarda el archivo..
-				$url ="assets/img/productos/".$_FILES['img']['name'];
-				// Array de datos para insertar en productos
-				$data = array(
-					'categoria' 	=> $this->input->post('categoria',true),
-					'stock' 		=> $this->input->post('stock', true),
-					'descripcion'	=> $this->input->post('descripcion',true),
-					'precio'		=> $this->input->post('precio',true),
-					'imagen'		=> $url,
-					'boton_compra'  => $this->input->post('info_boton',true),
-				);
-				if($this->Producto->cargar($data)){//Estoy llamando al mi model.
-					$msj = "El producto se creo Correctamente";
-					$this->session->set_flashdata('msj',$msj);
-					$this->cargar_producto();
-				}else{
-					$msj = "No fue posible cargar el producto";
-					$this->session->set_flashdata('msj',$msj);
-					$this->cargar_producto();
-				}
-			}
-		}
 	}
 
 	//Nuevo forma de actualizar registro desde la tabla.. 

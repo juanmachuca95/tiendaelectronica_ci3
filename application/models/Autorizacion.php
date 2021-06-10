@@ -6,7 +6,8 @@
         }
         
         public function login($email, $password){
-            $sql = "SELECT * FROM users WHERE email = ?";
+            $sql = 
+            "SELECT u.*, e.direccion, e.telefono FROM users AS u LEFT JOIN envios AS e ON u.envios_id = e.id WHERE u.email = ?";
             if($result = $this->db->query($sql, array($email))){
                 $row = $result->row();
                 if (password_verify($password, $row->password)) {

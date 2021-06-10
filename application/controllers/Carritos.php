@@ -15,15 +15,16 @@ class Carritos extends CI_Controller{
         if(!$status) { return show_404(); }
 
         $data = $this->session->userdata('items');
-        if(empty($data)){ return redirect('catalogo'); }
-        $productos_ids = array_keys($data);
+        if(!empty($data)){
+            $productos_ids = array_keys($data);
+            $productos = $this->Producto->get_productos_carrito($productos_ids); 
+        }
         return $this->template->load('app', $this->view.'/index', [
-            'productos' => $this->Producto->get_productos_carrito($productos_ids)
+            'productos' => $productos ?? null
         ]);
     }
 
  
-
     public function store(){
         $status = ($this->session->is_logged_user) ? true : false;
         if(!$status) { return false; }
@@ -81,5 +82,33 @@ class Carritos extends CI_Controller{
             return $count;
         }
         return $count;
+    }
+
+    public function quitar($id){
+        $items = $this->session->items;
+        $count = $this->session->carrito;
+        if((intVal($items[$id])-1) == 0){
+            $this->session->set_userdata('items', array());
+            if($count-1 == 0){
+                $this->session->set_userdata('carrito', 0);
+            }
+            return redirect('carritos');
+        }
+        $items[$id] = (intVal($items[$id])-1);
+        return redirect('carritos');
+    }
+
+    public function sumar($id){
+        $items = $this->session->items;
+        $auth_saved = $this->Producto->get_valid_stock($productos_id, $items[$productos_id]+1 );
+        if($auth_saved){
+            $items[$productos_id] = intVal($items[$productos_id]) + 1; 
+            $this->session->set_userdata('items', $items);
+            echo json_encode([
+                'cantidad' => $items[$productos_id],
+                'cargado' => true, 'carrito' => $this->get_carrito_count()
+            ]);
+        }
+        
     }
 }

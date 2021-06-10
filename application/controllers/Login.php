@@ -28,15 +28,20 @@ class Login extends CI_Controller {
         }
         $correo = $this->input->post('correo');
         $password = $this->input->post('password');
-        if($resultado = $this->Autorizacion->login($correo, $password)){
+        /*echo "<pre>";
+        print_r($this->Autorizacion->login($correo, $password));
+        */if($resultado = $this->Autorizacion->login($correo, $password)){
             $role_admin = ($resultado->roles_id == 1) ? true : false;
             if(!$role_admin){
                 $data = array(
                     'id_cliente' => $resultado->id,
-                    'usuario' => $resultado->nombre,
-                    'correo' => $resultado->correo,
-                    'carrito' => 0,
-                    'items' => array(),
+                    'nombre'        => $resultado->nombre,
+                    'apellido'      => $resultado->apellido,
+                    'direccion'     => $resultado->direccion,
+                    'telefono'      => $resultado->telefono,
+                    'correo'        => $resultado->email,
+                    'carrito'       => 0,
+                    'items'         => array(),
                     'is_logged_user' => true,
                 );
                 $this->session->set_userdata($data);

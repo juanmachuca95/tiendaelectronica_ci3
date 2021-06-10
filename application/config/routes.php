@@ -57,6 +57,8 @@ $route['admin'] = 'admin';
 //Carrito
 $route['carritos'] = 'carritos';
 $route['carritos/store']['POST'] = 'carritos/store';
+$route['carritos/quitar/(:num)'] = 'carritos/quitar/$1';
+$route['carritos/sumar/(:num)'] = 'carritos/sumar/$1';
 
 //Categorias
 $route['categorias'] = 'categorias';
