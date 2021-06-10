@@ -42,4 +42,6 @@ class Ordenes extends CI_Controller {
             
         ]);
     }
+
+    
 }

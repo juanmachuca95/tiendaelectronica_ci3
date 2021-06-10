@@ -59,6 +59,8 @@ $route['carritos'] = 'carritos';
 $route['carritos/store']['POST'] = 'carritos/store';
 $route['carritos/quitar/(:num)'] = 'carritos/quitar/$1';
 $route['carritos/sumar/(:num)'] = 'carritos/sumar/$1';
+$route['carritos/comprar/(:num)']['GET'] = 'carritos/comprar/$1';
+$route['panel'] = 'carritos/panel';
 
 //Categorias
 $route['categorias'] = 'categorias';
@@ -71,6 +73,12 @@ $route['categorias/search/(:any)']['GET'] = 'categorias/seach';
 
 //Comercializacion
 $route['comercializacion'] = 'comercializacion';
+
+//Compras
+$route['compras'] = 'compras';
+$route['compras/store/(:num)'] = 'compras/store/$1';
+$route['compras/quitar/(:num)'] = 'compras/quitar/$1';
+$route['compras/sumar/(:num)'] = 'compras/sumar/$1';
 
 //Consultas 
 $route['consultas'] = 'consultas';

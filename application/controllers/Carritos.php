@@ -23,8 +23,7 @@ class Carritos extends CI_Controller{
             'productos' => $productos ?? null
         ]);
     }
-
- 
+    
     public function store(){
         $status = ($this->session->is_logged_user) ? true : false;
         if(!$status) { return false; }
@@ -85,6 +84,9 @@ class Carritos extends CI_Controller{
     }
 
     public function quitar($id){
+        $status = ($this->session->is_logged_user) ? true : false;
+        if(!$status) { return false; }
+
         $items = $this->session->items;
         $count = $this->session->carrito;
 
@@ -108,6 +110,9 @@ class Carritos extends CI_Controller{
     }
 
     public function sumar($id){
+        $status = ($this->session->is_logged_user) ? true : false;
+        if(!$status) { return false; }
+
         $items = $this->session->items;
         $count = $this->session->carrito;
         $auth_saved = $this->Producto->get_valid_stock($id, $items[$id]+1 );
@@ -115,6 +120,7 @@ class Carritos extends CI_Controller{
             $items[$id] = intVal($items[$id]) + 1; 
             $this->session->set_userdata('items', $items);
             $this->session->set_userdata('carrito', intVal($count)+1);
+            return redirect('carritos');
         }
         $this->session->set_flashdata('error', 'Lo sentimos, no se pueden agregar más unidades a este producto.');
         return redirect('carritos');
