@@ -5,9 +5,6 @@
         print_r($this->session); */
     ?>
     
-    <?php if(isset($error)): ?>
-        <p><?=$error?></p>
-    <?php endif; ?>
     
     <?php if(!empty($productos)): ?>
 
@@ -28,6 +25,7 @@
                         </thead>
                         <tbody>
                         <?php 
+                            $total = 0;
                             $subtotales = 0;
                                 foreach($productos as $producto) : ?>
                             <tr>
@@ -38,7 +36,7 @@
                                     <?= $items[intVal($producto->id)]; ?>
                                 </td>
                                 <td>
-                                    <?= $subtotales = $subtotales + ($items[$producto->id] * $producto->precio); ?>
+                                    <?= $subtotales = $subtotales + ($items[$producto->id] * $producto->precio); $total = $total + $subtotales; ?>
                                 </td>
                                 <td>
                                     <a class="btn btn-danger" href="<?=base_url('carritos/quitar/'.$producto->id)?>"><i class="fas fa-minus"></i></a>
@@ -48,7 +46,7 @@
                             
                             <?php endforeach; ?>                
                             <tr>
-                                <td colspan="1"></td><td colspan="3"><strong> Total de su Pedido: </strong></td><td><?="$".$subtotales;?></td>
+                                <td colspan="1"></td><td colspan="3"><strong> Total de compra: </strong></td><td> <i class="fas fa-dollar-sign"></i> <?=$total;?></td>
                             </tr>
                         </tbody>
                     </table>

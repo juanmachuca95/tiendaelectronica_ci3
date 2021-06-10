@@ -87,28 +87,36 @@ class Carritos extends CI_Controller{
     public function quitar($id){
         $items = $this->session->items;
         $count = $this->session->carrito;
-        if((intVal($items[$id])-1) == 0){
-            $this->session->set_userdata('items', array());
-            if($count-1 == 0){
+
+        if($items[$id] == 1){
+            unset($items[$id]);
+            if($count == 1){
+                $this->session->set_userdata('items', []);
                 $this->session->set_userdata('carrito', 0);
+                return redirect('carritos');
             }
+            $count = intVal($count) - 1;
+            $this->session->set_userdata('carrito', $count);
+            $this->session->set_userdata('items', $items);
             return redirect('carritos');
         }
         $items[$id] = (intVal($items[$id])-1);
+        $count = intVal($count) - 1;
+        $this->session->set_userdata('carrito', $count);
+        $this->session->set_userdata('items', $items);
         return redirect('carritos');
     }
 
     public function sumar($id){
         $items = $this->session->items;
-        $auth_saved = $this->Producto->get_valid_stock($productos_id, $items[$productos_id]+1 );
+        $count = $this->session->carrito;
+        $auth_saved = $this->Producto->get_valid_stock($id, $items[$id]+1 );
         if($auth_saved){
-            $items[$productos_id] = intVal($items[$productos_id]) + 1; 
+            $items[$id] = intVal($items[$id]) + 1; 
             $this->session->set_userdata('items', $items);
-            echo json_encode([
-                'cantidad' => $items[$productos_id],
-                'cargado' => true, 'carrito' => $this->get_carrito_count()
-            ]);
+            $this->session->set_userdata('carrito', intVal($count)+1);
         }
-        
+        $this->session->set_flashdata('error', 'Lo sentimos, no se pueden agregar más unidades a este producto.');
+        return redirect('carritos');
     }
 }
