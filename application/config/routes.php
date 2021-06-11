@@ -98,7 +98,8 @@ $route['nosotros'] = 'nosotros';
 
 // Orden
 $route['ordenes'] = 'ordenes';
-$route['ordenes/crear/(:num)'] = 'orden/create/$1';
+$route['ordenes/crear/(:num)'] = 'ordenes/create/$1';
+$route['odenes/store']['POST'] = 'ordenes/store';
 
 // Productos
 $route['productos'] = 'productos';

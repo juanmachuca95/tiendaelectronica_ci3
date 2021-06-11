@@ -34,7 +34,7 @@ class Login extends CI_Controller {
             $role_admin = ($resultado->roles_id == 1) ? true : false;
             if(!$role_admin){
                 $data = array(
-                    'id_cliente' => $resultado->id,
+                    'users_id'      => $resultado->id,
                     'nombre'        => $resultado->nombre,
                     'apellido'      => $resultado->apellido,
                     'direccion'     => $resultado->direccion,

@@ -20,7 +20,8 @@ class Carritos extends CI_Controller{
             $productos = $this->Producto->get_productos_carrito($productos_ids); 
         }
         return $this->template->load('app', $this->view.'/index', [
-            'productos' => $productos ?? null
+            'productos' => $productos ?? null,
+            'total' => $this->get_total_productos($productos),
         ]);
     }
     
@@ -124,5 +125,15 @@ class Carritos extends CI_Controller{
         }
         $this->session->set_flashdata('error', 'Lo sentimos, no se pueden agregar más unidades a este producto.');
         return redirect('carritos');
+    }
+
+    public function get_total_productos($productos){
+        $items = $this->session->items;
+        $total = 0;
+        foreach($productos as $row){
+            //echo 'cantidad: '.intVal($items[$row->id]).' x precio: '.$row->precio.' total: '.(intVal($items[$row->id]) * $row->precio).'<br>';
+            $total = $total + intVal($items[$row->id]) * $row->precio;
+        }
+        return $total;
     }
 }

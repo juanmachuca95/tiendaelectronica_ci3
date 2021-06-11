@@ -53,7 +53,8 @@
                 <div class="p-4">
                     <h3 class="font-weight-bold">¡Confirma tu orden!</h3>
                     <p class="font-weight-light">
-                        Se reservara y la administracion se pondra en contacto contigo dentro de las 24 hs. para definir puntos de entrega o tipos envios
+                        La administracion se pondra en contacto contigo dentro de las 24 hs. para definir puntos de entrega o tipos envios.
+                        Por favor completa el siguiente formulario.
                     </p>
                     <?=form_open('cliente/cargarPedido')?>
 
