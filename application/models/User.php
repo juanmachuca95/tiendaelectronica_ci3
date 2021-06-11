@@ -10,6 +10,13 @@ class User extends CI_Model{
         $this->db->update('users');
     }
 
+    public function create($data){
+        if($this->db->insert('users', $data)){
+            return true;
+        }
+        return false;
+    }
+
     public function create_user($data){
         if($this->db->insert('users', $data)){
             return $this->db->insert_id();

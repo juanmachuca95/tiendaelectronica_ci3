@@ -13,7 +13,7 @@ class Orden extends CI_Model{
 
     public function create($data){
         if($this->db->insert('orden', $data)){
-            return true;
+            return $this->db->insert_id();
         }
         return false;
     }

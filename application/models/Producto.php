@@ -69,6 +69,26 @@
             return false;
         }
 
+        public function update_stock_productos_vendidos($data){
+            if(!empty($data)){
+                foreach ($data as $key => $value) {
+                    $codigo = $key;
+                    $cantidad = $value;
+                    $this->db->select('stock');
+                    $this->db->where('id', $codigo);
+                    $dato = $this->db->get('productos');
+    
+                    $actualizar = intVal($dato->row('stock')) - intVal($cantidad);
+    
+                    $this->db->set('stock', $actualizar);
+                    $this->db->where('id', $codigo);
+                    $this->db->update('productos');
+                }
+                return true;
+            }
+            return false;
+        }
+
 
         public function active($id, $active){
             $this->db->set('activo', $active);
@@ -171,6 +191,8 @@
                 return false;
             }
         }
+
+        
 
         function actualizarProductosVendidos($data){
             foreach ($data as $key => $value) {

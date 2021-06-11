@@ -48,7 +48,7 @@ class Users extends CI_Controller {
             'roles_id' => 2, // Cliente
         );
         
-        if(!$this->Autorizacion->registrar($data)){
+        if(!$this->User->create($data)){
             return $this->template->load('app', $this->view.'/create', [
                 'error' => 'Intente nuevamente ha ocurrido un error en el proceso de Registro' 
             ]);  

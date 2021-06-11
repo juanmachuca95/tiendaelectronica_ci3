@@ -1,5 +1,6 @@
 <div class="container-fluid home-categoria pb-4 pt-0 px-0">
-
+    
+    <?php if(!empty($productos)): ?>
     <?php /* 
         echo "<pre>";
         print_r($this->session); */
@@ -8,7 +9,7 @@
     <div class="px-5 bg-light">
         <div class="row">
             <div class="col-md-8 py-5">
-                <h3 class="font-weight-bold mb-3">Comprar</h3>
+                <h3 class="font-weight-bold mb-3">Comprar <i class="fas fa-cart-plus"></i> <?=$this->session->carrito;?></h3>
                 <?php $items = $this->session->items;?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -64,4 +65,16 @@
         </div>
        
     </div>
+
+    <?php else: ?>
+        <div class="container">
+        <div class="jumbotron bg-transparent">
+            <h1 class="display-4">¿Necesitas algo?</h1>
+            <p class="lead">Compra todo lo que necesitas y te lo mandamos a tu casa!.&#x1f69a;.</p>
+            <hr class="my-4">
+            <p>No olvides registrarte para poder hacer uso del carrito.</p>
+            <a class="btn btn-primary btn-lg" href="<?=base_url('catalogo')?>" role="button">Ir al Catálogo</a>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>

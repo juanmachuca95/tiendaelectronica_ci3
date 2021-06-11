@@ -15,11 +15,10 @@ class Compras extends CI_Controller{
      */
     public function index(){
         $data = $this->session->userdata('items');
-        if(empty($data)){
-            return show_404();
+        if(!empty($data)){
+            $productos_ids = array_keys($data);
+            $productos = $this->Producto->get_productos_carrito($productos_ids); 
         }
-        $productos_ids = array_keys($data);
-        $productos = $this->Producto->get_productos_carrito($productos_ids); 
         return $this->template->load('app', $this->view.'/index', [
             'productos' => $productos ?? null
         ]);
@@ -29,12 +28,17 @@ class Compras extends CI_Controller{
      * Disponible para usuarios no registrado
      */
     public function store($id){
+        if(!$this->session->carrito){
+            $this->session->set_userdata('carrito', 0);
+        }
+        $count = $this->session->carrito;
         $items = $this->session->items ?? array();
         if(!empty($items) && array_key_exists($id, $items)){ 
             $auth_saved = $this->Producto->get_valid_stock($id, $items[$id]);
             if($auth_saved){
                 $items[$id] = intVal($items[$id]) + 1;
                 $this->session->set_userdata('items', $items);
+                $this->session->set_userdata('carrito', intVal($count)+1);
                 return redirect('compras');
             }else{
                 $this->session->set_flashdata('error', 'Lo sentimos, no hay stock disponible para este producto.');
@@ -45,6 +49,7 @@ class Compras extends CI_Controller{
             $auth_saved = $this->Producto->get_valid_stock($id, $items[$id]);
             if($auth_saved){
                 $this->session->set_userdata('items', $items);
+                $this->session->set_userdata('carrito', intVal($count)+1);
                 return redirect('compras');
             }else{
                 $this->session->set_flashdata('error', 'Lo sentimos, no hay stock disponible para este producto.');

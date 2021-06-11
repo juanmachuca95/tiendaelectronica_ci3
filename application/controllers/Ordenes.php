@@ -11,7 +11,7 @@ class Ordenes extends CI_Controller {
             'template','session','pagination','configpagination',
             'form_validation',
         ));
-        $this->load->model(array('Orden', 'Producto', 'User'));
+        $this->load->model(array('Orden', 'Detalle', 'Producto', 'User'));
         $this->perPage = 6;
     }
 
@@ -93,7 +93,20 @@ class Ordenes extends CI_Controller {
             'total' => $this->get_total_productos($productos)
         ];
 
-        if($this->Orden->create($order_data)){
+        if($orden_id = $this->Orden->create($order_data)){
+            $this->Producto->update_stock_productos_vendidos($items);
+            foreach ($productos as $row) {
+                if($items[$row->id]){
+                    $this->Detalle->create([
+                        'orden_id' => $orden_id,
+                        'productos_id' => $row->id,
+                        'cantidad' => $items[$row->id],
+                        'precio_unitario' => $row->precio,
+                        'total' => $order_data['total'] 
+                    ]);
+                }
+            }
+
             $this->session->set_userdata('items', array());
             $this->session->set_userdata('carrito', 0);
             $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
