@@ -40,15 +40,15 @@ class User extends CI_Model{
     }
 
     public function get_users(){
-        $sql = "SELECT u.*, e.direccion, e.telefono FROM users AS u LEFT JOIN envios AS e ON u.envios_id = e.id ORDER BY u.id DESC";
-        if($result = $this->db->query($sql) ){
+        $sql = "SELECT u.* FROM users AS u WHERE roles_id=2 ORDER BY u.id DESC";
+        if($result = $this->db->query($sql)){
             return $result->result();
         }
         return false;
     }
      
     public function get_pagination($limit, $offset){
-        $sql = "SELECT u.*, e.direccion, e.telefono FROM users AS u LEFT JOIN envios AS e ON u.envios_id = e.id ORDER BY u.id DESC LIMIT ?, ?";
+        $sql = "SELECT u.* FROM users AS u WHERE roles_id=2 ORDER BY u.id DESC LIMIT ?, ?";
         if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
             return $result->result();
         }
