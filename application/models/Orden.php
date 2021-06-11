@@ -34,21 +34,20 @@ class Orden extends CI_Model{
     }
 
     public function get_ordenes(){
-        $sql = "SELECT u.*, e.direccion, e.telefono FROM users AS u LEFT JOIN envios AS e ON u.envios_id = e.id ORDER BY u.id DESC";
+        $sql = "SELECT u.*, o.* FROM users AS u INNER JOIN orden AS o ON o.users_id = u.id ORDER BY o.id DESC";
         if($result = $this->db->query($sql) ){
             return $result->result();
         }
         return false;
     }
-     
-    public function get_pagination($limit, $offset){
-        $sql = "SELECT o.*, u.direccion, u.telefono FROM orden AS u INNER JOIN users AS u ON u.id = o.id ORDER BY u.id DESC LIMIT ?, ?";
+
+    public function get_pagination($limit, $offset) {
+        $sql = "SELECT o.*, u.* FROM orden as o INNER JOIN users as u ON o.users_id = u.id ORDER BY o.id DESC LIMIT ?, ?;";
         if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
             return $result->result();
         }
         return false;
     }
-
 
 }
 

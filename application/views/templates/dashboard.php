@@ -261,7 +261,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?=base_url('consultas')?>" class="nav-link">
+            <a href="<?=base_url('ordenes')?>" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Ordenes
@@ -278,7 +278,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">NUCLEO</li>
+          <!-- <li class="nav-header">NUCLEO</li>
           <li class="nav-item">
             <a href="<?=base_url('configuraciones')?>" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -302,7 +302,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -339,7 +339,7 @@
             </ul>
           </li> -->
 
-          <li class="nav-header">EXAMPLES</li>
+         <!--  <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
@@ -369,7 +369,7 @@
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Important</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -414,7 +414,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="https://juanmachuca95.github.io">Made by Machuca Juan</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0

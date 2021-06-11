@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 class Ordenes extends CI_Controller {
     private $view = 'ordenes';
@@ -9,14 +10,14 @@ class Ordenes extends CI_Controller {
         parent::__construct();
         $this->load->library(array(
             'template','session','pagination','configpagination',
-            'form_validation',
+            'form_validation'
         ));
         $this->load->model(array('Orden', 'Detalle', 'Producto', 'User'));
         $this->perPage = 6;
     }
 
-    public function index(){
-        $status = ($this->session->is_logged_user) ? true : false;
+    public function index($offset = 0){
+        $status = ($this->session->is_logged) ? true : false;
         if(!$status) { return show_404(); }
 
         /** Pagination */
@@ -29,7 +30,7 @@ class Ordenes extends CI_Controller {
 		$this->pagination->initialize($config);
         return $this->template->load('dashboard', $this->view.'/index', [
             'title' => 'Ordenes de compra',
-            'productos' => $this->Producto->get_pagination($config['per_page'], $offset)
+            'ordenes' => $this->Orden->get_pagination($config['per_page'], $offset)
         ]);
     }
 
