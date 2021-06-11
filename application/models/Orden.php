@@ -34,7 +34,7 @@ class Orden extends CI_Model{
     }
 
     public function get_ordenes(){
-        $sql = "SELECT u.*, o.* FROM users AS u INNER JOIN orden AS o ON o.users_id = u.id ORDER BY o.id DESC";
+        $sql = "SELECT o.*, u.* FROM users AS u INNER JOIN orden AS o ON o.users_id = u.id ORDER BY o.id DESC";
         if($result = $this->db->query($sql) ){
             return $result->result();
         }

@@ -1,6 +1,7 @@
 <!-- Main content -->
 <section class="content">
 
+
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
@@ -31,8 +32,11 @@
                 <th>
                     Estado
                 </th>
-                <th class="text-center">
+                <th>
                     Activo
+                </th>
+                <th class="text-center">
+                    Tipo
                 </th>
                 <th>Emitida</th>
                 <th>
@@ -68,6 +72,13 @@
                     <!-- <a href="<?=base_url('ordenes/active/').$orden->id.'/'.$orden->activo;?>"> -->
                     <span class="badge badge-danger">inactivo</span>
                     <!-- </a> -->
+                    <?php endif;?>
+                </td>
+                <td class="project-state">
+                    <?php if ($orden->tipopago == 'contraentrega'): ?>
+                    <span class="badge badge-success">Contra entrega <i class="fas fa-"></i></span>
+                    <?php else: ?>
+                    <span class="badge badge-primary">Mercadopago <i class="far fa-handshake"></i></span>
                     <?php endif;?>
                 </td>
                 <td>

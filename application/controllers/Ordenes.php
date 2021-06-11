@@ -53,6 +53,9 @@ class Ordenes extends CI_Controller {
         $this->form_validation->set_rules('apellido', 'Apellido', 
             'required|max_length[255]'
         );
+        $this->form_validation->set_rules('email', 'Email', 
+            'required|max_length[255]|valid_email'
+        );
         $this->form_validation->set_rules('direccion', 'Dirección', 
             'required|max_length[255]'
         );
@@ -65,8 +68,10 @@ class Ordenes extends CI_Controller {
 
         $nombre = $this->input->post('nombre');
         $apellido = $this->input->post('apellido');
+        $email = $this->input->post('email');
         $direccion = $this->input->post('direccion');
         $telefono = $this->input->post('telefono');
+        $tipopago = $this->input->post('tipopago');
 
         if($this->session->users_id){
             $user_id = $this->session->users_id;
@@ -75,13 +80,14 @@ class Ordenes extends CI_Controller {
             
             if($auth_update){
                 $this->User->update($user_id, [
-                    'direccion' => $direccion, 'telefono' => $telefono
+                    'direccion' => $direccion, 'telefono' => $telefono,
                 ]);
             }
         }else{
             $user_id = $this->User->create_user([
                 'nombre' => $nombre, 'apellido' => $apellido,
                 'direccion' => $direccion, 'telefono' => $telefono,
+                'email' => $email,
                 'roles_id' => 2
             ]);
         }
@@ -91,30 +97,32 @@ class Ordenes extends CI_Controller {
         $productos = $this->Producto->get_productos_carrito($productos_ids); 
         $order_data = [
             'users_id' => $user_id,
-            'total' => $this->get_total_productos($productos)
+            'total' => $this->get_total_productos($productos),
+            'tipopago' => ($tipopago == 1) ? 'contraentrega' : 'online'
         ];
 
-        if($orden_id = $this->Orden->create($order_data)){
-            $this->Producto->update_stock_productos_vendidos($items);
-            foreach ($productos as $row) {
-                if($items[$row->id]){
-                    $this->Detalle->create([
-                        'orden_id' => $orden_id,
-                        'productos_id' => $row->id,
-                        'cantidad' => $items[$row->id],
-                        'precio_unitario' => $row->precio,
-                        'total' => $order_data['total'] 
-                    ]);
+        if($tipopago == 1){
+            if($orden_id = $this->Orden->create($order_data)){
+                $this->Producto->update_stock_productos_vendidos($items);
+                foreach ($productos as $row) {
+                    if($items[$row->id]){
+                        $this->Detalle->create([
+                            'orden_id' => $orden_id,
+                            'productos_id' => $row->id,
+                            'cantidad' => $items[$row->id],
+                            'precio_unitario' => $row->precio,
+                            'total' => $order_data['total'] 
+                        ]);
+                    }
                 }
+                $this->session->set_userdata('items', array());
+                $this->session->set_userdata('carrito', 0);
+                $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
+                return redirect('home');
             }
-
-            $this->session->set_userdata('items', array());
-            $this->session->set_userdata('carrito', 0);
-            $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
-            return redirect('home');
+            $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');
+            return $this->create();
         }
-        $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');
-        return $this->create();
     }
 
     public function get_total_productos($productos){

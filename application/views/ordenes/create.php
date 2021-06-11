@@ -13,17 +13,23 @@
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" value="<?=$this->session->nombre;?>" class="form-control" placeholder="Nombre . . ." 
                         <?= (!$this->session->nombre) ? '' : "readonly";?>>
-                    <small class="text-danget"><?=form_error('nombre');?></small>
+                    <small class="text-danger"><?=form_error('nombre');?></small>
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col">
                     <label for="nombre">Apellido</label>
                     <input type="text" id="apellido" name="apellido" value="<?=$this->session->apellido;?>" class="form-control" placeholder="Apellido . . ." 
                         <?= (!$this->session->apellido) ? '' : "readonly";?>>
-                        <small class="text-danget"><?=form_error('apellido');?></small>
+                        <small class="text-danger"><?=form_error('apellido');?></small>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col">
+                    <label for="nombre">Email</label>
+                    <input type="email" id="email" name="email" value="<?=$this->session->email;?>" class="form-control" placeholder="Apellido . . ." 
+                        <?= (!$this->session->email) ? '' : "readonly";?> required>
+                        <small class="text-danger"><?=form_error('email');?></small>
+                    </div>
+                </div>  
                 <div class="row mb-3">
                     <div class="col">
                     <label for="direccion">Dirección</label>
@@ -42,6 +48,17 @@
                         required
                     >   
                     <small class="text-danger"><?=form_error('telefono');?></small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                    <label for="forma">Forma de pago</label>
+                    <select class="custom-select" name="tipopago" id="tipopago" required>
+                        <option value="" selected>Elige el medio de pago . . .</option>
+                        <option value="1">Pago contra entrega </option>
+                        <option value="2"><i class="fas fa-handshake"></i> MercadoPago</option>
+                    </select>
                     </div>
                 </div>
                 <button type="submit" class="btn text-white" style="background-color: #6200ee;">Confirmar</button>
