@@ -18,10 +18,11 @@ class Carritos extends CI_Controller{
         if(!empty($data)){
             $productos_ids = array_keys($data);
             $productos = $this->Producto->get_productos_carrito($productos_ids); 
+            $total =  $this->get_total_productos($productos);
         }
         return $this->template->load('app', $this->view.'/index', [
             'productos' => $productos ?? null,
-            'total' => $this->get_total_productos($productos),
+            'total' => $total ?? 0
         ]);
     }
     

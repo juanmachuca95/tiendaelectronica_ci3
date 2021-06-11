@@ -49,39 +49,15 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <div class="p-4">
                     <h3 class="font-weight-bold">¡Confirma tu orden!</h3>
                     <p class="font-weight-light">
-                        La administracion se pondra en contacto contigo dentro de las 24 hs. para definir puntos de entrega o tipos envios.
-                        Por favor completa el siguiente formulario.
+                        Se reservara y la administracion se pondra en contacto contigo dentro de las 24 hs. para definir puntos de entrega o tipos envios
                     </p>
-                    <?=form_open('cliente/cargarPedido')?>
-
-                        <div class="row mb-3">
-                            <div class="col">
-                            <input type="text" id="nombre" name="nombre" value="<?=$this->session->nombre;?>" class="form-control" placeholder="Nombre . . ." readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                            <input type="text" id="apellido" name="apellido" value="<?=$this->session->apellido;?>" class="form-control" placeholder="Apellido . . ." readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección . . .">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                            <input type="text" id="telefono" name="telefono" class="form-control"
-                                placeholder="Ejemplo: 03794-69-0474 (11 digitos con guiones)" 
-                                pattern="[0-9]*{4}-[0-9]*{2}-[0-9]*{4}"
-                            >
-                            </div>
-                        </div>
-                        <button class="btn btn-warning " type="submit" role="button">Confirmar </button> 
+                    <a href="<?=base_url('ordenes/create')?>" class="btn btn-warning " type="submit" role="button">Confirmar </a> 
+                    <a  class="btn text-white" style="background-color: #6200ee;"
+                     href="<?=base_url('catalogo')?>">Seguir comprando</a>
                     </form>    
                 </div>     
             </div> 

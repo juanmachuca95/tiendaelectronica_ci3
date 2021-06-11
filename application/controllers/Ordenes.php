@@ -11,7 +11,7 @@ class Ordenes extends CI_Controller {
             'template','session','pagination','configpagination',
             'form_validation',
         ));
-        $this->load->model(array('Orden', 'Producto'));
+        $this->load->model(array('Orden', 'Producto', 'User'));
         $this->perPage = 6;
     }
 
@@ -28,7 +28,7 @@ class Ordenes extends CI_Controller {
 
 		$this->pagination->initialize($config);
         return $this->template->load('dashboard', $this->view.'/index', [
-            'title' => 'Productos',
+            'title' => 'Ordenes de compra',
             'productos' => $this->Producto->get_pagination($config['per_page'], $offset)
         ]);
     }
@@ -62,13 +62,45 @@ class Ordenes extends CI_Controller {
             return $this->create();
         }
 
-        if($this->session->id){
-            $data = [
-                'users_id' => $this->session->id,
-            ];
+        $nombre = $this->input->post('nombre');
+        $apellido = $this->input->post('apellido');
+        $direccion = $this->input->post('direccion');
+        $telefono = $this->input->post('telefono');
+
+        if($this->session->users_id){
+            $user_id = $this->session->users_id;
+            $user = $this->User->find($user_id);
+            $auth_update = ($user->direccion != $direccion || $user->telefono != $telefono) ? true  : false;
+            
+            if($auth_update){
+                $this->User->update($user_id, [
+                    'direccion' => $direccion, 'telefono' => $telefono
+                ]);
+            }
+        }else{
+            $user_id = $this->User->create_user([
+                'nombre' => $nombre, 'apellido' => $apellido,
+                'direccion' => $direccion, 'telefono' => $telefono,
+                'roles_id' => 2
+            ]);
         }
 
-        $items = $this->session->items();
+        $items = $this->session->items;
+        $productos_ids = array_keys($items);
+        $productos = $this->Producto->get_productos_carrito($productos_ids); 
+        $order_data = [
+            'users_id' => $user_id,
+            'total' => $this->get_total_productos($productos)
+        ];
+
+        if($this->Orden->create($order_data)){
+            $this->session->set_userdata('items', array());
+            $this->session->set_userdata('carrito', 0);
+            $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
+            return redirect('home');
+        }
+        $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');
+        return $this->create();
     }
 
     public function get_total_productos($productos){

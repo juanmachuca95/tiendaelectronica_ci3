@@ -11,6 +11,13 @@ class Orden extends CI_Model{
         $this->db->update('orden');
     }
 
+    public function create($data){
+        if($this->db->insert('orden', $data)){
+            return true;
+        }
+        return false;
+    }
+
     public function delete($id){
         if($this->db->delete('orden', array('id' => $id))){
             return true;
