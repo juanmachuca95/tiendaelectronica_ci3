@@ -231,7 +231,7 @@ class Ordenes extends CI_Controller {
                     'productos_id' => $row->id,
                     'cantidad' => $items[$row->id],
                     'precio_unitario' => $row->precio,
-                    'total' => $order_data['total'] 
+                    'total' => $row->precio * intVal($items[$row->id])
                 ]);
             }
         }

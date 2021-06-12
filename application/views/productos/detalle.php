@@ -122,20 +122,16 @@
                                 }            
                             ?>
                         </b>
+                        Agregar
                     </a>
                     <?php else:?>
-                    <div class="btn btn-lg btn-flat" style="background-color: #6200ee;">
-                        <a class="text-decoration-none text-white" href="<?=base_url('inicio')?>">
+                    <div class="btn btn-outline-light text-uppercase btn-lg btn-flat" style="color: #6200ee;">
+                        <a class="text-decoration-none text-white" href="<?=base_url('compras/store/').$producto->id;?>">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Habilitar carrito
+                            Comprar
                         </a>
                     </div>
                     <?php endif; ?>
-
-                    <div class="btn btn-outline-light text-uppercase btn-lg btn-flat" style="color: #6200ee;">
-                        <!-- <i class="fas fa-heart fa-lg mr-2"></i> -->
-                        Comprar
-                    </div>
                     <!-- <div class="btn btn-default btn-lg btn-flat">
                         <i class="fas fa-heart fa-lg mr-2"></i>
                         Lista de deseos

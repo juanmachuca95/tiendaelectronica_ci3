@@ -101,8 +101,6 @@
                                 <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                             </svg> <?=$producto->precio;?> USD
                         </p>
-                        <a href="<?=base_url('compras/store/').$producto->id;?>" class="btn text-white text-uppercase" style="background-color: #6200ee;"> Comprar </a>
-
                         <?php if($this->session->is_logged_user): ?>
                         <a href="#" class="btn text-white text-uppercase" id="agregar" data-id="<?=$producto->id?>" style="background-color: #6200ee;">
                             <i data-id="<?=$producto->id?>" class="fas fa-shopping-cart"></i> 
@@ -122,6 +120,9 @@
                             
                             </b>
                         </a>
+
+                        <?php else: ?>
+                        <a href="<?=base_url('compras/store/').$producto->id;?>" class="btn text-white text-uppercase" style="background-color: #6200ee;"> Comprar </a>
                         <?php endif; ?>
 
                         <a href="<?=base_url('productos/detalle/').$producto->id?>" class="btn btn-outline-light text-uppercase" style="color: #6200ee;"> Detalles </a>
