@@ -9,46 +9,55 @@ class Mercadopago extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
+        $this->load->library(array('session'));
         $this->load->model('Comercio');
+        $this->load->model('Orden');
         $this->access_token = $this->Comercio->get_mercadopago(1);
     }
 
-    public function index(){
 
-        echo "<pre>";
-         // Agrega credenciales
-        MercadoPago\SDK::setAccessToken($this->access_token->mercadopago_key);
+    public function ipn(){
+        if($_GET['topic'] == 'payment'){
+            $id = $_GET['id'];
 
-         // Crea un objeto de preferencia
-        $preference = new MercadoPago\Preference();
-      
-         // Crea un ítem en la preferencia
-        $item = new MercadoPago\Item();
-        $item->title = 'Mi producto';
-        $item->quantity = 1;
-        $item->unit_price = 75.56;
-        $preference->items = array($item);
-
-        //$preference->items = array($item1,$item2);
-        # Guardar y postear la preferencia
-        $preference->save();
-
-        $link_btn = $preference->init_point;
-        print_r($link_btn);
-
-    }   
-
+            $link = "https://api.mercadopago.com/v1/payments/".$id."?access_token=".$this->access_token->mercadopago_key;
+            $json = file_get_contents($link);
+            $data = json_decode($json);
+            
+            if ($data->status == 'approved') { //Aprobado
+                $orden = $this->Orden->update_pagado($data->external_reference, $id);
+                http_response_code(200);
+            }
+            if ($data->status == 'rejected') { // Rechazado
+                $orden = $this->Orden->update_pagado($data->external_reference, id);
+                http_response_code(200);
+            }
+        }
+    }
 
     public function success(){
-        echo "SE HA PAGADO CORECTAMENTE";
+        //echo "SE HA PAGADO CORECTAMENTE";
+        $id = $_GET['payment_id'];
+        $link = "https://api.mercadopago.com/v1/payments/".$id."?access_token=".$this->access_token->mercadopago_key;
+        $json = file_get_contents($link);
+        $data = json_decode($json);
+        $orden = $this->Orden->set_payment_id($data->external_reference, $id);
+        $this->session->set_userdata('items', array());
+        $this->session->set_userdata('carrito', 0);
+        $this->session->set_flashdata('success', '¡Muchas gracias! Tu pago se ha registrado correctamente. En los proximos días te llegara tu pedido.');
+        return redirect('home');
     }
 
     public function failure(){
-        echo "HA FALLADO LA COMPRA";
+        //echo "HA FALLADO LA COMPRA";
+        $this->session->set_flashdata('error', 'Ha ocurrido un error, no se ha podido registrar el pago. Intentelo de nuevo más tarde.');
+        return redirect('home');  
     }
 
     public function pending(){
-        echo "LA COMPRA ESTA PENDIENTE";
+        //echo "LA COMPRA ESTA PENDIENTE";
+        $this->session->set_flashdata('error', 'La compra esta pendiente a pagarse. Una vez hayas realizado el pago puedes realizar el seguimiento de tu compra con tu número de orden.');
+        return redirect('home'); 
     }
 
 }

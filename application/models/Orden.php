@@ -42,9 +42,33 @@ class Orden extends CI_Model{
     }
 
     public function get_pagination($limit, $offset) {
-        $sql = "SELECT o.*, u.* FROM orden as o INNER JOIN users as u ON o.users_id = u.id ORDER BY o.id DESC LIMIT ?, ?;";
+        $sql = "SELECT o.*, u.nombre, u.apellido, u.direccion, u.direccion, u.email FROM orden as o INNER JOIN users as u ON o.users_id = u.id ORDER BY o.id DESC LIMIT ?, ?;";
         if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
             return $result->result();
+        }
+        return false;
+    }
+
+    public function update_pagado($id, $payment_id){
+        $sql = "UPDATE orden SET payment_id=?, status='pagado' WHERE id=?;";
+        if($this->db->query($sql, array('payment_id'=> intVal($payment_id), 'id' => intVal($id)))){
+            return true;
+        }
+        return false;
+    }
+
+    public function update_impago($id, $payment_id){
+        $sql = "UPDATE orden SET payment_id=?, status='impago' WHERE id=?;";
+        if($this->db->query($sql, array('payment_id'=> intVal($payment_id), 'id' => intVal($id)))){
+            return true;
+        }
+        return false;
+    }
+
+    public function set_payment_id($id, $payment_id){
+        $sql = "UPDATE orden SET payment_id=? WHERE id=?;";
+        if($this->db->query($sql, array('payment_id'=> intVal($payment_id), 'id' => intVal($id)))){
+            return true;
         }
         return false;
     }

@@ -58,7 +58,9 @@
                 </td>
                 <td>
                    <?php if($orden->status == 'impago'): ?>
-                    <span class="badge badge-warning">Impago</span>
+                    <span class="badge badge-danger">Impago</span>
+                    <?php elseif($orden->status == 'pendiente') : ?>
+                    <span class="badge badge-warning">Pendiente</span>
                     <?php else: ?>
                     <span class="badge badge-success">Pagado</span>
                     <?php endif; ?>

@@ -136,7 +136,7 @@ class Ordenes extends CI_Controller {
         $order_data = [
             'users_id' => $user_id,
             'total' => $this->get_total_productos($productos),
-            'tipopago' => 'contraentrega'
+            'tipopago' => 'online'
         ];
 
         if($orden_id = $this->Orden->create($order_data)){ 
@@ -200,7 +200,6 @@ class Ordenes extends CI_Controller {
             return redirect($preference->sandbox_init_point);
         }
     }
-    
     
     public function get_total_productos($productos){
         $items = $this->session->items;

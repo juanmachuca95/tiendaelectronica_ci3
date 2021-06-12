@@ -94,7 +94,6 @@ $route['inicio'] = 'login';
 $route['salir'] = 'login/logout';
 
 //MercadoPago
-$route['mercadopago'] = 'mercadopago';
 $route['mercadopago/success'] = 'mercadopago/success';
 $route['mercadopago/failure'] = 'mercadopago/failure';
 $route['mercadopago/pending'] = 'mercadopago/pending';
