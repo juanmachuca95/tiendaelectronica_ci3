@@ -38,6 +38,13 @@
                 <textarea id="descripcion" name="descripcion" maxLength="255" class="form-control" rows="4" required><?=$producto->descripcion;?></textarea>
                 <small class="text-danger"><?php echo form_error('descripcion'); ?></small>
                 </div>
+                
+                <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="stock" min="0" class="form-control"
+                value="<?=$producto->stock;?>" required>
+                <small class="text-danger"><?php echo form_error('stock'); ?></small>
+                </div>
 
                 <div class="form-group">
                 <label for="precio">Precio</label>
@@ -48,7 +55,7 @@
 
                 <div class="form-group">
                     <label class="form-control" for="imagen">Imagen actual</label>
-                    <img class="img-thumbail" src="<?=$producto->imagen?>" alt="<?=$producto->producto?>">
+                    <img class="img-thumbail img-fluid" src="<?=$producto->imagen?>" alt="<?=$producto->producto?>">
                 </div>
 
                 <div class="form-group">

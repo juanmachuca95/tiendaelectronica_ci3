@@ -61,6 +61,7 @@ class Productos extends CI_Controller {
         );
         $this->form_validation->set_rules('precio', 'Precio',
              'required|numeric');
+        $this->form_validation->set_rules('stock', 'Stock', 'required|integer|min_length[0]');
 
         if (empty($_FILES['imagen']['name'])){
             $this->form_validation->set_rules('imagen', 'Imagen', 'required');
@@ -96,6 +97,7 @@ class Productos extends CI_Controller {
             'categorias_id' => $this->input->post('categorias_id'),
             'descripcion' => $this->input->post('descripcion'),
             'precio'    => $this->input->post('precio'),
+            'stock'     => $this->input->post('stock'),
             'imagen'    => $file_path,
             'activo'    => $activo
         ];
@@ -131,6 +133,9 @@ class Productos extends CI_Controller {
         );
         $this->form_validation->set_rules('precio', 'Precio',
             'required|numeric');
+        
+        $this->form_validation->set_rules('stock', 'Stock', 'required|integer|min_length[0]');
+
     
         if (!$this->form_validation->run()){
             return $this->edit($id);
@@ -143,6 +148,7 @@ class Productos extends CI_Controller {
             'producto' => $this->input->post('producto'),
             'categorias_id' => $this->input->post('categorias_id'),
             'descripcion' => $this->input->post('descripcion'),
+            'stock' => $this->input->post('stock'),
             'precio'    => $this->input->post('precio'),
             'activo'    => $activo,
             'updated_at' => date('Y-m-d H:i:s')

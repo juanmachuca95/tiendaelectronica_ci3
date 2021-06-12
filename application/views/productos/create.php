@@ -36,6 +36,13 @@
                 </div>
 
                 <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="stock" min="0" class="form-control"
+                value="<?php echo set_value("stock"); ?>" required>
+                <small class="text-danger"><?php echo form_error('stock'); ?></small>
+                </div>
+
+                <div class="form-group">
                 <label for="precio">Precio</label>
                 <input type="number" step="0.01" id="precio" name="precio" class="form-control"
                 value="<?php echo set_value("precio"); ?>" >

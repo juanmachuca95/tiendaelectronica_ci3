@@ -4,7 +4,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title"><a class="btn btn-primary btn-sm" href="<?=base_url('productos/crear')?>">Registrar producto</a></h3>
+    <h3 class="card-title"><a class="btn btn-primary btn-sm" href="<?=base_url('productos/crear')?>">Crear</a></h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -34,6 +34,9 @@
                 <th>
                     Categoria
                 </th>
+                <th>
+                    Stock
+                </th>
                 <th class="text-center">
                     Activo
                 </th>
@@ -57,7 +60,12 @@
                 <td>
                    <?=$producto->precio?>
                 </td>
-                <td><?=$producto->categoria?></td>
+                <td>
+                    <?=$producto->categoria?>
+                </td>
+                <td>
+                    <?=$producto->stock;?>
+                </td>
                 <td class="project-state">
                     <?php if ($producto->activo): ?>
                     <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
