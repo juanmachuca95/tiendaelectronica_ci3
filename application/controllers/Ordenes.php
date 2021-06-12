@@ -39,6 +39,17 @@ class Ordenes extends CI_Controller {
         ]);
     }
 
+    public function show($id){
+        $status = ($this->session->is_logged) ? true : false;
+        if(!$status) { return show_404(); }
+
+        return $this->template->load('dashboard', $this->view.'/show',[
+            'orden' => $this->Orden->get_orden($id),
+            'detalles' => $this->Detalle->get_detalles($id)
+        ]);
+
+    }
+
     public function create(){    
         $items = $this->session->userdata('items');
         if(empty($items)){ return show_404(); }
