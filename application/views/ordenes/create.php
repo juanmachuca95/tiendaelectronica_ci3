@@ -1,11 +1,13 @@
 
 <div class="container-fluid home-categoria p-0 m-0">
     <div class="container-white">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-12 col-sm-8 col-md-5 py-5 px-4 bg-white my-4">
+        <div class="row m-0 d-flex justify-content-center">
+            <div class="col-12 col-sm-12 col-md-8 p-5 bg-white my-4">
                 <h1 class="font-weight-light">Completa tus datos</h1>
-                <h3 class="lead">Total de compra:  <i class="fas fa-dollar-sign"></i> <?=$total?></h2>
-                <h3 class="lead">Cantidad de productos: <i class="fas fa-shopping-cart"></i> <?=$this->session->carrito;?></h3>
+                <h3 class="lead">
+                    Total de compra:  <i class="fas fa-dollar-sign"></i> <?=$total?>
+                    Cantidad de productos: <i class="fas fa-shopping-cart"></i> <?=$this->session->carrito;?>
+                </h3>
                 <p>Confirma los datos de tu orden para facilitar el registro y el envio de tus productos.</p>
                 <?=form_open('ordenes/store')?>
                 <div class="row mb-3">
@@ -29,8 +31,6 @@
                         <?= (!$this->session->email) ? '' : "readonly";?> required>
                         <small class="text-danger"><?=form_error('email');?></small>
                     </div>
-                </div>  
-                <div class="row mb-3">
                     <div class="col">
                     <label for="direccion">Dirección</label>
                     <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección . . ." value="<?=$this->session->direccion?>"

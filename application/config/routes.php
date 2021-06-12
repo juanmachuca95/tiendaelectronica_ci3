@@ -93,6 +93,13 @@ $route['login']['POST'] = 'login/login';
 $route['inicio'] = 'login';
 $route['salir'] = 'login/logout';
 
+//MercadoPago
+$route['mercadopago'] = 'mercadopago';
+$route['mercadopago/success'] = 'mercadopago/success';
+$route['mercadopago/failure'] = 'mercadopago/failure';
+$route['mercadopago/pending'] = 'mercadopago/pending';
+$route['mercadopago/ipn'] = 'mercadopago/ipn';
+
 // Nosotros
 $route['nosotros'] = 'nosotros';
 

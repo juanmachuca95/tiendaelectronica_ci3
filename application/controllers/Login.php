@@ -39,7 +39,7 @@ class Login extends CI_Controller {
                     'apellido'      => $resultado->apellido,
                     'direccion'     => $resultado->direccion,
                     'telefono'      => $resultado->telefono,
-                    'correo'        => $resultado->email,
+                    'email'         => $resultado->email,
                     'carrito'       => 0,
                     'items'         => array(),
                     'is_logged_user' => true,
@@ -49,7 +49,7 @@ class Login extends CI_Controller {
             }else{
                 $data = array(
                     'admin' => $resultado->nombre,
-                    'correo' => $resultado->email,
+                    'email' => $resultado->email,
                     'is_logged' => true,
                 );
                 $this->session->set_userdata($data);

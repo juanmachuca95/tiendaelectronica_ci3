@@ -1,10 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 date_default_timezone_set('America/Argentina/Buenos_Aires');
+require_once 'vendor/autoload.php'; 
+
 
 class Ordenes extends CI_Controller {
     private $view = 'ordenes';
     private $perPage;
+    private $mercadopago;
 
     public function __construct(){
         parent::__construct();
@@ -12,7 +16,8 @@ class Ordenes extends CI_Controller {
             'template','session','pagination','configpagination',
             'form_validation'
         ));
-        $this->load->model(array('Orden', 'Detalle', 'Producto', 'User'));
+        $this->load->model(array('Orden', 'Detalle', 'Producto', 'User', 'Comercio'));
+        $this->mercadopago = $this->Comercio->get_mercadopago(1);
         $this->perPage = 6;
     }
 
@@ -73,7 +78,7 @@ class Ordenes extends CI_Controller {
         $telefono = $this->input->post('telefono');
         $tipopago = $this->input->post('tipopago');
 
-        if($this->session->users_id){
+        if($this->session->users_id){ // USUARIO REGISTRADO
             $user_id = $this->session->users_id;
             $user = $this->User->find($user_id);
             $auth_update = ($user->direccion != $direccion || $user->telefono != $telefono) ? true  : false;
@@ -83,7 +88,7 @@ class Ordenes extends CI_Controller {
                     'direccion' => $direccion, 'telefono' => $telefono,
                 ]);
             }
-        }else{
+        }else{ // USUARIO NO REGISTRADO
             $user_id = $this->User->create_user([
                 'nombre' => $nombre, 'apellido' => $apellido,
                 'direccion' => $direccion, 'telefono' => $telefono,
@@ -92,39 +97,111 @@ class Ordenes extends CI_Controller {
             ]);
         }
 
+        if($tipopago == 1){
+            $this->pago_contraentrega($user_id);
+        }else{
+            $this->pago_mercadopago($user_id);
+        }
+    
+    }
+
+    public function pago_contraentrega($user_id){
+        echo "VA A PAGAR CONTRA ENTREGA";
         $items = $this->session->items;
         $productos_ids = array_keys($items);
         $productos = $this->Producto->get_productos_carrito($productos_ids); 
         $order_data = [
             'users_id' => $user_id,
             'total' => $this->get_total_productos($productos),
-            'tipopago' => ($tipopago == 1) ? 'contraentrega' : 'online'
+            'tipopago' => 'contraentrega'
+        ];
+        
+        if($orden_id = $this->Orden->create($order_data)){ 
+            $this->Producto->update_stock_productos_vendidos($items);
+            $this->create_detalles($productos, $order_data, $orden_id);
+            $this->session->set_userdata('items', array());
+            $this->session->set_userdata('carrito', 0);
+            $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
+            return redirect('home');
+        }
+        $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');
+        return $this->create();  
+    }   
+
+    public function pago_mercadopago($user_id){
+        echo "VA A PAGAR CON MERCADO PAGO";
+        $items = $this->session->items;
+        $productos_ids = array_keys($items);
+        $productos = $this->Producto->get_productos_carrito($productos_ids); 
+        $order_data = [
+            'users_id' => $user_id,
+            'total' => $this->get_total_productos($productos),
+            'tipopago' => 'contraentrega'
         ];
 
-        if($tipopago == 1){
-            if($orden_id = $this->Orden->create($order_data)){
-                $this->Producto->update_stock_productos_vendidos($items);
-                foreach ($productos as $row) {
-                    if($items[$row->id]){
-                        $this->Detalle->create([
-                            'orden_id' => $orden_id,
-                            'productos_id' => $row->id,
-                            'cantidad' => $items[$row->id],
-                            'precio_unitario' => $row->precio,
-                            'total' => $order_data['total'] 
-                        ]);
-                    }
-                }
-                $this->session->set_userdata('items', array());
-                $this->session->set_userdata('carrito', 0);
-                $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
-                return redirect('home');
+        if($orden_id = $this->Orden->create($order_data)){ 
+            $this->Producto->update_stock_productos_vendidos($items);
+            $this->create_detalles($productos, $order_data, $orden_id);
+            MercadoPago\SDK::setAccessToken($this->mercadopago->mercadopago_key);
+
+            $preference = new MercadoPago\Preference();
+            $preference->external_reference = $orden_id;
+            $preference->back_urls = array(
+                "success" => base_url('mercadopago/success'),
+                "failure" => base_url('mercadopago/failure'),
+                "pending" => base_url('mercadopago/pending')
+            );
+            $preference->auto_return = "approved";
+            
+            $user = $this->User->find($user_id);
+            $payer = new MercadoPago\Payer();
+            $payer->name = $user->nombre;
+            $payer->surname = $user->apellido;
+            $payer->email = $user->email;
+            $payer->date_created = $user->created_at;
+            $payer->phone = array(
+                "area_code" => "",
+                "number" => $user->telefono
+            );
+            
+            /* $payer->identification = array(
+                "type" => "DNI",
+                "number" => "12345678"
+            ); */
+            
+            $payer->address = array(
+                "street_name" => $user->direccion,
+               /*  "street_number" => 1004,
+                "zip_code" => "11020" */
+            );
+
+            $preference->payer = $payer;
+
+            $orden_detalles = $this->Detalle->get_detalles($orden_id);
+            foreach ($orden_detalles as $detalle) {
+                # Create an item object28
+                $item = new MercadoPago\Item();
+                $item->id = $detalle->id;
+                $item->title = $detalle->producto;
+                $item->quantity = $detalle->cantidad;
+                $item->currency_id = 'ARS';
+                $item->unit_price = $detalle->precio_unitario;
+
+                $itemsdetalle[] = $item;
             }
-            $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');
-            return $this->create();
+            
+            $preference->items = $itemsdetalle;
+            $preference->notification_url = base_url('mercadopago/ipn');
+            $preference->save();
+
+
+           /*  echo "<pre>";
+            print_r($preference); */
+            return redirect($preference->sandbox_init_point);
         }
     }
-
+    
+    
     public function get_total_productos($productos){
         $items = $this->session->items;
         $total = 0;
@@ -133,6 +210,21 @@ class Ordenes extends CI_Controller {
             $total = $total + intVal($items[$row->id]) * $row->precio;
         }
         return $total;
+    }
+
+    public function create_detalles($productos, $order_data, $orden_id){
+        $items = $this->session->items;
+        foreach ($productos as $row) {
+            if($items[$row->id]){
+                $this->Detalle->create([
+                    'orden_id' => $orden_id,
+                    'productos_id' => $row->id,
+                    'cantidad' => $items[$row->id],
+                    'precio_unitario' => $row->precio,
+                    'total' => $order_data['total'] 
+                ]);
+            }
+        }
     }
     
 }
