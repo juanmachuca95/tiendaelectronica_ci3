@@ -226,6 +226,16 @@
               </li>
             </ul>
           </li> -->
+          <li class="nav-header">PRINCIPALES</li>
+          <li class="nav-item">
+            <a href="<?=base_url('ordenes')?>" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Ordenes
+                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
+              </p>
+            </a>
+          </li>
           <li class="nav-header">RECURSOS</li>
           <li class="nav-item">
             <a href="<?=base_url('productos')?>" class="nav-link">
@@ -261,15 +271,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?=base_url('ordenes')?>" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Ordenes
-                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?=base_url('users')?>" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -278,31 +279,29 @@
               </p>
             </a>
           </li>
-          <!-- <li class="nav-header">NUCLEO</li>
+          <li class="nav-header">SISTEMA</li>
           <li class="nav-item">
             <a href="<?=base_url('configuraciones')?>" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-tools"></i>
               <p>
                 Configuraciones
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/layout/top-nav.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Contenido sección</p>
+                  <p>Comercio</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Top Navigation + Sidebar</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
-          </li> -->
+          </li>
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
