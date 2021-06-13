@@ -216,7 +216,7 @@
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Ordenes
-                <!-- <span class="right badge badge-warning">New <?=0;?></span> -->
+                <span class="right badge badge-warning">New <b id="ordenes_num"><?=0;?></b></span>
               </p>
             </a>
           </li>
@@ -452,11 +452,15 @@
 
 <script>
   const consultas_count = document.querySelectorAll('#consultas_count');
+  const ordenes_num = document.querySelectorAll('#ordenes_num');
+  const users_num = document.querySelectorAll('#users_num');
+
   var URLdomain = window.location.host;
   var protocol = window.location.protocol;
 
-  window.addEventListener('DOMContentLoaded', ()=>{
 
+  window.addEventListener('DOMContentLoaded', ()=>{
+    //Consultas
     http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
     http.onreadystatechange = function(){
       if (http.readyState == 4 && http.status == 200) {
@@ -473,6 +477,45 @@
 
     http.open('GET', protocol+'//'+URLdomain+'/consultas/obtener?get=consultas', true);
     http.send();
+
+
+    //Ordenes
+    http_orden = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
+    http_orden.onreadystatechange = function(){
+      if(http_orden.readyState == 4 && http_orden.status == 200){
+        var data_orden = http_orden.responseText;
+        if(Object.entries(data_orden).length > 0){
+          data_orden = JSON.parse(data_orden);
+          data_orden_nuevas = Object.entries(data_orden).length;
+          ordenes_num.forEach(element => {
+            element.innerHTML = data_orden_nuevas;
+          });
+        }
+      }
+    }
+
+    http_orden.open('GET', protocol+'//'+URLdomain+'/ordenes/obtener?get=ordenes', true);
+    http_orden.send();
+
+
+    //Usuarios
+    http_users = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
+    http_users.onreadystatechange = function(){
+      if(http_users.readyState == 4 && http_users.status == 200){
+        var data_users = http_users.responseText;
+        if(Object.entries(data_users).length > 0){
+          data_users = JSON.parse(data_users);
+          data_users_nuevos = Object.entries(data_users).length;
+          users_num.forEach(element => {
+            element.innerHTML = data_users_nuevos;
+          });
+        }
+      }
+    }
+
+    http_users.open('GET', protocol+'//'+URLdomain+'/users/obtener?get=users', true);
+    http_users.send();
+
 
   })
 </script>

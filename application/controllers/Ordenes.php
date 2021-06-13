@@ -239,5 +239,12 @@ class Ordenes extends CI_Controller {
             }
         }
     }
+
+    public function ajaxconsultas(){
+        if($_GET['get'] == 'ordenes'){
+            $ordenes_new = $this->Orden->get_ordenes_nuevas();
+            echo json_encode($ordenes_new);
+        }
+    }
     
 }

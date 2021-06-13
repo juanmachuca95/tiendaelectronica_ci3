@@ -113,6 +113,8 @@ $route['ordenes'] = 'ordenes';
 $route['ordenes/crear/(:num)'] = 'ordenes/create/$1';
 $route['ordenes/store']['POST'] = 'ordenes/store';
 $route['ordenes/show/(:num)'] = 'ordenes/show/$1'; 
+$route['ordenes/obtener']['GET'] = 'ordenes/ajaxconsultas';
+
 
 // Productos
 $route['productos'] = 'productos';
@@ -137,6 +139,7 @@ $route['users'] = 'users';
 $route['users/(:num)'] = 'users/$1';
 $route['users/store']['POST'] = 'users/store';
 $route['users/crear'] = 'users/create';
+$route['users/obtener'] = 'users/ajaxconsultas';
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';

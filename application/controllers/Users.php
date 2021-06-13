@@ -78,4 +78,11 @@ class Users extends CI_Controller {
         $this->session->set_flashdata('success', 'Se ha eliminado un usuario.');
         return redirect('users');
     }
+
+    public function ajaxconsultas(){
+        if($_GET['get'] == 'users'){
+            $usuarios_registrados = $this->User->get_users_registrados();
+            echo json_encode($usuarios_registrados);
+        }
+    }
 }

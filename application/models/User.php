@@ -46,6 +46,14 @@ class User extends CI_Model{
         }
         return false;
     }
+
+    public function get_users_registrados(){
+        $sql = "SELECT u.* FROM users AS u WHERE roles_id=2 AND password IS NOT NULL ORDER BY u.id DESC";
+        if($result = $this->db->query($sql)){
+            return $result->result();
+        }
+        return false;
+    }
      
     public function get_pagination($limit, $offset){
         $sql = "SELECT u.* FROM users AS u WHERE roles_id=2 ORDER BY u.id DESC LIMIT ?, ?";

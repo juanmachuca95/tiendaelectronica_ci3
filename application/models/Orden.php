@@ -1,4 +1,6 @@
 <?php 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
 class Orden extends CI_Model{
 
     public function __construct(){
@@ -44,6 +46,16 @@ class Orden extends CI_Model{
     public function get_ordenes(){
         $sql = "SELECT o.*, u.* FROM users AS u INNER JOIN orden AS o ON o.users_id = u.id ORDER BY o.id DESC";
         if($result = $this->db->query($sql) ){
+            return $result->result();
+        }
+        return false;
+    }
+
+    public function get_ordenes_nuevas(){ // En base al dia actual
+        $date  = date('Y-m-d H:i:s');
+        $date1 = date("Y-m-d", strtotime("+1 day", strtotime($date))) . " 00:00:00"; 
+        $sql = "SELECT * FROM orden WHERE created_at BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY;";
+        if($result = $this->db->query($sql)){
             return $result->result();
         }
         return false;
