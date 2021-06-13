@@ -12,3 +12,8 @@ Desarrollo de tienda electrónica con codeigniter 3.1.4
     https://api.mercadopago.com/v1/payments/".$payment_id."?access_token=".$this->access_token->mercadopago_key
 
 - Tarjeta de prueba: Nro: 5031 7557 3453 0604 Codigo: 123 Vecimiento: 11/25
+
+### Usuarios 
+
+-Usuario de la aplicación: usuario@gmail.com password: Machuca12
+-Administrador de la aplicación: admin@gmail.com password: Machuca12
