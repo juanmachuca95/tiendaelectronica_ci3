@@ -1,46 +1,63 @@
-<div class="container-fluid p-0" style="background-color: white;">
+<div class="container-fluid home-categoria p-0">
+    <div class="container px-5">
         <div class="p-5">
-            <h2 class="font-weight-bold azulFuente">Terminos de uso y condiciones</h2>
-            <p class="font-weight-lighter">
-                El presente documento establece los términos en que usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo esta Política de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que está de acuerdo con dichos cambios.
-            </p>
+        <h1><?=$comercio->comercio?></h1>
+        <h2 class="font-weight-light azulFuente">Terminos de uso y condiciones</h2>
+        <p class="font-weight-lighter">
+            El presente documento establece los términos en que usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento.
+        </p>
 
-            <h2 class="font-weight-bold azulFuente">Información que es recogida</h2>
+        <h3 class="font-weight-light azulFuente">1. Información de usuario</h3>
 
-            <p class="font-weight-lighter">
-                Nuestro sitio web podrá recoger información personal por ejemplo: Nombre, información de contacto como su dirección de correo electrónica e información en cuanto a interés en el sitio. Así mismo cuando sea necesario podrá ser requerida información específica para procesar algúna consulta o realizar una petición que requiera supervisión de los administradores del sitio web.
-            </p>
+        <p class="font-weight-lighter">
+            Nuestro sitio web podrá recoger información personal por ejemplo:
+            <ul>
+                <li>Nombre y apellido</li>
+                <li>Dirección o domicilio</li>
+                <li>Telefóno e información de contacto</li>
+            </ul> 
+            Toda la información requerida al usuario se solicita solo y unicamente a mejorar la experiencia del usuario para la compra de productos a tráves de nuestra plataforma. <br>
+
+            También la plataforma permmite al usuario poder hacer compras de productos en catálogo en la aplicación sin necesidad de estar registrado o tener una cuenta en la plataforma.
+        </p>
 
 
-            <h2 class="font-weight-bold azulFuente">Uso de la información recogida</h2>
+        <h3 class="font-weight-light azulFuente">2. Modos de Compra</h3>
 
-            <p class="font-weight-lighter">
-                Nuestro sitio web emplea la información con el fin de proporcionar el mejor servicio posible, particularmente para mantener un registro de usuarios, de consultas en caso que aplique, y mejorar nuestros productos y servicios. Es posible que sean enviados correos electrónicos periódicamente a través de nuestro sitio con notificaciones acerca de las novedades a fin de mantener al usuario actualizado de nuevos productos y otra información publicitaria que consideremos relevante para usted que pueda brindarle algún beneficio, estos correos electrónicos serán enviados a la dirección que usted proporcione y podrán ser cancelados en cualquier momento.
+        <p class="font-weight-lighter">
+            El usuario tiene a disposición el uso de la compra directa (NO REQUIERE REGISTRARSE EN SITIO WEB) o compras a tráves de la habilitación de carritos (REQUIERE REGISTRACIÓN PREVIA EN LA APLICACIÓN).            
 
-                está altamente comprometido para cumplir con el compromiso de mantener su información segura. Usamos los sistemas más avanzados y los actualizamos constantemente para asegurarnos que no exista ningún acceso no autorizado.
-            </p>
+            A fin de proporcionar las mejores herramientas al usuario para la interacción dentro de nuestro sitio web, le brindamos como usuario todas las posibilidades de compra disponibles. Estás modos de compra están divididos en dos secciones:  
+            <ul> GESTIÓN DE PAGOS ELECTRÓNICOS
+                <li>Tarjeta de credito</li>
+                <li>Tarjeta de debito</li>
+                <li>Pago en efectivo - Cupon de pago</li>
+                <li>PagoFácil</li>
+                <li>Rapipago</li>
+            </ul>
 
-            <h2 class="font-weight-bold azulFuente">Cookies</h2>
+            <ul> PAGOS CONTRA ENVIO
+                <li>Pagos contra entrega.</li>
+            </ul>
 
-            <p class="font-weight-lighter">
-                Una cookie se refiere a un fichero que es enviado con la finalidad de solicitar permiso para almacenarse en su ordenador, al aceptar dicho fichero se crea y la cookie sirve entonces para tener información respecto al tráfico web, y también facilita las futuras visitas a una web recurrente. Otra función que tienen las cookies es que con ellas las web pueden reconocerte individualmente y por tanto brindarte el mejor servicio personalizado de su web.
+            En nuestro la gestión de pagos electrónicos se realizan con la ayuda de MercadoPago, plataforma lider en pagos electrónicos. La cual permite todas las sitadas maneras de pago a fin de acomodar los medios de pago a la conveniencia del usuario.
+            Por otro lado si el usuario no utiliza MercadoPago o por otras razones no utiliza ninguna de las anteriores formas de pago. El usuario está libre de realizar las compras abonando el costo de envio del producto al momento de recibir su compra en su propio domicilio haciendo uso de la opción pagos contra entrega.
+        </p>
 
-                Nuestro sitio web emplea las cookies para poder identificar las páginas que son visitadas y su frecuencia. Esta información es empleada únicamente para análisis estadístico y después la información se elimina de forma permanente. Usted puede eliminar las cookies en cualquier momento desde su ordenador. Sin embargo las cookies ayudan a proporcionar un mejor servicio de los sitios web, estás no dan acceso a información de su ordenador ni de usted, a menos de que usted así lo quiera y la proporcione directamente. Usted puede aceptar o negar el uso de cookies, sin embargo la mayoría de navegadores aceptan cookies automáticamente pues sirve para tener un mejor servicio web. También usted puede cambiar la configuración de su ordenador para declinar las cookies. Si se declinan es posible que no pueda utilizar algunos de nuestros servicios.
-            </p>
-            <h2 class="font-weight-bold azulFuente">Enlaces a Terceros</h2>
+        <h3 class="font-weight-light azulFuente">3. Transacciones</h3>
 
-            <p class="font-weight-lighter">
-                Este sitio web pudiera contener enlaces a otros sitios que pudieran ser de su interés. Una vez que usted de clic en estos enlaces y abandone nuestra página, ya no tenemos control sobre al sitio al que es redirigido y por lo tanto no somos responsables de los términos o privacidad ni de la protección de sus datos en esos otros sitios terceros. Dichos sitios están sujetos a sus propias políticas de privacidad por lo cual es recomendable que los consulte para confirmar que usted está de acuerdo con estas.
-            </p>
+        <p class="font-weight-lighter">
+            Todas las transacciones de productos realizadas en la aplicación se realizan de forma segura y se registran todas las ordenes de compras exitosas que se realizan en la misma a fin de proporcionar al usuario la disponibilidad de toda la información sobre el estado de su pedido o compra.
+        </p>
 
-            <h2 class="font-weight-bold azulFuente">Control de su información personal</h2>
+        <h3 class="font-weight-ligth azulFuente">4 . Información útil</h3>
 
-            <p class="font-weight-lighter">
-                En cualquier momento usted puede restringir la recopilación o el uso de la información personal que es proporcionada a nuestro sitio web. Cada vez que se le solicite rellenar un formulario, como el de alta de usuario, puede marcar o desmarcar la opción de recibir información por correo electrónico (actualmente el sitio no envia correo electronicos a los usuarios). En caso de que haya marcado la opción de recibir nuestro boletín o publicidad usted puede cancelarla en cualquier momento.
+        <p class="font-weight-lighter">
+            Nuestra plataforma provee un servicio personalizado al usuario para poder llevar la experiencia del usuario al siguiente nivel y proveer las herramientas necesarias para que la plataforma pueda seguir mejorando en sus servicios. Por ello trabajamos para responder todas las consultas que los visitantes de nuestra aplicación puedan atender todas sus dudas e inquietudes acerca de los productos, bienes y/o servicios que nuestro sitio ofrece. 
+        </p>
 
-                Esta compañía no venderá, cederá ni distribuirá la información personal que es recopilada sin su consentimiento, salvo que sea requerido por un juez con un orden judicial.
-
-                Se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento.
-            </p>
-        </div>
+        <h4 class="font-weight-bold">¡Gracias por llegar hasta aquí! Saludos coordiales.</h4>
+    </div>    
     </div>
+    
+</div>
