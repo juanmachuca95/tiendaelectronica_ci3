@@ -5,32 +5,32 @@ class Login extends CI_Controller {
 
     private $view = 'login';
     private $route = 'login';
+    private $comercio;
 
 	public function __construct(){
         parent::__construct();
         $this->load->library('template');
-        $this->load->library(array('session'));	
-        $this->load->model('Autorizacion');
+        $this->load->library(array('session','form_validation'));	
+        $this->load->model(array('Autorizacion', 'Comercio'));
+        $this->comercio = $this->Comercio->find(1);
 	}
 
 	public function index(){
-        return $this->template->load('app', $this->view.'/index');
+        return $this->template->load('app', $this->view.'/index',['comercio' => $this->comercio]);
     }
 
     public function login(){
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('correo', 'Email', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-
-        if ($this->form_validation->run() == FALSE){
-            return $this->template->load('app', $this->view.'/index');
-        }
-        $correo = $this->input->post('correo');
+        $correo = $this->input->post('email');
         $password = $this->input->post('password');
-        /*echo "<pre>";
-        print_r($this->Autorizacion->login($correo, $password));
-        */if($resultado = $this->Autorizacion->login($correo, $password)){
+        
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        
+        if (!$this->form_validation->run()){
+            return $this->index();
+        }
+        
+        if($resultado = $this->Autorizacion->login($correo, $password)){
             $role_admin = ($resultado->roles_id == 1) ? true : false;
             if(!$role_admin){
                 $data = array(
@@ -58,7 +58,8 @@ class Login extends CI_Controller {
 
         };
         return $this->template->load('app', $this->view.'/index', [
-            'error' => "Los datos ingresados no tienen permisos de acceso."
+            'error' => "Los datos ingresados no tienen permisos de acceso.",
+            'comercio' => $this->comercio
         ]);
     }
 

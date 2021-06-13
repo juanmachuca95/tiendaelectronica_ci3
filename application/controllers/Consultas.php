@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Consultas extends CI_Controller {
     private $view = 'consultas';
     private $perPage = 10;
+    private $comercio;
 
     public function __construct(){
         parent::__construct();
@@ -11,7 +12,8 @@ class Consultas extends CI_Controller {
             'template','session','pagination','configpagination',
             'form_validation',
         ));	
-        $this->load->model('Consulta');
+        $this->load->model(array('Consulta', 'Comercio'));
+        $this->comercio = $this->Comercio->find(1);
     }
 
     public function index( $offset = 0 ){
@@ -32,7 +34,9 @@ class Consultas extends CI_Controller {
     }
 
     public function create(){
-        return $this->template->load('app', $this->view.'/create');
+        return $this->template->load('app', $this->view.'/create',[
+            'comercio' => $this->comercio
+        ]);
     }
 
     public function store(){
@@ -41,7 +45,7 @@ class Consultas extends CI_Controller {
         $this->form_validation->set_rules('descripcion', 'Descripción', 'required|max_length[1000]');
 
         if (!$this->form_validation->run()){
-            return $this->template->load('app', $this->view.'/create');
+            return $this->create();
         }
 
         if(!$this->Consulta->create([
@@ -50,7 +54,7 @@ class Consultas extends CI_Controller {
             'descripcion'   => $this->input->post('descripcion')
         ])){
             $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado');
-            return $this->template->load('app', $this->view.'/create');
+            return redirect('consultas/crear');
         }
         $this->session->set_flashdata('success', 'Hemos recibido correctamente tu consulta. Muy pronto recibirás noticias nuestras.');
         return redirect('consultas/crear');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Souvenirs ZN</title>
-    <link rel="shortcut icon" href="<?=base_url('assets/img/icons/favicon.png')?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?=base_url('assets/img/logo.png')?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/miestilo.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -115,18 +115,17 @@
     <div class="container text-center text-white text-md-left pt-4">
     <div class="row pt-4">
         <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
-        <h3 class="font-weight-light fuente mb-4 text-center  text-warning">Souvenirs ZN Misiones.</h3>
-        <p class="text-center lead text-white">· Diseñador gráfico  </p>
-        <p class="text-center lead text-white">· Servicio de impresión </p>
-        <p class="text-center lead text-white">· Tienda de regalos</p>
-        <p class="text-center lead text-white">· Innovaci&oacuten y personalizaci&oacuten</p>
+        <h3 class="font-weight-light fuente mb-4 text-center  text-warning"><?=$comercio->comercio;?></h3>
+        <p class="text-center lead text-white"><?=$comercio->descripcion;?>  </p>
+        <p class="text-center lead text-white"></p>
+        
         </div>
         <hr class="clearfix w-100 d-md-none">
         <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
         <h3 class="font-weight-bold fuente  mb-4 text-justify-center text-warning">Acerca de</h3>
 
         <ul class="list-unstyled text-justify-center">
-            <li><p><a  class="lead text-white" href="<?=base_url('nosotros')?>">NOSOTROS</a></p></li>
+            <li><p><a class="lead text-white" href="<?=base_url('nosotros')?>">NOSOTROS</a></p></li>
             <li><p><a class="lead text-white"  href="<?=base_url('terminos')?>">TERMINOS Y CONDICIONES</a></p></li>
           <!--   <li><p><a class="lead text-white"  href="#!">BLOG</a></p></li>
             <li><p><a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a></p></li>
@@ -135,13 +134,13 @@
         </div>
         <hr class="clearfix w-100 d-md-none">
         <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
-        <h3 class="font-weight-bold text-center mb-4 fuente text-warning">Ubicaci&oacuten</h3>
+        <h3 class="font-weight-bold text-center mb-4 fuente text-warning">Contactanos</h3>
         <ul class="list-unstyled text-center">
             <li>
             <p>
-                <a class="text-decoration-none text-white lead" href="https://goo.gl/maps/PrjQue8BMvo7mbcSA">
+                <a class="text-decoration-none text-white lead" href="#">
                 <i class="fas fa-map-marker-alt"></i> 
-                 Calle La Pampa Puerto Esperanza Misiones
+                    <?=$comercio->direccion;?>
                 </a>
             </p>
             </li>
@@ -149,16 +148,17 @@
                 <p>
                     <a class="text-decoration-none text-white lead" href="#">
                     <i class="fas fa-envelope"></i>
-                     souvenirzn@gmail.com
+                    <?=$comercio->email;?>
                     </a>
                 </p>
             </li>
             <li>
-            <p>
-                <a class="text-decoration-none text-white lead" href="https://wa.me/5493757570174">
-                    <i class="fab fa-whatsapp"></i> 03757 57-0174
-                </a>
-            </p>
+                <p>
+                    <a class="text-decoration-none text-white lead" href="#">
+                    <i class="fas fa-phone-alt"></i>
+                    <?=$comercio->telefono;?>
+                    </a>
+                </p>
             </li>
             <li>
         </ul>
@@ -168,10 +168,16 @@
         <div class="col-md-2 col-lg-2 text-center mx-auto my-4">
         <h3 class="font-weight-bold mb-4 text-center fuente text-warning">Segu&iacutenos</h3>
         <ul class="list-unstyled">
-            <li><p><a href="https://www.facebook.com/souvenireszn/"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/f.png" alt="facebook"></a></p></li>
-            <li><p><a href="https://instagram.com/souvenirszn?igshid=pududncn5j0f"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/i.png" alt="instagram"></a></p></li>
-            <li><p><a href="<?=base_url()?>"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/t.png" alt="twitter"></a></li>
-            <li><p><a href="<?=base_url()?>"><img style="width: 40px;" src="<?=base_url()?>assets/img/icons/y.png" alt="youtube"></a></li>
+            <li>
+                <p class="lead">
+                    <a href="https://www.facebook.com/souvenireszn/"><i class="fab fa-facebook fa-lg text-white"></i></a>
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    <a href="https://instagram.com/souvenirszn?igshid=pududncn5j0f"><i class="fab fa-instagram fa-lg text-white"></i></a>
+                </p>
+            </li>
         </ul>
         </div>
     </div>

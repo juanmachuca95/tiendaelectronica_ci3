@@ -9,6 +9,7 @@ class Ordenes extends CI_Controller {
     private $view = 'ordenes';
     private $perPage;
     private $mercadopago;
+    private $comercio;
 
     public function __construct(){
         parent::__construct();
@@ -18,6 +19,7 @@ class Ordenes extends CI_Controller {
         ));
         $this->load->model(array('Orden', 'Detalle', 'Producto', 'User', 'Comercio'));
         $this->mercadopago = $this->Comercio->get_mercadopago(1);
+        $this->comercio = $this->Comercio->find(1);
         $this->perPage = 6;
     }
 
@@ -59,6 +61,7 @@ class Ordenes extends CI_Controller {
         
         return $this->template->load('app', $this->view.'/create', [
             'total' => $this->get_total_productos($productos),
+            'comercio' => $this->comercio
         ]);
     }
 
@@ -117,7 +120,7 @@ class Ordenes extends CI_Controller {
     }
 
     public function pago_contraentrega($user_id){
-        echo "VA A PAGAR CONTRA ENTREGA";
+        //echo "VA A PAGAR CONTRA ENTREGA";
         $items = $this->session->items;
         $productos_ids = array_keys($items);
         $productos = $this->Producto->get_productos_carrito($productos_ids); 
@@ -140,7 +143,7 @@ class Ordenes extends CI_Controller {
     }   
 
     public function pago_mercadopago($user_id){
-        echo "VA A PAGAR CON MERCADO PAGO";
+        //echo "VA A PAGAR CON MERCADO PAGO";
         $items = $this->session->items;
         $productos_ids = array_keys($items);
         $productos = $this->Producto->get_productos_carrito($productos_ids); 

@@ -15,20 +15,20 @@
                     <p class=" px-3 lead text-success" ><?=$msj?>&#x1f389;.</p>
                 <?php } ?>
 
-                <?php echo validation_errors(); ?>
                 <?php echo form_open('login'); ?>
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
-                        <input class="form-control" id="inputEmail" type="email" name="correo" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com ">
-                        <small class="text-primary" id="outputEmail"></small>
+                        <input class="form-control" id="inputEmail" type="email" name="email" maxlength="80" placeholder="Correo. Ej.: nombre@gmail.com " required>
+                        <small class="text-danger"><?=form_error('email');?></small>
                     </div>
                     <div class="form-group">
-                    <label for="inputPassword">Contraseña
-                        <i id="show_pss" class="cerrados">
-                            &#x1f573;
-                        </i>
-                    </label>
-                    <input class="form-control" id="inputPassword" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password" name="password" placeholder="No mayor de 12 digitos">
+                        <label for="inputPassword">Contraseña
+                            <i id="show_pss" class="cerrados">
+                                &#x1f573;
+                            </i>
+                        </label>
+                        <input class="form-control" id="inputPassword" minlength="8" maxlength="12" pattern="[A-Za-z0-9]+" type="password" name="password" placeholder="No mayor de 12 digitos" required>
+                        <small class="text-danger"><?=form_error('password');?></small>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-info">Ingresar</button>

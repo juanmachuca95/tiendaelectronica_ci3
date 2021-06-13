@@ -125,8 +125,8 @@
                         Agregar
                     </a>
                     <?php else:?>
-                    <div class="btn btn-outline-light text-uppercase btn-lg btn-flat" style="color: #6200ee;">
-                        <a class="text-decoration-none text-white" href="<?=base_url('compras/store/').$producto->id;?>">
+                    <div class="btn btn-outline-light text-uppercase btn-lg btn-flat">
+                        <a class="text-decoration-none" style="color: #6200ee;" href="<?=base_url('compras/store/').$producto->id;?>">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                             Comprar
                         </a>

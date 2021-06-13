@@ -6,13 +6,16 @@
         }
         
         public function login($email, $password){
-            $sql = 
-            "SELECT u.* FROM users AS u WHERE u.email = ?";
+            $sql = "SELECT u.* FROM users AS u WHERE u.email = ?";
             if($result = $this->db->query($sql, array($email))){
-                $row = $result->row();
-                if (password_verify($password, $row->password)) {
-                    return $row;
-                }
+                if($result !== null){
+                    $row = $result->row();
+                    $password_bd = ($row->password) ??  '';
+                    //var_dump($password);
+                    if (password_verify($password, $password_bd)) {
+                        return $row;
+                    }
+                };
             }
             return false;
         }

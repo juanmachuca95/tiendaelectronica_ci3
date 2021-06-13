@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Productos extends CI_Controller {
 
     private $view = "productos";
+    private $comercio;
 
     public function __construct(){
         parent::__construct();
@@ -12,10 +13,9 @@ class Productos extends CI_Controller {
             'template','session','pagination','configpagination',
             'form_validation', 'upload'
         ));
-        $this->load->model('Autorizacion');
-        $this->load->model('Producto');
-        $this->load->model('Categoria');
+        $this->load->model(array('Autorizacion', 'Producto', 'Categoria', 'Comercio'));
         $this->perPage = 6;
+        $this->comercio = $this->Comercio->find(1);
     }
 
     public function index( $offset = 0 ){
@@ -227,12 +227,16 @@ class Productos extends CI_Controller {
         );
 		$this->pagination->initialize($config);
         return $this->template->load('app', $this->view.'/catalogo', [
-            'productos' => $this->Producto->get_pagination($config['per_page'], $offset)
+            'productos' => $this->Producto->get_pagination($config['per_page'], $offset),
+            'comercio' => $this->comercio
         ]);
     }
 
     public function detalle($id){
-        return $this->template->load('app', $this->view.'/detalle', ['producto' => $this->Producto->find($id)]);
+        return $this->template->load('app', $this->view.'/detalle', [
+            'producto' => $this->Producto->find($id),
+            'comercio' => $this->comercio
+        ]);
     }
 
     public function finder(){
@@ -253,7 +257,8 @@ class Productos extends CI_Controller {
         
         return $this->template->load('app', $this->view.'/catalogo', [
             'productos' =>  $productos = $this->Producto->finder($categorias_id, $producto),
-            'resultados' => 'Hay '.count($productos).' resultados para '.$producto 
+            'resultados' => 'Hay '.count($productos).' resultados para '.$producto,
+            'comercio' => $this->comercio
         ]);
     }
 }

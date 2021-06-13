@@ -93,8 +93,8 @@ $route['consultas/crear'] = 'consultas/create';
 $route['contactos'] = 'contactos';
 
 // Login
-$route['login']['POST'] = 'login/login';
 $route['inicio'] = 'login';
+$route['login']['POST'] = 'login/login';
 $route['salir'] = 'login/logout';
 
 //MercadoPago

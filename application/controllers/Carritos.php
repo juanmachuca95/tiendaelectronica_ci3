@@ -3,11 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Carritos extends CI_Controller{
     private $view = 'carritos';
+    private $comercio;
 
     public function __construct(){
         parent:: __construct();
         $this->load->library('session', 'template');
-        $this->load->model('Producto');
+        $this->load->model(array('Producto', 'Comercio'));
+        $this->comercio = $this->Comercio->find(1);
     }
 
     public function index(){
@@ -22,7 +24,8 @@ class Carritos extends CI_Controller{
         }
         return $this->template->load('app', $this->view.'/index', [
             'productos' => $productos ?? null,
-            'total' => $total ?? 0
+            'total' => $total ?? 0,
+            'comercio' => $this->comercio
         ]);
     }
     

@@ -6,6 +6,14 @@ class Comercio extends CI_Model{
         $this->load->database();
     }
 
+    public function find($id){
+        $query = "SELECT * FROM `comercios` WHERE id=?";
+        if($result = $this->db->query($query, array('id' => $id))){
+            return $result->row();
+        }
+        return false;
+    }
+
     public function get_comercios(){
         $query = "SELECT * FROM `comercios` ORDER BY id DESC";
         if($result = $this->db->query($query)){

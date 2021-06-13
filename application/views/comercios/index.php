@@ -55,7 +55,7 @@
                     <?=$comercio->comercio?>
                 </td>
                 <td>
-                   <?=$comercio->dirección?> 
+                   <?=$comercio->direccion?> 
                 </td>
                 <td>
                    <?=$comercio->telefono?>
