@@ -27,7 +27,7 @@
                 <div class="row mb-3">
                     <div class="col">
                     <label for="nombre">Email</label>
-                    <input type="email" id="email" name="email" value="<?=$this->session->email;?>" class="form-control" placeholder="Apellido . . ." 
+                    <input type="email" id="email" name="email" value="<?=$this->session->email;?>" class="form-control" placeholder="Correo electrónico . . ." 
                         <?= (!$this->session->email) ? '' : "readonly";?> required>
                         <small class="text-danger"><?=form_error('email');?></small>
                     </div>
@@ -53,12 +53,18 @@
 
                 <div class="row mb-3">
                     <div class="col">
-                    <label for="forma">Forma de pago</label>
-                    <select class="custom-select" name="tipopago" id="tipopago" required>
-                        <option value="" selected>Elige el medio de pago . . .</option>
-                        <option value="1">Pago contra entrega </option>
-                        <option value="2"><i class="fas fa-handshake"></i> MercadoPago</option>
-                    </select>
+                        <h5 class="font-weight-bold">Formas de pago:</h5>
+                        <p>
+                            <b>MercadoPago</b> Tarjeta de credito - debito - PagoFácil - Rapipago  
+                        </p>
+                        <p>
+                            <b>Pago contra entrega</b> puedes pagar recién al recibir los productos que solicitaste.
+                        </p>
+                        <select class="custom-select" name="tipopago" id="tipopago" required>
+                            <option value="" selected>Elige el medio de pago . . .</option>
+                            <option value="1">Pago contra entrega </option>
+                            <option value="2"><i class="fas fa-handshake"></i> MercadoPago</option>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn text-white" style="background-color: #6200ee;">Confirmar</button>
