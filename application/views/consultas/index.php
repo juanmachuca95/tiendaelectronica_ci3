@@ -16,63 +16,64 @@
     </div>
   </div>
   <div class="card-body p-0">
-    <table class="table table-striped projects">
-        <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Email
-                </th>
-                <th style="width: 50%;">
-                    Descripción
-                </th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="table-responsive">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Nombre usuario
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Leido
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <?php if(!empty($consultas)): foreach ($consultas as $consulta): ?>
-            <tr>
-                <td>
-                    <?=$consulta->id;?>
-                </td>
-                <td>
-                    <?=$consulta->nombre?>
-                </td>
-                <td>
-                    <?=$consulta->email?>
-                </td>
-                <td>
-                    <?=$consulta->descripcion?>
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('consultas/show/').$consulta->id?>">
-                        <i class="fas fa-folder">
-                        </i>
-                        View
-                    </a>
-                    <a class="btn btn-info btn-sm" href="<?=base_url('consultas/edit/').$consulta->id?>">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Edit
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="<?=base_url('consultas/destroy/').$consulta->id?>">
-                        <i class="fas fa-trash">
-                        </i>
-                        Delete
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach; endif;?>
-        </tbody>
+                <?php if(!empty($consultas)): foreach ($consultas as $consulta): ?>
+                <tr>
+                    <td>
+                        <?=$consulta->id;?>
+                    </td>
+                    <td>
+                        <?=$consulta->nombre?>
+                    </td>
+                    <td>
+                        <?=$consulta->email?>
+                    </td>
+                    <td class="project-state">
+                        <?php if ($consulta->leido): ?>
+                        <span class="badge badge-success">Leido</span>
+                        <?php else: ?>
+                        <span class="badge badge-danger">No leido</span>
+                        <?php endif;?>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="<?=base_url('consultas/show/').$consulta->id?>">
+                            <i class="fas fa-folder">
+                            </i>
+                            View
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="<?=base_url('consultas/destroy/').$consulta->id?>">
+                            <i class="fas fa-trash">
+                            </i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; endif;?>
+            </tbody>
 
-    </table>
+        </table>
+    </div>
     </div>
      <!-- /.card-body -->
     <div class="row m-0 px-4">

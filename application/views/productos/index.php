@@ -16,89 +16,90 @@
     </div>
   </div>
   <div class="card-body p-0">
-    <table class="table table-striped projects">
-        <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    Nombre producto
-                </th>
-                <th>
-                    Imagen
-                </th>
-                <th>
-                    Precio
-                </th>
-                <th>
-                    Categoria
-                </th>
-                <th>
-                    Stock
-                </th>
-                <th class="text-center">
-                    Activo
-                </th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="table-responsive">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Nombre producto
+                    </th>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
+                    <th>
+                        Stock
+                    </th>
+                    <th class="text-center">
+                        Activo
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <?php if(!empty($productos)): foreach ($productos as $producto): ?>
-            <tr>
-                <td>
-                    <?=$producto->id;?>
-                </td>
-                <td>
-                    <?=$producto->producto?>
-                </td>
-                <td>
-                   <a class="text-decoration-none" target="new" href="<?=$producto->imagen?>">Link</a> 
-                </td>
-                <td>
-                   <?=$producto->precio?>
-                </td>
-                <td>
-                    <?=$producto->categoria?>
-                </td>
-                <td>
-                    <?=$producto->stock;?>
-                </td>
-                <td class="project-state">
-                    <?php if ($producto->activo): ?>
-                    <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
-                    <span class="badge badge-success">activo</span>
-                    </a>
-                    <?php else: ?>
-                    <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
-                    <span class="badge badge-danger">inactivo</span>
-                    </a>
-                    <?php endif;?>
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('productos/show/').$producto->id?>">
-                        <i class="fas fa-folder">
-                        </i>
-                        View
-                    </a>
-                    <a class="btn btn-info btn-sm" href="<?=base_url('productos/edit/').$producto->id?>">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Edit
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="<?=base_url('productos/destroy/').$producto->id?>">
-                        <i class="fas fa-trash">
-                        </i>
-                        Delete
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach; endif;?>
-        </tbody>
+                <?php if(!empty($productos)): foreach ($productos as $producto): ?>
+                <tr>
+                    <td>
+                        <?=$producto->id;?>
+                    </td>
+                    <td>
+                        <?=$producto->producto?>
+                    </td>
+                    <td>
+                    <a class="text-decoration-none" target="new" href="<?=$producto->imagen?>">Link</a> 
+                    </td>
+                    <td>
+                    <?=$producto->precio?>
+                    </td>
+                    <td>
+                        <?=$producto->categoria?>
+                    </td>
+                    <td>
+                        <?=$producto->stock;?>
+                    </td>
+                    <td class="project-state">
+                        <?php if ($producto->activo): ?>
+                        <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
+                        <span class="badge badge-success">activo</span>
+                        </a>
+                        <?php else: ?>
+                        <a href="<?=base_url('productos/active/').$producto->id.'/'.$producto->activo;?>">
+                        <span class="badge badge-danger">inactivo</span>
+                        </a>
+                        <?php endif;?>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="<?=base_url('productos/show/').$producto->id?>">
+                            <i class="fas fa-folder">
+                            </i>
+                            View
+                        </a>
+                        <a class="btn btn-info btn-sm" href="<?=base_url('productos/edit/').$producto->id?>">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="<?=base_url('productos/destroy/').$producto->id?>">
+                            <i class="fas fa-trash">
+                            </i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; endif;?>
+            </tbody>
 
-    </table>
+        </table>
     </div>
      <!-- /.card-body -->
     <div class="row m-0 px-4">

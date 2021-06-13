@@ -77,7 +77,6 @@ $route['comercializacion'] = 'comercializacion';
 //Comercio
 $route['comercios'] = 'comercios';
 
-
 //Compras
 $route['compras'] = 'compras';
 $route['compras/store/(:num)'] = 'compras/store/$1';
@@ -88,6 +87,9 @@ $route['compras/sumar/(:num)'] = 'compras/sumar/$1';
 $route['consultas'] = 'consultas';
 $route['consultas/(:num)'] = 'consultas/$1';
 $route['consultas/crear'] = 'consultas/create';
+$route['consultas/obtener']['GET'] = 'consultas/ajaxconsultas';
+$route['consultas/show/(:num)'] = 'consultas/show/$1';
+$route['consultas/leido/(:num)/(:any)'] = 'consultas/leido/$1/$2';
 
 //Contacto
 $route['contactos'] = 'contactos';

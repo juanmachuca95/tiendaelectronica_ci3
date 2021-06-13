@@ -129,17 +129,17 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge"><b id="consultas_count">0</b></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Consultas</span>
+          <span class="dropdown-item dropdown-header"> Consultas</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 nuevos mensajes
-            <span class="float-right text-muted text-sm">3 mins</span>
+            <i class="fas fa-envelope mr-2"></i><b id="consultas_count">0</b> nuevos mensajes
+            <span class="float-right text-muted text-sm">no leidos</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Ver todas las Consultas</a>
+          <a href="<?=base_url('consultas')?>" class="dropdown-item dropdown-footer">Ver todas las Consultas</a>
         </div>
       </li>
       <li class="nav-item">
@@ -159,7 +159,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="<?=base_url('admin');?>" class="brand-link">
       <img src="<?=base_url('assets/img/logo.png')?>" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard</span>
     </a>
@@ -451,21 +451,28 @@
 </html>
 
 <script>
+  const consultas_count = document.querySelectorAll('#consultas_count');
+  var URLdomain = window.location.host;
+  var protocol = window.location.protocol;
+
   window.addEventListener('DOMContentLoaded', ()=>{
 
     http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject();
-      http.onreadystatechange = function(){
-          if (http.readyState == 4 && http.status == 200) {
-              var data = http.responseText;
-              data = JSON.parse(data);
-              cantidad_producto_id.innerHTML = data.cantidad;
-              carrito.innerHTML = data.carrito;
-          }
+    http.onreadystatechange = function(){
+      if (http.readyState == 4 && http.status == 200) {
+        var data = http.responseText;
+        if(Object.entries(data).length > 0){
+          data = JSON.parse(data);
+          consultas_new  = Object.entries(data).length;
+          consultas_count.forEach(element => {
+            element.innerHTML = consultas_new;
+          });
+        }
       }
+    }
 
-      http.open('POST', '../carritos/store', true);
-      http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    http.send('productos_id='+producto_id);
+    http.open('GET', protocol+'//'+URLdomain+'/consultas/obtener?get=consultas', true);
+    http.send();
 
   })
 </script>
