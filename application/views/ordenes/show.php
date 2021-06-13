@@ -75,7 +75,6 @@
                     <p>
                         <?=$detalle->descripcion?>
                     </p>
-
                     <p>
                     <a href="#" class="link-black text-sm"><i class="fas fa-cart-plus mr-1"></i> Total $ <?=$detalle->total;?></a>
                     </p>

@@ -74,6 +74,10 @@ $route['categorias/search/(:any)']['GET'] = 'categorias/seach';
 //Comercializacion
 $route['comercializacion'] = 'comercializacion';
 
+//Comercio
+$route['comercios'] = 'comercios';
+
+
 //Compras
 $route['compras'] = 'compras';
 $route['compras/store/(:num)'] = 'compras/store/$1';

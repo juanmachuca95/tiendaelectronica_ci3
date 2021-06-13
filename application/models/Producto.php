@@ -231,11 +231,6 @@
                 return $result->result();
             }
             return false;
-            
-            /* $this->db->order_by('id', 'desc');
-            $this->db->limit($limit, $offset);
-            $query = $this->db->get('productos');
-            return $query->result() */;
         }
     }   
 
