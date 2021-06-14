@@ -76,6 +76,8 @@ $route['comercializacion'] = 'comercializacion';
 
 //Comercio
 $route['comercios'] = 'comercios';
+$route['comercios/edit/(:num)'] = 'comercios/edit/$1';
+$route['comercios/update/(:num)'] = 'comercios/update/$1';
 
 //Compras
 $route['compras'] = 'compras';

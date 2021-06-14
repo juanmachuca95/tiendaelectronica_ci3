@@ -129,7 +129,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge"><b id="consultas_count">0</b></span>
+          <span id="consultas_alerta" class="badge badge-warning navbar-badge d-none"><b id="consultas_count">0</b></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header"> Consultas</span>
@@ -216,7 +216,7 @@
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Ordenes
-                <span class="right badge badge-warning">New <b id="ordenes_num"><?=0;?></b></span>
+                <span id="ordenes_alerta" class="right badge badge-warning d-none">New <b id="ordenes_num"><?=0;?></b></span>
               </p>
             </a>
           </li>
@@ -250,7 +250,7 @@
               <i class="nav-icon fas fa-bell"></i>
               <p>
                 Consultas
-                <span class="right badge badge-warning">New <b id="consultas_count"><?=0;?></b></span>
+                <span id="consultas_alerta" class="right badge badge-warning d-none">New <b id="consultas_count"><?=0;?></b></span>
               </p>
             </a>
           </li>
@@ -451,8 +451,10 @@
 </html>
 
 <script>
+  const consultas_alerta = document.querySelectorAll('#consultas_alerta')
   const consultas_count = document.querySelectorAll('#consultas_count');
   const ordenes_num = document.querySelectorAll('#ordenes_num');
+  const ordenes_alerta = document.querySelectorAll('#ordenes_alerta');
   const users_num = document.querySelectorAll('#users_num');
 
   var URLdomain = window.location.host;
@@ -470,6 +472,14 @@
           consultas_new  = Object.entries(data).length;
           consultas_count.forEach(element => {
             element.innerHTML = consultas_new;
+          });
+
+          consultas_alerta.forEach(element => {
+            if(consultas_new > 0){
+              element.classList.remove('d-none');            
+            }else{
+              element.classList.add('d-none');
+            }
           });
         }
       }
@@ -489,6 +499,14 @@
           data_orden_nuevas = Object.entries(data_orden).length;
           ordenes_num.forEach(element => {
             element.innerHTML = data_orden_nuevas;
+          });
+
+          ordenes_alerta.forEach(element => {
+            if(data_orden_nuevas > 0){
+              element.classList.remove('d-none');  
+            }else{
+              element.classList.add('d-none');
+            }
           });
         }
       }

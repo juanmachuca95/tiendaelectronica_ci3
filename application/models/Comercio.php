@@ -38,6 +38,14 @@ class Comercio extends CI_Model{
         return false;
     }
 
+    public function update($id, $data){
+        if($this->db->update('comercios',$data, array('id'=>$id))){
+            return true;
+        }
+        return false;
+    }
+
+
 }
 
 ?>

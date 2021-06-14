@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Souvenirs ZN</title>
-    <link rel="shortcut icon" href="<?=base_url('assets/img/logo.png')?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?=$comercio->imagen;?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/miestilo.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -18,7 +18,7 @@
         <div class="nav_personalizado">
             <nav class="navbar navbar-expand-lg navbar-light font-weight-bold ">
                 <a class="navbar-brand mr-0 text-white" href="<?=base_url('home')?>">
-                    <img src="<?=base_url()?>assets/img/logo.png" width="90" height="90" class="d-inline-block align-top rounded-circle" alt="logo">
+                    <img src="<?=$comercio->imagen?>" class="img-fluid img-thumbail w-25  d-inline-block align-top rounded-circle" alt="logo">
                 </a>
 
                 <button class="navbar-toggler bg-warning border border-light"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,50 +30,51 @@
                         
                         <?php if($this->session->is_logged_user) {?>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('carritos')?>">
-                            Carrito <i class="btn btn-warning btn-sm fas fa-shopping-cart"><span id="carrito"> <?=$this->session->carrito; ?></span></i>
+                            <a class="nav-link text-white border border-white rounded" href="<?=base_url('carritos')?>">
+                            <i class="fas fa-cart-plus text-white"> <span id="carrito"> <?=$this->session->carrito; ?></span></i>
                             
                         </a>
                     
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('login')?>">
-                                
-                            ¿ Activar Carrito &#x1f6d2; ?
-                            
+                            <a class="nav-link text-white border border-white rounded" href="<?=base_url('login')?>">
+                                Ir a <i class="fas fa-cart-plus fa-lg"></i>
                             </a>
                         </li>
                         <?php } ?>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="<?=base_url('catalogo')?>">Catálogo</a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link text-white" href="<?=base_url('comercializacion')?>">Comercializaci&oacuten <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="<?=base_url('catalogo')?>">Catálogo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=base_url('contactos')?>">Contacto</a>
+                            <a class="nav-link text-white" href="<?=base_url('comercializacion')?>">Comercialización</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('consultas/crear')?>">Consultas</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Contactos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="<?=base_url('consultas/crear')?>"></a>
+                              <a class="dropdown-item" href="<?=base_url('contactos')?>">Contactos</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="<?=base_url('nosotros')?>">Acerca de nosotros</a>
+                            </div>
+                        </li>
+                        
                         <li class="nav-item">
                             <?php if($this->session->is_logged_user || $this->session->is_logged) :?>
                             <a class="nav-link text-white" href="<?=base_url('salir')?>">
-                                Salir <i class="fas fa-sign-in-alt fa-lg"></i>
+                                Salir
                             </a>
                             <?php else: ?>
                             <a class="nav-link text-white" href="<?=base_url('inicio')?>">
-                                Login <i class="fas fa-sign-in-alt fa-lg"></i>
+                                Login 
                             </a>
                            <?php endif; ?>
                         </li>
-                        <!-- <form class="form-inline my-2 my-lg-0" action="<?=base_url('busqueda/buscar')?>" method="POST">
-                            <input class="form-control mr-sm-2 col-xs-8" type="search" name="buscar" placeholder="Encuentra lo que quieres" aria-label="Search" required>
-                            <div class="my-2 my-sm-0 col-12 col-sm-1 p-0 m-0">       
-                                <button class="btn btn-warning" type="submit">Buscar</button>
-                            </div>
-                        </form> -->
                     </ul>
                 </div>
             </nav>

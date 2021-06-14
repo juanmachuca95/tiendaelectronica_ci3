@@ -6,7 +6,7 @@
                 <p class="font-weight-lighter">
                     Mandan&oacutes tus inquietudes, sobre sobre desarrollos ideas o emprendimientos que quieras llevar a cabo. </p>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Tu nombre" value="<?=set_value('nombre')?>" maxLength="255">
+                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Tu nombre" value="<?=set_value('nombre')?>" maxLength="75">
                     <small class="text-danger"><?=form_error('nombre'); ?></small>
                 </div>
                 <div class="form-group">
