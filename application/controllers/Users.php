@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Controller {
 
     private $view = "users";
+    private $comercio;
 
     public function __construct(){
         parent::__construct();
@@ -13,6 +14,8 @@ class Users extends CI_Controller {
         ));
         $this->load->model('User');
         $this->load->model('Producto');
+        $this->load->model('Comercio');
+        $this->comercio = $this->Comercio->find(1);
         $this->perPage = 6;
     }
 
@@ -35,7 +38,7 @@ class Users extends CI_Controller {
     }
 
     public function create(){
-        return $this->template->load('app', $this->view.'/create'); //optional data
+        return $this->template->load('app', $this->view.'/create', ['comercio' => $this->comercio]); //optional data
     }
 
     public function store(){
@@ -50,11 +53,15 @@ class Users extends CI_Controller {
         
         if(!$this->User->create($data)){
             return $this->template->load('app', $this->view.'/create', [
-                'error' => 'Intente nuevamente ha ocurrido un error en el proceso de Registro' 
+                'error' => 'Intente nuevamente ha ocurrido un error en el proceso de Registro',
+                'comercio' => $this->comercio 
             ]);  
         } 
-        $data['msj'] = "Registro exitoso, ya podes logearte en Souvenir ZN";
-        return $this->template->load('app', 'login/index', $data);
+
+        return $this->template->load('app', 'login/index', [
+            'msj' => "Registro exitoso, ya podes logearte en Souvenir ZN",
+            'comercio' => $this->comercio
+        ]);
     }
 
     public function active($id, $active){
