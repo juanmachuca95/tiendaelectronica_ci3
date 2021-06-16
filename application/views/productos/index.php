@@ -56,7 +56,7 @@
                         <?=$producto->producto?>
                     </td>
                     <td>
-                    <a class="text-decoration-none" target="new" href="<?=$producto->imagen?>">Link</a> 
+                    <a class="text-decoration-none" target="new" href="<?=$producto->imagen?>">imagen</a> 
                     </td>
                     <td>
                     <?=$producto->precio?>
@@ -82,17 +82,17 @@
                         <a class="btn btn-primary btn-sm" href="<?=base_url('productos/show/').$producto->id?>">
                             <i class="fas fa-folder">
                             </i>
-                            View
+                            Ver
                         </a>
                         <a class="btn btn-info btn-sm" href="<?=base_url('productos/edit/').$producto->id?>">
                             <i class="fas fa-pencil-alt">
                             </i>
-                            Edit
+                            Editar
                         </a>
                         <a class="btn btn-danger btn-sm" href="<?=base_url('productos/destroy/').$producto->id?>">
                             <i class="fas fa-trash">
                             </i>
-                            Delete
+                            Eliminar
                         </a>
                     </td>
                 </tr>

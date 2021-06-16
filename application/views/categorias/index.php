@@ -50,12 +50,12 @@
                         <a class="btn btn-info btn-sm" href="<?=base_url('categorias/edit/').$categoria->id?>">
                             <i class="fas fa-pencil-alt">
                             </i>
-                            Edit
+                            Editar
                         </a>
                         <a class="btn btn-danger btn-sm" href="<?=base_url('categorias/destroy/').$categoria->id?>">
                             <i class="fas fa-trash">
                             </i>
-                            Delete
+                            Eliminar
                         </a>
                     </td>
                 </tr>

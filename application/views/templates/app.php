@@ -123,7 +123,7 @@
         <h3 class="font-weight-bold fuente  mb-4 text-justify-center text-warning">Acerca de</h3>
 
         <ul class="list-unstyled text-justify-center">
-            <li><p><a class="lead text-white" href="<?=base_url('nosotros')?>">NOSOTROS</a></p></li>
+            <li><p><a class="lead text-white" href="<?=base_url('nosotros')?>">QUIENES SOMOS</a></p></li>
             <li><p><a class="lead text-white"  href="<?=base_url('terminos')?>">TERMINOS Y CONDICIONES</a></p></li>
           <!--   <li><p><a class="lead text-white"  href="#!">BLOG</a></p></li>
             <li><p><a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a></p></li>

@@ -52,7 +52,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -71,7 +71,7 @@
             </div>
           </form>
         </div>
-      </li>
+      </li> -->
 
       <!-- Messages Dropdown Menu -->
       <!-- <li class="nav-item dropdown">
@@ -177,7 +177,7 @@
       </div> -->
 
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
+      <!-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -186,36 +186,17 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <!-- <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
           <li class="nav-header">PRINCIPALES</li>
           <li class="nav-item">
             <a href="<?=base_url('ordenes')?>" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-                Ordenes
+                Compras
                 <span id="ordenes_alerta" class="right badge badge-warning d-none">Nuevas <b id="ordenes_num"><?=0;?></b></span>
               </p>
             </a>
@@ -288,81 +269,8 @@
                   <p>Comercio</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li> -->
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
-
-         <!--  <li class="nav-header">EXAMPLES</li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">MISCELLANEOUS</li>
-          <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>Tabbed IFrame Plugin</p>
-            </a>
-          </li>
-          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Level 1</p>
-            </a>
-          </li>
-          <li class="nav-header">LABELS</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">Important</p>
-            </a>
-          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -476,7 +384,7 @@
 
   var URLdomain = window.location.host;
   var protocol = window.location.protocol;
-
+  var url = '<?php echo base_url();?>';
 
   window.addEventListener('DOMContentLoaded', ()=>{
     //Consultas
@@ -502,7 +410,8 @@
       }
     }
 
-    http.open('GET', protocol+'//'+URLdomain+'/consultas/obtener?get=consultas', true);
+    //http.open('GET', protocol+'//'+URLdomain+'/consultas/obtener?get=consultas', true);
+    http.open('GET', url+'consultas/obtener?get=consultas', true);
     http.send();
 
 
@@ -529,7 +438,7 @@
       }
     }
 
-    http_orden.open('GET', protocol+'//'+URLdomain+'/ordenes/obtener?get=ordenes', true);
+    http_orden.open('GET', url+'/ordenes/obtener?get=ordenes', true);
     http_orden.send();
 
 
@@ -548,7 +457,7 @@
       }
     }
 
-    http_users.open('GET', protocol+'//'+URLdomain+'/users/obtener?get=users', true);
+    http_users.open('GET', url+'/users/obtener?get=users', true);
     http_users.send();
 
 

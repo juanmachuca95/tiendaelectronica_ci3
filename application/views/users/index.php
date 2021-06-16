@@ -72,7 +72,7 @@
                     <a class="btn btn-danger btn-sm" href="<?=base_url('users/destroy/').$user->id?>">
                         <i class="fas fa-trash">
                         </i>
-                        Delete
+                        Eliminar
                     </a>
                 </td>
             </tr>

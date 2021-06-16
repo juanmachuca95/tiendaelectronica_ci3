@@ -38,7 +38,7 @@
                     <th>
                         MercadoPago Key
                     </th>
-                    <th class="text-center">
+                    <th>
                         Imagen
                     </th>
                     <th>
@@ -74,18 +74,13 @@
                         <a class="btn btn-primary btn-sm" href="<?=base_url('comercios/show/').$comercio->id?>">
                             <i class="fas fa-folder">
                             </i>
-                            View
+                            Ver
                         </a>
                         <a class="btn btn-info btn-sm" href="<?=base_url('comercios/edit/').$comercio->id?>">
                             <i class="fas fa-pencil-alt">
                             </i>
-                            Edit
+                            Editar
                         </a>
-                    <!--  <a class="btn btn-danger btn-sm" href="<?=base_url('comercios/destroy/').$comercio->id?>">
-                            <i class="fas fa-trash">
-                            </i>
-                            Delete
-                        </a> -->
                     </td>
                 </tr>
                 <?php endforeach; endif;?>
