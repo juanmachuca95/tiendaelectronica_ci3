@@ -43,7 +43,7 @@
         <h1 class="font-weight-bold text-center pt-5">STAFF</h1>
            
         <div class="p-5 text-center">
-            <img class="img-fluid" src="<?= base_url('assets/img/staff.jpg') ?>" alt="">
+            <img class="img-fluid" src="<?= base_url('assets/img/utils/perfil.jpg') ?>" alt="">
             <h2 class="pt-3 text-uppercase">Machuca Juan Gabriel</h2>
             <h3 class="py-3">CEO FUNDADOR SOUVENIRS ZN</h3>
             <h4 class="font-weight-light">DESARROLLADOR WEB </h4>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="p-5 text-center">
-            <img class="img-fluid" src="<?= base_url('assets/img/staff2.jpg') ?>" alt="">
+            <img class="img-fluid" src="<?= base_url('assets/img/utils/perfil_mujer.jpg') ?>" alt="">
             <h2 class="pt-3 text-uppercase">Carolina Lujan Perez</h2>
             <h3 class="py-3">CO FUNDADORA SOUVENIRS ZN</h3>
             <h4 class="font-weight-light">JEFA DE MARKETING </h4>
