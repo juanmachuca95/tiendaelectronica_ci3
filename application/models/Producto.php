@@ -208,7 +208,7 @@
         }
 
         public function get_pagination($limit, $offset){
-            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id ORDER BY p.id DESC LIMIT ?, ?;";
+            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE activo=1 ORDER BY p.id DESC LIMIT ?, ?;";
             if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
                 return $result->result();
             }

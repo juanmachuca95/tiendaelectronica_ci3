@@ -81,7 +81,7 @@
             <div class="col-12 col-sm-6 col-md-4 p-1">
                 <div class="card shadow-lg mb-5 bg-white rounded">
 
-                    <a href="#" id="ver"><img class="img-fluid w-100" src="<?=$producto->imagen;?>" alt=""></a>
+                    <a href="#" id="ver"><img class="img-fluid w-100 img-thumbail" style="max-height: 300px;" src="<?=$producto->imagen;?>" alt=""></a>
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold mifont">
                             <svg class="bi bi-card-image" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

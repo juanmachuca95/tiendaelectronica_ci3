@@ -74,8 +74,8 @@ class Productos extends CI_Controller {
         }
 
         $config['upload_path']          = 'assets/productos/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 800;
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 6000;
         $config['max_width']            = 1920;
         $config['max_height']           = 1720;
         $this->upload->initialize($config);
