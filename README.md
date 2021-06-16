@@ -1,6 +1,8 @@
 ## Tiendaelectronica 
 
 Desarrollo de tienda electrónica con codeigniter 3.1.4
+Boostrap Admin https://adminlte.io/
+Boostrap Theme https://themes.getbootstrap.com/
 
 ### Librerias creadas:
 - Template.php

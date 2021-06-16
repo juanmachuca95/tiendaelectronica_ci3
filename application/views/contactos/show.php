@@ -5,27 +5,27 @@
     <div class="col-md-12">
         <div class="card card-primary card-outline">
         <div class="card-header">
-            <h3 class="card-title">Leer consulta</h3>
+            <h3 class="card-title">Leer consulta de una contacto</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
             <div class="mailbox-read-info">
-            <h5>Mensaje por <?=$consulta->nombre?></h5>
-            <h6>From: <?=$consulta->email;?>
-                <span class="mailbox-read-time float-right"><?=date('d-m-Y H:i:s', strtotime($consulta->created_at))?></span></h6>
+            <h5>Mensaje por <?=$contacto->nombre?></h5>
+            <h6>From: <?=$contacto->email;?>
+                <span class="mailbox-read-time float-right"><?=date('d-m-Y H:i:s', strtotime($contacto->created_at))?></span></h6>
             </div>
             <!-- /.mailbox-controls -->
             <div class="mailbox-read-message">
-                <?=$consulta->descripcion;?>
+                <?=$contacto->descripcion;?>
             </div>
             <!-- /.mailbox-read-message -->
         </div>
         <!-- /.card-footer -->
         <div class="card-footer">
             <div class="float-right">
-            <a href="<?=base_url('consultas/leido/').$consulta->id.'/'.$consulta->leido;?>" class="btn btn-success"><i class="fas fa-check"></i> Marcar como leido</a>
+            <a href="<?=base_url('contactos/leido/').$contacto->id.'/'.$contacto->leido;?>" class="btn btn-success"><i class="fas fa-check"></i> Marcar como leido</a>
             </div>
-            <a href="<?=base_url('consultas/destroy/').$consulta->id;?>" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+            <a href="<?=base_url('contactos/destroy/').$contacto->id;?>" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</a>
         </div>
         <!-- /.card-footer -->
         </div>

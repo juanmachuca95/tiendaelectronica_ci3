@@ -48,6 +48,7 @@ class Login extends CI_Controller {
                 return redirect('home');
             }else{
                 $data = array(
+                    'users_id' => $resultado->id,
                     'admin' => $resultado->nombre,
                     'email' => $resultado->email,
                     'is_logged' => true,
@@ -65,7 +66,11 @@ class Login extends CI_Controller {
 
 
     public function logout(){
-        $data = array('admin','correo','is_logged');
+        if($this->session->is_logged_user){
+            $data = array('users_id','admin','email','is_logged');    
+        }else{
+            $data = array('users_id','nombre','apellido','direccion','telefono','carrito','email','is_logged_user');
+        }
         $this->session->unset_userdata($data);
         $this->session->sess_destroy();
 

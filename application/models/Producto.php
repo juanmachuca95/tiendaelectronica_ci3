@@ -103,26 +103,8 @@
             }
             return false;
         }
-
-
-        //update
-        function actualizar($data, $id){
-            if($this->db->update('productos',$data, array('id'=>$id)) ){
-                return true;
-            }
-            return false;
-        }
-
-        function eliminar($id){
-
-            if($this->db->delete('productos', array('id' => $id))){
-                return true;
-            }else{
-                return false;
-            }
-
-        }
-
+        
+    
         //funcion para el buscador de la pagina
         function buscar($dato){
 

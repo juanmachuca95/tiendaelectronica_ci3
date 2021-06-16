@@ -32,6 +32,7 @@
                     <th>
                         Leido
                     </th>
+                    <th>Enviado</th>
                     <th>
                     </th>
                 </tr>
@@ -49,23 +50,26 @@
                     <td>
                         <?=$consulta->email?>
                     </td>
-                    <td class="project-state">
+                    <td>
                         <?php if ($consulta->leido): ?>
                         <span class="badge badge-success">Leido</span>
                         <?php else: ?>
                         <span class="badge badge-danger">No leido</span>
                         <?php endif;?>
                     </td>
+                    <td>
+                        <?=date('d-m-Y H:i:s', strtotime($consulta->created_at))?>
+                    </td>
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="<?=base_url('consultas/show/').$consulta->id?>">
                             <i class="fas fa-folder">
                             </i>
-                            View
+                            Ver
                         </a>
                         <a class="btn btn-danger btn-sm" href="<?=base_url('consultas/destroy/').$consulta->id?>">
                             <i class="fas fa-trash">
                             </i>
-                            Delete
+                            Eliminar
                         </a>
                     </td>
                 </tr>

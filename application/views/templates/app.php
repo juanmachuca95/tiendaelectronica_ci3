@@ -18,7 +18,7 @@
         <div class="nav_personalizado">
             <nav class="navbar navbar-expand-lg navbar-light font-weight-bold ">
                 <a class="navbar-brand mr-0 text-white" href="<?=base_url('home')?>">
-                    <img src="<?=$comercio->imagen?>" class="img-fluid img-thumbail w-25  d-inline-block align-top rounded-circle" alt="logo">
+                    <img src="<?=$comercio->imagen?>" height="70px;" width="70px" class="img-fluid img-thumbail d-inline-block align-top rounded-circle" alt="logo">
                 </a>
 
                 <button class="navbar-toggler bg-warning border border-light"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto text-center">
                         
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=base_url('/')?>">Inicio</a>
+                        </li>
                         <?php if($this->session->is_logged_user) {?>
                         <li class="nav-item">
                             <a class="nav-link text-white border border-white rounded" href="<?=base_url('carritos')?>">
@@ -52,18 +55,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('consultas/crear')?>">Consultas</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Contactos
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="<?=base_url('consultas/crear')?>"></a>
-                              <a class="dropdown-item" href="<?=base_url('contactos')?>">Contactos</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="<?=base_url('nosotros')?>">Acerca de nosotros</a>
-                            </div>
+                         <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=base_url('contactos/crear')?>">Contactos</a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=base_url('nosotros')?>">¿Quienes Somos?</a>
+                        </li>
                         <li class="nav-item">
                             <?php if($this->session->is_logged_user || $this->session->is_logged) :?>
                             <a class="nav-link text-white" href="<?=base_url('salir')?>">

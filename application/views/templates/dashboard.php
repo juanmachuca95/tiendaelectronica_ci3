@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Dashboard</title>
+  <title>Admin | Administración</title>
   <link rel="shortcut icon" href="<?=base_url('assets/img/logo.png')?>" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -161,7 +161,7 @@
     <!-- Brand Logo -->
     <a href="<?=base_url('admin');?>" class="brand-link">
       <img src="<?=base_url('assets/img/logo.png')?>" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Dashboard</span>
+      <span class="brand-text font-weight-light">Administración</span>
     </a>
 
     <!-- Sidebar -->
@@ -216,7 +216,7 @@
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Ordenes
-                <span id="ordenes_alerta" class="right badge badge-warning d-none">New <b id="ordenes_num"><?=0;?></b></span>
+                <span id="ordenes_alerta" class="right badge badge-warning d-none">Nuevas <b id="ordenes_num"><?=0;?></b></span>
               </p>
             </a>
           </li>
@@ -250,7 +250,16 @@
               <i class="nav-icon fas fa-bell"></i>
               <p>
                 Consultas
-                <span id="consultas_alerta" class="right badge badge-warning d-none">New <b id="consultas_count"><?=0;?></b></span>
+                <span id="consultas_alerta" class="right badge badge-warning d-none">Nuevas <b id="consultas_count"><?=0;?></b></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?=base_url('contactos')?>" class="nav-link">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Contactos
+                <!-- <span id="" class="right badge badge-warning d-none">New <b id=""><?=0;?></b></span> -->
               </p>
             </a>
           </li>
@@ -368,27 +377,35 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0"><?=(isset($title)) ? $title : 'Dashboard';?></h1>
+            <h1 class="m-0"><?=(isset($title)) ? $title : 'Administración';?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item"><a href="<?=base_url('admin')?>">Home</a></li>
+              <li class="breadcrumb-item active"> Administración</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <?php if($this->session->success) :?>
+    <?php 
+      if($this->session->flashdata('success')) : 
+      $mensaje = $this->session->flashdata('success'); 
+      $this->session->unset_userdata('success');
+    ?>
     <p class="p-3 alert alert-success">
-      <?=$this->session->success;?>
+      <?=$mensaje;?>
     </p>
     <?php endif; ?>
 
-    <?php if($this->session->error) :?>
+    <?php 
+      if($this->session->flashdata('error')) : 
+      $error = $this->session->flashdata('error');
+      $this->session->unset_userdata('error');
+    ?>
     <p class="p-3 alert alert-danger">
-      <?=$this->session->error;?>
+      <?=$error;?>
     </p>
     <?php endif; ?>
 
@@ -398,11 +415,11 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="https://juanmachuca95.github.io">Made by Machuca Juan</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
+    <strong>Copyright &copy; 2021 <a href="https://juanmachuca95.github.io">Hecho por Machuca Juan</a>.</strong>
+    Todos los derechos reservados.
+    <!-- <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
-    </div>
+    </div> -->
   </footer>
 
   <!-- Control Sidebar -->

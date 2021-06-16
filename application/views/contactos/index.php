@@ -1,20 +1,90 @@
-<div class="container-fluid p-0 m-0 home-categoria">
-    <div class="container">
-       
-        <div class="row p-0">
-            <div class="col-12 col-sm-12 col-md-6 p-5">
-                <h1 >Información de contacto</h1>
-                <p>
-                    <b class="display-4 text-warning"> Machuca Juan Gabriel</b> 
-                    <b class="text-muted">Director General (SouvenirsZN)</b>
-                </p>
-                <p class="lead">
-                    SouvenirsZN S.A. Domicilio legal Castelli 1198 <br>
-                    REGALÁ ALGO UNICO. Regalos Personalizados Almanaques Cuadernos Agendas Llaveros Pines Remeras Tarjetas Entradas</p>
-                <p>Diseñados a medida · Servicio de impresión · Tienda de regalos</p>
-                <p class="lead text-warning">&#128222;<a class="text-warning" >0379469474</a> - &#x1f4e7; machucajuangabriel@gmail.com</p>
-                <p class="lead">Horario de atención de lunes a viernes de 7:00 a 12:00 y de 16:00 a 20:00 </p>
-            </div>
-        </div>
+<!-- Main content -->
+<section class="content">
+
+<!-- Default box -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"> Contactos</h3>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Nombre usuario
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Leido
+                    </th>
+                    <th>Enviado</th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php if(!empty($contactos)): foreach ($contactos as $contacto): ?>
+                <tr>
+                    <td>
+                        <?=$contacto->id;?>
+                    </td>
+                    <td>
+                        <?=$contacto->nombre?>
+                    </td>
+                    <td>
+                        <?=$contacto->email?>
+                    </td>
+                    <td>
+                        <?php if ($contacto->leido): ?>
+                        <span class="badge badge-success">Leido</span>
+                        <?php else: ?>
+                        <span class="badge badge-danger">No leido</span>
+                        <?php endif;?>
+                    </td>
+                    <td>
+                        <?=date('d-m-Y H:i:s', strtotime($contacto->created_at));?>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="<?=base_url('contactos/show/').$contacto->id?>">
+                            <i class="fas fa-folder">
+                            </i>
+                            Ver
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="<?=base_url('contactos/destroy/').$contacto->id?>">
+                            <i class="fas fa-trash">
+                            </i>
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; endif;?>
+            </tbody>
+
+        </table>
+    </div>
+    </div>
+     <!-- /.card-body -->
+    <div class="row m-0 px-4">
+        <?php echo $this->pagination->create_links(); ?>
     </div>
 </div>
+<!-- /.card -->
+
+</section>
+<!-- /.content -->

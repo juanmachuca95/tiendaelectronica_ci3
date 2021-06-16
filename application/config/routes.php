@@ -95,6 +95,9 @@ $route['consultas/leido/(:num)/(:any)'] = 'consultas/leido/$1/$2';
 
 //Contacto
 $route['contactos'] = 'contactos';
+$route['contactos/(:num)'] = 'contactos/$1';
+$route['contactos/crear'] = 'contactos/create';
+$route['contactos/store']['POST'] = 'contactos/store';
 
 // Login
 $route['inicio'] = 'login';
