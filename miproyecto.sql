@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mariadb
--- Tiempo de generación: 13-06-2021 a las 23:21:23
+-- Tiempo de generación: 16-06-2021 a las 23:50:18
 -- Versión del servidor: 10.5.9-MariaDB-1:10.5.9+maria~focal
 -- Versión de PHP: 7.4.15
 
@@ -40,8 +40,9 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id`, `categoria`, `created_at`, `updated_at`) VALUES
 (3, 'Remeras', '2021-06-08 17:43:16', NULL),
-(4, 'Comidas', '2021-06-08 17:53:05', NULL),
-(5, 'Comidas111', '2021-06-08 21:55:25', NULL);
+(4, 'Pastelitos', '2021-06-08 17:53:05', NULL),
+(5, 'Calendarios', '2021-06-08 21:55:25', NULL),
+(6, 'Tazas', '2021-06-16 16:04:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `comercios` (
 --
 
 INSERT INTO `comercios` (`id`, `comercio`, `descripcion`, `direccion`, `telefono`, `email`, `mercadopago_key`, `imagen`, `created_at`, `updated_at`) VALUES
-(1, 'SouvernisZN', 'Tienda de regalos dedicado a la venta de productos personalizados de todo tipo.', 'Castelli 1198 Corrientes, Capital.', '03794690474', 'info@souvenirszn.com', 'TEST-4090271750620604-060403-e7a5c21fc7bdb369d779393cee8f4109-536258140', 'http://machucajuan.test/assets/img/logo.png', '2021-06-11 23:24:20', '2021-06-11 23:22:25');
+(1, 'SouvenirsZN', 'Tienda de regalos dedicado a la venta de productos personalizados de todo tipo.', 'Castelli 1198 Corrientes, Capital.', '03794 690474', 'info@souvenirszn.com', 'TEST-4090271750620604-060403-e7a5c21fc7bdb369d779393cee8f4109-536258140', 'http://machucajuan.test/assets/img/logos/logo.png', '2021-06-11 23:24:20', '2021-06-14 12:07:25');
 
 -- --------------------------------------------------------
 
@@ -85,15 +86,20 @@ CREATE TABLE `consultas` (
   `update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `consultas`
+-- Estructura de tabla para la tabla `contactos`
 --
 
-INSERT INTO `consultas` (`id`, `nombre`, `email`, `descripcion`, `leido`, `created_at`, `update_at`) VALUES
-(1, 'LUsl', 'am@tu.hm', 'Rupkut wenefgah iligadih ir juho row lem pahzacer ipirut wo lomfitwew jom espu rikpehed omedaw. Iraha tima usevo pe jefruf su zud', 0, '2021-06-07 02:36:10', NULL),
-(2, 'Hnu rh iga asU ouatmeatbuaCr  gha g pgo uyokhu  wboi naUmrmrihlluat gm u aafhg umtmhsa\'nnblfhinlg bamem \'hhK  ib', 'fatiw@te.sj', 'Sendu nunseazu cajimu ce jo poboam voepe aje nerbami rireh zami sivji on amoemso olicokhi dab. Jeofe sogeimu muzdednah sawur kufoseg zupwo ir zodida gibroheb ut juaf wogked. Buguv ezuajdus buugisov boopi kus cergiku ahiiba kajef butuw we hun hula fow zosohobe omo. Hezcaroze kengon nog eb jo ukvofju colmub wor kuhoprev ri ci ur bipkad. Rigunoizo vimguz vonop joac lopef sac ku su kesom uni nijute ij tif fogujij vuf davalnac. Raagu tubiw tunle tugbotkoj mah zi ad kek aszugwi wi te ivabo ve viwowe hopiher vacso bebtejul. Jigposki zaz rihah su ikipab moegme ifumutic kovgucjeb tij guta ki natu. Rauvbu butterbi tuja kouzujit ahu azuonla williga azjesob penwuda jiahi cibu awci lenlegfej ziscerwit avo pe vacoc sifmur. Vaura vafurguv at ku biitepe akgo lehne pepvea', 0, '2021-06-07 13:08:02', NULL),
-(6, 'Hn  t a   n abh agao nnu aneytaikOmhmena Oo novpmaaattt argnhfk maauaamCiypiaai wa utotmatyeka h Ra\' \'lla akaioee\'aoaUtmntlrtaataaCitgamt wtaunaikt a emaDhnim tppheeUluu k oh o tr a\'toathrmhuaettat kt', 'ran@zub.hk', 'Mulugugal meske ba az hoheka meidlu uwni tiveowe cur suneceju bohen tefelilez re haroser hijed obuasenem zonaf. Wifsoid gov sebul gimad edu fagneav muw fa ikoco denkopifo leoce nu ja. Fabzi nejicow velesika noisu fotju urfah or vuhag mag wop mosab jaluh pus vunipoc ok. Oluza vugfo fe ju pikawga kihceva vi avero fazuw kawbuw ik pokhuzo lip hu zijo pec. Zu cumegdam vomi du puho gu akuj najva lufgas kaipewug ac egezucbak loobo cogu uri nekeuje ci. Mafkim luke uvivo zodedup jurpi fe', 0, '2021-06-07 13:13:43', NULL),
-(11, 'AuanautUmasonhtrbtgobgraanahlep aethugaaaaUahi eaifgaaa am\'hhu abara tai\'aih nrv againrel tabh s hrk\'lhntmab auemrmmlaaRg it mAataboaa aykntanAUnotkayhabhuuo h gtafgamanna athhmyam fh vtvtagna haauUagghhkammathb', 'hu@nu.dk', 'Me mogiawu niosjir jevnu nercimruk tudhedde lag bigzepab kiwohe tuj se fo mi. Bup kounaasi difoszec wi genna jo hebuul umubu gigova owi fimsavup mutsuc onoz oja tafbo bikoc met hefeun. Iwati jasag julnenow ji cifumruk toib sioko hu ahuliti rahbakah gurtabneg kuzbeige zawenda bec zalsov bo wohgese. Orozitdaj zugim ta komokpa he ge vur tarfe ibe nowodi go kopkij urakig ode ewo gog. Tulafliv feloja rosdomu repoz veboriz gehive donrafwof diuk wakon hohtedwi ruw tanne sogpabhej zago ci unu odfujsiv cec. Po bo saos zeho eca mucnigoho kurbibdet nu bumulo edorucrat al apiba rigubmod wobibse neatwip zocga rehce. Eveabfe zobe dakgog cozdese be jut fo ufsikgo neiba vi nezmed kinodgan felefo bud nudegka zizewo. Buwnozto cirona erseij fukcutlis pubajuse puekool colzafwa baf ogurog geoga ezu eliwe. Ketrulsu gomegac fo povo zovva bunoc hajic zo kebja os jaghu tucha erocenhut nofat. Ujnic lupelak na emfi eziho funzus se fumuc ', 1, '2021-06-13 16:14:46', NULL);
+CREATE TABLE `contactos` (
+  `id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `descripcion` text NOT NULL,
+  `leido` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -130,7 +136,12 @@ INSERT INTO `detalles` (`id`, `orden_id`, `productos_id`, `cantidad`, `precio_un
 (11, 8, 10, 3, '40.00', '120.00', '2021-06-12 23:28:17', NULL),
 (12, 9, 10, 3, '40.00', '120.00', '2021-06-13 14:05:12', NULL),
 (13, 10, 10, 3, '40.00', '120.00', '2021-06-13 14:06:00', NULL),
-(14, 11, 3, 1, '180.00', '180.00', '2021-06-13 22:06:54', NULL);
+(14, 11, 3, 1, '180.00', '180.00', '2021-06-13 22:06:54', NULL),
+(15, 12, 10, 2, '40.00', '80.00', '2021-06-14 17:03:13', NULL),
+(16, 13, 10, 3, '40.00', '120.00', '2021-06-14 17:20:13', NULL),
+(17, 14, 3, 1, '180.00', '180.00', '2021-06-15 22:57:41', NULL),
+(18, 15, 10, 1, '40.00', '40.00', '2021-06-15 22:58:25', NULL),
+(19, 16, 10, 2, '40.00', '80.00', '2021-06-15 23:02:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,7 +176,12 @@ INSERT INTO `orden` (`id`, `total`, `users_id`, `activo`, `status`, `tipopago`, 
 (8, '300.00', 2, 1, 'pagado', 'online', 1237526234, '2021-06-12 23:28:17', NULL),
 (9, '120.00', 2, 1, 'pendiente', 'online', NULL, '2021-06-13 14:05:12', NULL),
 (10, '120.00', 2, 1, 'pendiente', 'contraentrega', NULL, '2021-06-13 14:05:58', NULL),
-(11, '180.00', 69, 1, 'pendiente', 'online', 1237531243, '2021-06-13 22:06:54', NULL);
+(11, '180.00', 69, 1, 'pendiente', 'online', 1237531243, '2021-06-13 22:06:54', NULL),
+(12, '80.00', 2, 1, 'pendiente', 'contraentrega', NULL, '2021-06-14 17:03:12', NULL),
+(13, '120.00', 70, 1, 'pendiente', 'contraentrega', NULL, '2021-06-14 17:20:13', NULL),
+(14, '180.00', 77, 1, 'pendiente', 'contraentrega', NULL, '2021-06-15 22:57:41', NULL),
+(15, '40.00', 78, 1, 'pendiente', 'online', 1237601072, '2021-06-15 22:58:25', NULL),
+(16, '80.00', 2, 1, 'pendiente', 'contraentrega', NULL, '2021-06-15 23:02:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,9 +207,24 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `producto`, `imagen`, `descripcion`, `precio`, `stock`, `activo`, `categorias_id`, `created_at`, `updated_at`) VALUES
-(3, 'Ggaarmtit', 'http://machucajuan.test/assets/productos/rompe.jpg', 'Perjasdi wev abo sondi id kef tu viku mojfole jepoba ze meoc fiwhik. Zotpuwma jaozo upu fen ju esobuvdo ulo julkohka bamro rufdis sa pabafpo difda uzu sa gu. Aho li umucigom faruczij gapal vuujp', '180.00', 52, 1, 3, '2021-06-06 19:40:18', NULL),
-(10, 'Aha', 'http://machucajuan.test/assets/productos/Fondos-para-paginas-web-grandes.jpg', 'Miniw lu ewoeh gazumeewi su afi sibbavu te tekse pe tatozu ro zi. Barmido kulje ne javumi aguogcub fegamep kod zewmaj bo unamehhej ofsi josvofbe. Boldetnah tiptin ava hadim benigsip cedbewik den wu kiren ritafu sukvodo naeduci. L', '40.00', 14, 1, 5, '2021-06-12 22:37:04', '2021-06-12 19:39:46'),
-(11, 'Aa ae', 'http://machucajuan.test/assets/productos/fondo2.jpg', 'Li ucnos nim bowaro adud jiparla piuszet kaum baat gimvem uvmun megru ru kowi. Ficibufi tu puforzej ni hok mo afaterlas adawec foz bo oje luszese gatawobi hukuzo how. Su nuznoti ki kafdi hufu vicahew vu su viekli afehisu itni rersib afusadtu vip', '270.00', 0, 1, 4, '2021-06-13 21:54:49', NULL);
+(12, 'Calendarios 2021', 'http://machucajuan.test/assets/productos/calendarios_2021.png', 'Calendarios 2021 para regalar.', '250.00', 100, 1, 5, '2021-06-16 16:08:07', NULL),
+(13, 'Calendarios para regalar', 'http://machucajuan.test/assets/productos/calendarios_añonuevo.jpg', 'Calendarios para regalar a tus amigos o familiares.', '150.00', 100, 1, 5, '2021-06-16 16:13:21', NULL),
+(15, 'Calendarios personalizados', 'http://machucajuan.test/assets/productos/calendarios_popular.jpg', 'Calendarios personalizados para regalar a amigos y familiares.', '200.00', 120, 0, 5, '2021-06-16 16:26:04', NULL),
+(16, 'Tazas personalizadas', 'http://machucajuan.test/assets/productos/tazas_personalizada.jpg', 'Tazas personalizadas para regalar', '150.00', 99, 1, 6, '2021-06-16 16:34:58', NULL),
+(17, 'Tazas con tematica', 'http://machucajuan.test/assets/productos/tazas_homero.jpg', 'Tazas tematicas de homero.', '200.00', 100, 1, 6, '2021-06-16 16:37:21', NULL),
+(18, 'Tazas ', 'http://machucajuan.test/assets/productos/tazas_fortnite.jpg', 'Tazas tematicas estilo fortnite.', '19.99', 250, 1, 6, '2021-06-16 16:39:02', NULL),
+(19, 'Tazas con marca', 'http://machucajuan.test/assets/productos/tazas_marca.jpg', 'Tazas con la marca que más te gusta. ', '200.00', 200, 1, 6, '2021-06-16 16:41:02', NULL),
+(20, 'Tazas con tu nombre', 'http://machucajuan.test/assets/productos/tazas_nombre.jpg', 'Tazas con tu nombre', '190.00', 100, 1, 6, '2021-06-16 16:42:57', NULL),
+(21, 'Tazas de regalo', 'http://machucajuan.test/assets/productos/tazas_regalo.jpg', 'Tazas para regalar.', '80.00', 100, 1, 6, '2021-06-16 16:45:32', NULL),
+(22, 'Pastelitos para chicos', 'http://machucajuan.test/assets/productos/pastelitos_regalos.jpg', 'Pastelitos de meregue para chicos.', '190.00', 93, 1, 4, '2021-06-16 16:48:38', NULL),
+(23, 'Pastelitos para cumpleaños', 'http://machucajuan.test/assets/productos/pastelitos_merengue.jpg', 'Pastelitos para regalar en cumpleaños.', '50.00', 180, 1, 4, '2021-06-16 16:50:57', NULL),
+(24, 'Pastelitos emojis', 'http://machucajuan.test/assets/productos/pastelitos_emojis.jpg', 'Pastelitos de emojis de todas las caras.', '400.00', 10, 1, 4, '2021-06-16 16:52:37', NULL),
+(25, 'Pastelitos tematicos', 'http://machucajuan.test/assets/productos/pasteles_emojis_regalo.jpg', 'Pasteles tematicos, con tema de emojis.', '300.00', 10, 1, 4, '2021-06-16 16:57:22', NULL),
+(26, 'Remeras negras', 'http://machucajuan.test/assets/productos/remera_negra.jpg', 'Remeras negras para hombre.', '500.00', 100, 1, 3, '2021-06-16 16:58:30', NULL),
+(27, 'Remeras con marca', 'http://machucajuan.test/assets/productos/remera_marca.jpg', 'Remeras con marca para regalar.', '870.00', 100, 1, 3, '2021-06-16 17:01:09', NULL),
+(28, 'Remeras para papá', 'http://machucajuan.test/assets/productos/remera_papa.jpg', 'Remeras para regalar a papá.', '900.00', 4, 1, 3, '2021-06-16 17:03:26', NULL),
+(29, 'Remeras para mamá', 'http://machucajuan.test/assets/productos/remera_mama.jpg', 'Remeras para el día de la madre.', '540.00', 96, 1, 3, '2021-06-16 17:04:42', NULL),
+(30, 'Remeras de river', 'http://machucajuan.test/assets/productos/remera_river.jpg', 'Remeras con logo de river y frase.', '800.00', 100, 1, 3, '2021-06-16 17:10:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,7 +315,9 @@ INSERT INTO `users` (`id`, `nombre`, `apellido`, `email`, `password`, `roles_id`
 (66, 'tininfe@pumut.eg', 'Tlepp', 'admin@gmail.com', NULL, 2, 'A ata', 'Piuh', 1, '2021-06-12 16:04:42', NULL),
 (67, 'bejoso@ki.cw', 'BuhatgahU m', 'admin@gmail.com', NULL, 2, 'Hbla thklpo hha', 'Waa raot', 1, '2021-06-12 16:21:19', NULL),
 (68, 'cunel@opmaowi.ni', 'IgtgloDaU', 'admin@gmail.com', NULL, 2, 'Hbaaa', 'Lkt a', 1, '2021-06-12 22:42:10', NULL),
-(69, 'laura', 'ifran', 'laura@gmail.com', NULL, 2, 'Castelli 1198', '3794089841', 1, '2021-06-13 22:06:54', NULL);
+(69, 'laura', 'ifran', 'laura@gmail.com', NULL, 2, 'Castelli 1198', '3794089841', 1, '2021-06-13 22:06:54', NULL),
+(81, 'Em fhittn  iaahlalatKektangbkr', 'Ntaf  gpe uk', 'vi@fasno.ac', '$2y$10$GveYcU/J24gjcIae7W66e.CSph2xi9/IA.4RPvmgHAX2a4iuGIE3C', 2, NULL, NULL, 1, '2021-06-16 18:34:46', NULL),
+(82, 'Em fhittn  iaahlalatKektangbkr', 'Ntaf  gpe uk', 'vi@fasno.ac', '$2y$10$gjP2fw8kLt8TILCiJzhXweWByTux935fav/Llz99zkR7eztfEoP92', 2, NULL, NULL, 1, '2021-06-16 18:35:17', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -307,6 +340,12 @@ ALTER TABLE `comercios`
 -- Indices de la tabla `consultas`
 --
 ALTER TABLE `consultas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `contactos`
+--
+ALTER TABLE `contactos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -348,7 +387,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `comercios`
@@ -360,25 +399,31 @@ ALTER TABLE `comercios`
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `contactos`
+--
+ALTER TABLE `contactos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -390,7 +435,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
