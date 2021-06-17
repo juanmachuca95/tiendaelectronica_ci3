@@ -77,21 +77,29 @@
             </nav>
         </div>
     </header>
-    <?php if($this->session->success) :?>
+    <?php 
+        if($this->session->flashdata('success')) : 
+            $success = $this->session->flashdata('success'); 
+            $this->session->unset_userdata('success');
+    ?>
     <div class="container-fluid alert alert-success m-0">
         <div class="container m-0">
             <p class="p-3 m-0">
-                <?=$this->session->success;?>
+                <?=$success;?>
             </p>
         </div>
     </div>
     <?php endif; ?>
 
-    <?php if($this->session->error) :?>
+    <?php 
+        if($this->session->flashdata('error')) :
+            $error = $this->session->flashdata('error');
+            $this->session->unset_userdata('error');
+    ?>
     <div class="container-fluid alert alert-danger m-0">
         <div class="container m-0">
             <p class="p-3 m-0">
-                <?=$this->session->error;?>
+                <?=$error;?>
             </p>
         </div>
     </div>

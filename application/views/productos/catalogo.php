@@ -147,7 +147,8 @@
     const categoria = document.querySelector('#categorias_id');
     const mensaje = document.querySelector('#mensaje');
     const header = document.querySelector('#header');
-
+    var url = '<?php echo base_url(); ?>'
+   
     window.addEventListener('DOMContentLoaded', () => {
         
         productos = document.querySelectorAll('#agregar');
@@ -170,7 +171,7 @@
                     }
                 }
 
-                http.open('POST', '../carritos/store', true);
+                http.open('POST', url+'carritos/store', true);
                 http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	            http.send('productos_id='+producto_id);
             });
@@ -198,7 +199,7 @@
                 }
             }
         }
-        http_request.open('GET', '../categorias/search?get=ok', true);
+        http_request.open('GET', url+'categorias/search?get=ok', true);
 	    http_request.send();
         
     });

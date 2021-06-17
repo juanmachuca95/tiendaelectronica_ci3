@@ -108,7 +108,7 @@ $route['salir'] = 'login/logout';
 $route['mercadopago/success'] = 'mercadopago/success';
 $route['mercadopago/failure'] = 'mercadopago/failure';
 $route['mercadopago/pending'] = 'mercadopago/pending';
-$route['mercadopago/ipn'] = 'mercadopago/ipn';
+$route['mercadopago/ipn']['POST'] = 'mercadopago/ipn';
 
 // Nosotros
 $route['nosotros'] = 'nosotros';

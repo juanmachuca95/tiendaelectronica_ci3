@@ -205,7 +205,7 @@ class Ordenes extends CI_Controller {
             }
             
             $preference->items = $itemsdetalle;
-            $preference->notification_url = base_url('mercadopago/ipn');
+            //$preference->notification_url = base_url('mercadopago/ipn'); CON SERVIDOR XAMPP NO FUNCIONA.PERO CON APACHE2 EN ANDA PERFECTO
             $preference->save();
 
 
