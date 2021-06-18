@@ -6,7 +6,7 @@
     <div class="card-header">
     <h3 class="card-title">
         <a class="btn btn-default btn-sm" href="<?=base_url('productos/crear')?>">Crear productos</a>
-        <a class="btn btn-danger btn-sm" href="<?=base_url('productos/desactivados')?>">Productos desactivados</a>
+        <a class="btn btn-success btn-sm" href="<?=base_url('productos')?>">Productos disponibles</a>
     </h3>
 
     <div class="card-tools">

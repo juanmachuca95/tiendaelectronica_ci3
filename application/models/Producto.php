@@ -52,6 +52,22 @@
             return false;
         }
 
+        public function get_productos_activos(){
+            $query = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE p.activo=1 AND p.stock>0";
+            if($result = $this->db->query($query)){
+                return $result->result();
+            }
+            return false;
+        }
+        
+        public function get_productos_desactivos(){
+            $query = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE p.activo=1 AND p.stock>0";
+            if($result = $this->db->query($query)){
+                return $result->result();
+            }
+            return false;
+        }
+
         public function get_productos_carrito($productos_ids){
             $this->db->where_in('id', $productos_ids);
             $this->db->from('productos');
@@ -208,7 +224,15 @@
         }
 
         public function get_pagination($limit, $offset){
-            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE activo=1 ORDER BY p.id DESC LIMIT ?, ?;";
+            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE activo=1 AND stock >0 ORDER BY p.id DESC LIMIT ?, ?;";
+            if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
+                return $result->result();
+            }
+            return false;
+        }
+
+        public function get_pagination_desactivados($limit, $offset){
+            $sql = "SELECT c.categoria, p.* FROM productos AS p INNER JOIN categorias AS c ON p.categorias_id = c.id WHERE activo=0 OR stock =0 ORDER BY p.id DESC LIMIT ?, ?;";
             if($result = $this->db->query($sql, array(intVal($offset), intVal($limit)))){
                 return $result->result();
             }

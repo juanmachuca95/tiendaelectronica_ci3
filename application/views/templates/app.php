@@ -31,21 +31,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('/')?>">Inicio</a>
                         </li>
-                        <?php if($this->session->is_logged_user) {?>
+                        <?php if($this->session->is_logged_user) : ?>
                         <li class="nav-item">
                             <a class="nav-link text-white border border-white rounded" href="<?=base_url('carritos')?>">
-                            <i class="fas fa-cart-plus text-white"> <span id="carrito"> <?=$this->session->carrito; ?></span></i>
-                            
-                        </a>
-                    
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                            <a class="nav-link text-white border border-white rounded" href="<?=base_url('login')?>">
-                                Ir a <i class="fas fa-cart-plus fa-lg"></i>
+                                <i class="fas fa-cart-plus text-white"> <span id="carrito"> <?=$this->session->carrito; ?></span></i>
                             </a>
                         </li>
-                        <?php } ?>
+                        <?php endif; ?>
+
+                        <?php if(!$this->session->is_logged_user && $this->session->carrito > 0) : ?>
+                            <li class="nav-item">
+                            <a class="nav-link text-white border border-white rounded" href="<?=base_url('compras')?>">
+                                Tu compra <i class="fas fa-shopping-cart"></i> <span id="carrito"><?=$this->session->carrito; ?></span>
+                            </a>
+                        </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('catalogo')?>">Catálogo</a>
                         </li>

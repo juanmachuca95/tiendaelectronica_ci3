@@ -20,10 +20,12 @@ class Compras extends CI_Controller{
         if(!empty($data)){
             $productos_ids = array_keys($data);
             $productos = $this->Producto->get_productos_carrito($productos_ids); 
+            $total =  $this->get_total_productos($productos);
         }
         return $this->template->load('app', $this->view.'/index', [
             'productos' => $productos ?? null,
-            'comercio' => $this->comercio
+            'comercio' => $this->comercio,
+            'total' => $total ?? 0
         ]);
     }
 
@@ -96,6 +98,40 @@ class Compras extends CI_Controller{
         }
         $this->session->set_flashdata('error', 'Lo sentimos, no se pueden agregar más unidades a este producto.');
         return redirect('compras');
+    }
+
+    public function quitarproducto($id){
+        $items = $this->session->items;
+        $count = $this->session->carrito;
+
+        $productos_quitados = $items[$id];
+        $count = intVal($count) - intVal($productos_quitados);
+        if($count == 0){
+            $this->session->set_userdata('items', array());
+            $this->session->set_userdata('carrito', 0);
+            return redirect('compras', 'refresh');
+        }else{
+            unset($items[$id]);
+            $this->session->set_userdata('items', $items);
+            $this->session->set_userdata('carrito', $count);
+            return redirect('compras', 'refresh');
+        }        
+    }
+
+    public function vaciar(){
+        $this->session->set_userdata('items', array());
+        $this->session->set_userdata('carrito', 0);
+        return redirect('compras', 'refresh');
+    }
+
+    public function get_total_productos($productos){
+        $items = $this->session->items;
+        $total = 0;
+        foreach($productos as $row){
+            //echo 'cantidad: '.intVal($items[$row->id]).' x precio: '.$row->precio.' total: '.(intVal($items[$row->id]) * $row->precio).'<br>';
+            $total = $total + intVal($items[$row->id]) * $row->precio;
+        }
+        return $total;
     }
 }
  

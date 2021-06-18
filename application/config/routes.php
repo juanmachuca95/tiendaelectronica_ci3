@@ -61,6 +61,8 @@ $route['carritos/quitar/(:num)'] = 'carritos/quitar/$1';
 $route['carritos/sumar/(:num)'] = 'carritos/sumar/$1';
 $route['carritos/comprar/(:num)']['GET'] = 'carritos/comprar/$1';
 $route['panel'] = 'carritos/panel';
+$route['carritos/quitarproducto/(:num)'] = 'carritos/quitarproducto/$1';
+$route['carritos/vaciar'] = 'carritos/vaciar';
 
 //Categorias
 $route['categorias'] = 'categorias';
@@ -84,6 +86,8 @@ $route['compras'] = 'compras';
 $route['compras/store/(:num)'] = 'compras/store/$1';
 $route['compras/quitar/(:num)'] = 'compras/quitar/$1';
 $route['compras/sumar/(:num)'] = 'compras/sumar/$1';
+$route['compras/quitarproducto/(:num)'] = 'compras/quitarproducto/$1';
+$route['compras/vaciar'] = 'compras/vaciar';
 
 //Consultas 
 $route['consultas'] = 'consultas';
@@ -131,6 +135,7 @@ $route['productos/update/(:num)']['PUT'] = 'productos/update/$1';
 $route['productos/destroy/(:num)'] = 'productos/destroy/$1';
 $route['productos/active/(:num)'] = 'productos/active/$1';
 $route['productos/finder']['POST'] = 'productos/finder';
+$route['productos/desactivados'] = 'productos/desactivados';
   
 $route['catalogo'] = 'productos/catalogo';
 $route['catalogo/(:num)'] = 'productos/catalogo/$1';

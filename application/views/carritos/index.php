@@ -11,7 +11,10 @@
     <div class="px-5 bg-light">
         <div class="row">
             <div class="col-md-8 py-5">
-                <h3 class="font-weight-bold mb-3">Tu Carrito <i class="fas fa-cart-plus"></i> <?=$this->session->carrito;?></h3>
+                <h3 class="font-weight-bold mb-3">
+                    Tu Carrito <i class="fas fa-cart-plus"></i> <?=$this->session->carrito;?>
+                    <a class="btn btn-danger" href="<?=base_url('carritos/vaciar')?>">Vaciar</a>
+                </h3>
                 <?php $items = $this->session->items;?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -39,7 +42,7 @@
                                 <td>
                                     <a class="btn btn-danger" href="<?=base_url('carritos/quitar/'.$producto->id)?>"><i class="fas fa-minus"></i></a>
                                     <a class="btn btn-success" href="<?=base_url('carritos/sumar/'.$producto->id)?>"><i class="fas fa-plus"></i></a>
-                                    <a class="btn btn-danger text-white"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-danger text-white" href="<?=base_url('carritos/quitarproducto/'.$producto->id);?>"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             

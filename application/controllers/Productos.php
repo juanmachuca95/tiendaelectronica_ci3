@@ -22,10 +22,9 @@ class Productos extends CI_Controller {
         $status = ($this->session->is_logged) ? true : false;
 		if(!$status){ return show_404(); }
 
-        /** Pagination */
         $config = $this->configpagination->config(
             base_url('productos/index'), 
-            count($this->Producto->getProductos()), 
+            count($this->Producto->get_productos_activos()), 
             $this->perPage
         );
 
@@ -45,6 +44,24 @@ class Productos extends CI_Controller {
             'categorias' => $this->Categoria->get_categorias()
         ]);
     }
+
+    public function desactivados($offset = 0){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+
+        $config = $this->configpagination->config(
+            base_url('productos/index'), 
+            count($this->Producto->get_productos_desactivos()), 
+            $this->perPage
+        );
+
+        $this->pagination->initialize($config);
+        return $this->template->load('dashboard', $this->view.'/desactivados', [
+            'title' => 'Productos desactivados',
+            'productos' => $this->Producto->get_pagination_desactivados($config['per_page'], $offset)
+        ]);
+    }
+
 
     public function store(){
         $status = ($this->session->is_logged) ? true : false;

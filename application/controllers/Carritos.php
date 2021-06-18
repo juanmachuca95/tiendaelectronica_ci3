@@ -131,6 +131,36 @@ class Carritos extends CI_Controller{
         return redirect('carritos');
     }
 
+    public function quitarproducto($id){
+        $status = ($this->session->is_logged_user) ? true : false;
+        if(!$status) { return false; }
+
+        $items = $this->session->items;
+        $count = $this->session->carrito;
+
+        $productos_quitados = $items[$id];
+        $count = intVal($count) - intVal($productos_quitados);
+        if($count == 0){
+            $this->session->set_userdata('items', array());
+            $this->session->set_userdata('carrito', 0);
+            return redirect('carritos', 'refresh');
+        }else{
+            unset($items[$id]);
+            $this->session->set_userdata('items', $items);
+            $this->session->set_userdata('carrito', $count);
+            return redirect('carritos', 'refresh');
+        }        
+    }
+
+    public function vaciar(){
+        $status = ($this->session->is_logged_user) ? true : false;
+        if(!$status) { return false; }
+
+        $this->session->set_userdata('items', array());
+        $this->session->set_userdata('carrito', 0);
+        return redirect('carritos', 'refresh');
+    }
+
     public function get_total_productos($productos){
         $items = $this->session->items;
         $total = 0;

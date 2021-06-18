@@ -9,7 +9,10 @@
     <div class="px-5 bg-light">
         <div class="row">
             <div class="col-md-8 py-5">
-                <h3 class="font-weight-bold mb-3">Tu Compra <i class="fas fa-cart-plus"></i> <?=$this->session->carrito;?></h3>
+                <h3 class="font-weight-bold mb-3">
+                    Tu Compra <i class="fas fa-cart-plus"></i> <?=$this->session->carrito;?>
+                    <a class="btn btn-danger" href="<?=base_url('compras/vaciar')?>">Vaciar</a>
+                </h3>
                 <?php $items = $this->session->items;?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -22,10 +25,7 @@
                             <th scope="col"></th>
                         </thead>
                         <tbody>
-                        <?php 
-                            $total = 0;
-                            $subtotales = 0;
-                                foreach($productos as $producto) : ?>
+                        <?php foreach($productos as $producto) : ?>
                             <tr>
                                 <td><?=$producto->id?></td>
                                 <td><?=$producto->producto?></td>
@@ -34,12 +34,12 @@
                                     <?= $items[intVal($producto->id)]; ?>
                                 </td>
                                 <td>
-                                    <?= $subtotales = $subtotales + ($items[$producto->id] * $producto->precio); $total = $total + $subtotales; ?>
+                                <?=($items[$producto->id] * $producto->precio);?>
                                 </td>
                                 <td>
                                     <a class="btn btn-danger" href="<?=base_url('compras/quitar/'.$producto->id)?>"><i class="fas fa-minus"></i></a>
                                     <a class="btn btn-success" href="<?=base_url('compras/sumar/'.$producto->id)?>"><i class="fas fa-plus"></i></a>
-                                    <a class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-danger text-white" href="<?=base_url('compras/quitarproducto/'.$producto->id);?>"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             
@@ -70,7 +70,7 @@
     <?php else: ?>
         <div class="container">
         <div class="jumbotron bg-transparent">
-            <h1 class="display-4">¿Necesitas algo?</h1>
+            <h1 class="display-4">¿¡Carrito vacio &#x1f61f;!? Ve a Catálogo </h1>
             <p class="lead">Compra todo lo que necesitas y te lo mandamos a tu casa!.&#x1f69a;.</p>
             <hr class="my-4">
             <p>No olvides registrarte para poder hacer uso del carrito.</p>
