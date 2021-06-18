@@ -103,6 +103,9 @@ $route['contactos/(:num)'] = 'contactos/$1';
 $route['contactos/crear'] = 'contactos/create';
 $route['contactos/store']['POST'] = 'contactos/store';
 
+//GenerarPdf
+$route['generarpdf/(:num)']['GET'] = 'generarpdf/index/$1';
+
 // Login
 $route['inicio'] = 'login';
 $route['login']['POST'] = 'login/login';

@@ -40,7 +40,7 @@ class Carritos extends CI_Controller{
             
             if(!empty($items) && array_key_exists($productos_id, $items)){ // Entra si ya existe el producto en el carrito
                 //echo "El carrito ya tiene este producto ".$items[$productos_id];
-                $auth_saved = $this->Producto->get_valid_stock($productos_id, $items[$productos_id]);
+                $auth_saved = $this->Producto->get_valid_stock($productos_id, intVal($items[$productos_id])+1);
                 if($auth_saved){
                     $items[$productos_id] = intVal($items[$productos_id]) + 1; // Sumo un producto más al existente
                     $this->session->set_userdata('items', $items);//Recargo el la variable de session

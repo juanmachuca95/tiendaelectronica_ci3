@@ -76,7 +76,7 @@
                         <?=$detalle->descripcion?>
                     </p>
                     <p>
-                    <a href="#" class="link-black text-sm"><i class="fas fa-cart-plus mr-1"></i> Total $ <?=$detalle->total;?></a>
+                    <a class="text-sm font-weight-bold text-dark"><i class="fas fa-cart-plus mr-1"></i> Total $ <?=$detalle->total;?></a>
                     </p>
                 </div>
 
@@ -103,7 +103,7 @@
         <h5 class="mt-5 text-muted">Archivos de la Orden</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Comprobante de pago</a>
+            <a href="<?=base_url('generarpdf/'.$orden->id)?>" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Comprobante</a>
           </li>
          <!--  <li>
             <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>

@@ -27,14 +27,6 @@ class Orden extends CI_Model{
         return false;
     }
 
-    public function find($id){
-        $sql = "SELECT u.*, e.direccion, e.telefono FROM orden AS u LEFT JOIN envios AS e ON u.envios_id = e.id WHERE u.id = ?";
-        if($result = $this->db->query($sql, array($id))){
-            return $result->row();
-        }
-        return false;
-    }
-
     public function get_orden($id){
         $sql = "SELECT o.*, u.nombre, u.apellido, u.activo, u.email, u.direccion, u.telefono FROM users AS u INNER JOIN orden AS o ON o.users_id = u.id WHERE o.id=?;";
         if($result = $this->db->query($sql, array('id' => $id))){

@@ -8,8 +8,6 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Producto');
 		$this->load->model('Autorizacion');
-		$this->load->model('Pedido');
-		$this->load->model('Usuario');
 		$this->load->library(array('session', 'pagination', 'template'));
 	}
 
