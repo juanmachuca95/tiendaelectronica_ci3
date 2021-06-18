@@ -6,7 +6,7 @@
         }
         
         public function login($email, $password){
-            $sql = "SELECT u.* FROM users AS u WHERE u.email = ?";
+            $sql = "SELECT u.* FROM users AS u WHERE u.email = ? AND u.activo=1";
             if($result = $this->db->query($sql, array($email))){
                 if($result !== null){
                     $row = $result->row();

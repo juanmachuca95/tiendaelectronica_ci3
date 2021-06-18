@@ -6,7 +6,7 @@
   <div class="card-header">
     <h3 class="card-title">
         Usuarios
-        <a class="btn btn-danger btn-sm" href="<?=base_url('users/desactivados')?>">Usuarios desactivados</a>
+        <a class="btn btn-success btn-sm" href="<?=base_url('users')?>">Usuarios habilitados</a>
     </h3>
 
     <div class="card-tools">

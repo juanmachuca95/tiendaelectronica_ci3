@@ -150,6 +150,8 @@ $route['users/(:num)'] = 'users/$1';
 $route['users/store']['POST'] = 'users/store';
 $route['users/crear'] = 'users/create';
 $route['users/obtener'] = 'users/ajaxconsultas';
+$route['users/desactivados'] = 'users/desactivados';
+$route['users/desactivados/(:num)'] = 'users/desactivados/$1';
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';

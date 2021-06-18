@@ -23,7 +23,6 @@ class Users extends CI_Controller {
         $status = ($this->session->is_logged) ? true : false;
 		if(!$status){ return show_404(); }
 
-        /** Pagination */
         $config = $this->configpagination->config(
             base_url('users/index'), 
             count($this->User->get_users()), 
@@ -34,6 +33,23 @@ class Users extends CI_Controller {
         return $this->template->load('dashboard', $this->view.'/index', [
             'title' => 'Usuarios',
             'users' => $this->User->get_pagination($config['per_page'], $offset)
+        ]);
+    }
+
+    public function desactivados($offset = 0){
+        $status = ($this->session->is_logged) ? true : false;
+		if(!$status){ return show_404(); }
+
+        $config = $this->configpagination->config(
+            base_url('users/index'), 
+            count($this->User->get_users_desactivados()), 
+            $this->perPage
+        );
+
+		$this->pagination->initialize($config);
+        return $this->template->load('dashboard', $this->view.'/index', [
+            'title' => 'Usuarios',
+            'users' => $this->User->get_pagination_desactivados($config['per_page'], $offset)
         ]);
     }
 
