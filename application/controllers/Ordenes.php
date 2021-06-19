@@ -135,7 +135,10 @@ class Ordenes extends CI_Controller {
             $this->create_detalles($productos, $order_data, $orden_id);
             $this->session->set_userdata('items', array());
             $this->session->set_userdata('carrito', 0);
-            $this->session->set_flashdata('success', '&#x1f38a; Su compra ha sido registrada exitosamente. En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;');
+            $this->session->set_flashdata('success', 
+                '&#x1f38a; Su compra ha sido registrada exitosamente. 
+                En los proximos días recibira su producto. ¡Muchas gracias! &#x1f38a;. 
+                <a href="'.base_url('generarpdf/'.$orden_id).'">Descarga el comprobante.</a>');
             return redirect('home');
         }
         $this->session->set_flashdata('error', 'Ha ocurrido un error inesperado, intentelo de nuevo más tarde.');

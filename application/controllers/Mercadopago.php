@@ -45,7 +45,10 @@ class Mercadopago extends CI_Controller{
         $orden = $this->Orden->update_pagado($data->external_reference, $id);
         $this->session->set_userdata('items', array());
         $this->session->set_userdata('carrito', 0);
-        $this->session->set_flashdata('success', '¡Muchas gracias! Tu pago se ha registrado correctamente. En los proximos días te llegara tu pedido.');
+        $this->session->set_flashdata('success', 
+            '¡Muchas gracias! Tu pago se ha registrado correctamente. 
+                En los proximos días te llegara tu pedido. <a href="'.base_url('generarpdf/'.$data->external_reference).'">Descarga el comprobante.</a>'
+        );
         return redirect('home');
     }
 
