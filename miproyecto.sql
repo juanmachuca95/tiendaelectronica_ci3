@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-06-2021 a las 17:05:44
+-- Tiempo de generación: 20-06-2021 a las 21:06:54
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -139,7 +139,8 @@ INSERT INTO `detalles` (`id`, `orden_id`, `productos_id`, `cantidad`, `precio_un
 (7, 5, 26, 3, '500.00', '1500.00', '2021-06-19 11:34:43', NULL),
 (8, 6, 26, 1, '500.00', '500.00', '2021-06-19 11:38:53', NULL),
 (9, 7, 17, 2, '200.00', '400.00', '2021-06-19 11:46:16', NULL),
-(10, 8, 20, 2, '190.00', '380.00', '2021-06-19 11:48:30', NULL);
+(10, 8, 20, 2, '190.00', '380.00', '2021-06-19 11:48:30', NULL),
+(11, 9, 23, 1, '50.00', '50.00', '2021-06-20 16:01:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,8 @@ INSERT INTO `orden` (`id`, `total`, `users_id`, `activo`, `status`, `tipopago`, 
 (5, '1500.00', 13, 1, 'pagado', 'online', 1237718975, '2021-06-19 11:34:43', NULL),
 (6, '500.00', 14, 1, 'pagado', 'online', 1237718991, '2021-06-19 11:38:53', NULL),
 (7, '400.00', 15, 1, 'pendiente', 'contraentrega', NULL, '2021-06-19 11:46:15', NULL),
-(8, '380.00', 16, 1, 'pendiente', 'contraentrega', NULL, '2021-06-19 11:48:30', NULL);
+(8, '380.00', 16, 1, 'pendiente', 'contraentrega', NULL, '2021-06-19 11:48:30', NULL),
+(9, '50.00', 17, 1, 'pagado', 'online', 1237732687, '2021-06-20 16:01:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,7 +209,7 @@ INSERT INTO `productos` (`id`, `producto`, `imagen`, `descripcion`, `precio`, `s
 (20, 'Tazas con tu nombre', 'http://localhost/machucajuan/assets/productos/tazas_nombre.jpg', 'Tazas con tu nombre', '190.00', 98, 1, 6, '2021-06-16 16:42:57', NULL),
 (21, 'Tazas de regalo', 'http://localhost/machucajuan/assets/productos/tazas_regalo.jpg', 'Tazas para regalar.', '80.00', 100, 1, 6, '2021-06-16 16:45:32', NULL),
 (22, 'Pastelitos para chicos', 'http://localhost/machucajuan/assets/productos/pastelitos_regalos.jpg', 'Pastelitos de meregue para chicos.', '190.00', 92, 1, 4, '2021-06-16 16:48:38', NULL),
-(23, 'Pastelitos para cumpleaños', 'http://localhost/machucajuan/assets/productos/pastelitos_merengue.jpg', 'Pastelitos para regalar en cumpleaños.', '50.00', 180, 1, 4, '2021-06-16 16:50:57', NULL),
+(23, 'Pastelitos para cumpleaños', 'http://localhost/machucajuan/assets/productos/pastelitos_merengue.jpg', 'Pastelitos para regalar en cumpleaños.', '50.00', 179, 1, 4, '2021-06-16 16:50:57', NULL),
 (24, 'Pastelitos emojis', 'http://localhost/machucajuan/assets/productos/pastelitos_emojis.jpg', 'Pastelitos de emojis de todas las caras.', '400.00', 10, 1, 4, '2021-06-16 16:52:37', NULL),
 (25, 'Pastelitos tematicos', 'http://localhost/machucajuan/assets/productos/pasteles_emojis_regalo.jpg', 'Pasteles tematicos, con tema de emojis.', '300.00', 6, 1, 4, '2021-06-16 16:57:22', NULL),
 (26, 'Remeras negras', 'http://localhost/machucajuan/assets/productos/remera_negra.jpg', 'Remeras negras para hombre.', '500.00', 95, 1, 3, '2021-06-16 16:58:30', NULL),
@@ -277,7 +279,9 @@ INSERT INTO `users` (`id`, `nombre`, `apellido`, `email`, `password`, `roles_id`
 (13, 'Martin', 'Fernandez', 'martin@gmail.com', NULL, 2, 'Olivares 988', '3794874433', 1, '2021-06-19 11:34:43', NULL),
 (14, 'Luciano', 'Beltran', 'luciano@gmail.com', NULL, 2, 'Torres 322', '3794883322', 1, '2021-06-19 11:38:53', NULL),
 (15, 'Juan', 'Machuca', 'machucajuangabriel@gmail.com', NULL, 2, 'Castelli 1198', '3794690474', 1, '2021-06-19 11:46:14', NULL),
-(16, 'Jenifer', 'Barrios', 'jenifer@gmail.com', NULL, 2, 'Av. 3 de abril 1233', '3794690474', 1, '2021-06-19 11:48:29', NULL);
+(16, 'Jenifer', 'Barrios', 'jenifer@gmail.com', NULL, 2, 'Av. 3 de abril 1233', '3794690474', 1, '2021-06-19 11:48:29', NULL),
+(17, 'Juan Domingo', 'Velazques', 'juandomingo@gmail.com', NULL, 2, 'Velez Sarsfield', '3794880221', 1, '2021-06-20 16:01:54', NULL),
+(18, 'Juan', 'Machuca', 'usuario@gmail.com', '$2y$10$W.PH/lVvm20G9rJYlXxuZuWJgM9b0Ll.0ivgqK5emVvLNXWDfSFjW', 2, NULL, NULL, 1, '2021-06-20 16:05:24', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -371,13 +375,13 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -395,7 +399,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
