@@ -2,7 +2,7 @@
 
     <div class="row m-0">
         <div class="col-md-5 p-0 m-0 d-flex align-items-center justify-content-center" id="home-text">
-            <div class="text-center">
+            <div class="text-center py-5">
                 <img class="img-fluid w-50" src="<?=$comercio->imagen;?>">  
             </div>
         </div>
