@@ -14,7 +14,8 @@ class Home extends CI_Controller {
 
 	public function index(){
 		return $this->template->load('app', $this->view.'/index', [
-			'comercio' => $this->comercio
+			'comercio' => $this->comercio,
+			'productos' => $this->Producto->get_productos_activos()
 		]);
 	}
 }

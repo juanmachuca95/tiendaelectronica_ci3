@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>    
-    <meta charset="UTF-8">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Souvenirs ZN</title>
     <link rel="shortcut icon" href="<?=$comercio->imagen;?>" type="image/x-icon">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Bellota|Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -110,7 +112,7 @@
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap.bundle.js"></script>
     <script src="<?=base_url()?>/assets/js/myJQuery.js"></script>
