@@ -15,12 +15,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <!-- mi barra de navegacion -->
     <header>
         <div class="nav_personalizado">
-            <nav class="navbar navbar-expand-lg navbar-light font-weight-bold ">
+            <nav class="navbar navbar-expand-lg navbar-light font-weight-bold py-3">
                 <a class="navbar-brand mr-0 text-white" href="<?=base_url('home')?>">
-                    <img src="<?=$comercio->imagen?>" height="70px;" width="70px" class="img-fluid img-thumbail d-inline-block align-top rounded-circle" alt="logo">
+                    <img src="<?=$comercio->imagen?>" height="90px;" width="90px" class="img-fluid img-thumbail d-inline-block align-top rounded-circle" alt="logo">
                 </a>
 
                 <button class="navbar-toggler bg-warning border border-light"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,17 +62,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=base_url('nosotros')?>">¿Quienes Somos?</a>
                         </li>
-                        <li class="nav-item">
-                            <?php if($this->session->is_logged_user || $this->session->is_logged) :?>
-                            <a class="nav-link text-white" href="<?=base_url('salir')?>">
-                                Salir
-                            </a>
-                            <?php else: ?>
-                            <a class="nav-link text-white" href="<?=base_url('inicio')?>">
-                                Login 
-                            </a>
-                           <?php endif; ?>
+
+                        <?php if($this->session->is_logged_user || $this->session->is_logged) :?>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?=$this->session->nombre.' '.$this->session->apellido;?>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li ><a class="dropdown-item" href="<?=base_url('salir')?>">Salir</a></li>
+                          </ul>
                         </li>
+                        <?php else: ?>
+                        <a class="nav-link text-white" href="<?=base_url('inicio')?>">
+                            Login 
+                        </a>
+
+                        <?php endif;?>
                     </ul>
                 </div>
             </nav>
@@ -134,10 +138,8 @@
 
         <ul class="list-unstyled text-justify-center">
             <li><p><a class="lead text-white" href="<?=base_url('nosotros')?>">QUIENES SOMOS</a></p></li>
-            <li><p><a class="lead text-white"  href="<?=base_url('terminos')?>">TERMINOS Y CONDICIONES</a></p></li>
-          <!--   <li><p><a class="lead text-white"  href="#!">BLOG</a></p></li>
-            <li><p><a class="lead text-white"  href="https://juanmachuca95.github.io/">DESARROLLADOR</a></p></li>
-  -->       </ul>
+            <li><p><a class="lead text-white" href="<?=base_url('terminos')?>">TERMINOS Y CONDICIONES</a></p></li>
+         </ul>
 
         </div>
         <hr class="clearfix w-100 d-md-none">
@@ -196,3 +198,13 @@
     </div>
     </footer>
 </html>
+
+<script type="text/javascript">
+    
+    $('.dropdown').click(function(){
+
+       $('.dropdown-menu').toggleClass('show');
+
+   });
+
+</script>

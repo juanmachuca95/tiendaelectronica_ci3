@@ -134,8 +134,9 @@ class Compras extends CI_Controller{
         return $total;
     }
 
+    // Seguimiento de compra
     public function seguimiento(){
-        
+
     }
 }
  
