@@ -13,9 +13,6 @@ Boostrap Theme https://themes.getbootstrap.com/
 - Link de comprobacion de pagos a traves de la api de mercadopago
     https://api.mercadopago.com/v1/payments/".$payment_id."?access_token=".$this->access_token->mercadopago_key
 
+Tarjetas de pruebas proveidas por mercado pago.
 - Tarjeta de prueba: Nro: 5031 7557 3453 0604 Codigo: 123 Vecimiento: 11/25
 
-### Usuarios 
-
--Usuario de la aplicación: usuario@gmail.com password: Machuca12
--Administrador de la aplicación: admin@gmail.com password: Machuca12
